@@ -1,0 +1,27 @@
+{
+    "api_keys": [
+        "bac21d693fmshe58334755c3361fp111419jsn8c32e28e0ae9",
+        "f2bc0f81a2msh04919275bf0bb7cp1cbe2cjsn78f09cab6db9",
+        "4576b2a5b9msh2297cf55eb3c3eep1d2882jsn38ec95c6446e",
+        "3c36737f20mshc0960271b010c80p1b44c5jsnf9da34fc275f",
+        "e6dabcaf83msh17ab7975b03f4a1p17e3f8jsn1f9612bace60",
+        "778ccf6711msh7ea5c4ad4ac0234p1fe8e0jsn874d3c02e253",
+        "d729bde3damshf196c4d6678bfadp10299ejsn82ba1804d78e",
+        "77131c23f8msh8aa7777b250d77cp10296ajsn8e3be71c84c8",
+        "ddaaba1fb5msh7cab091c1a62819p1f6a9djsn227dc703fad0",
+        "0b809214c0msh7fcd9d615cf928ap1c5924jsn670795415dec",
+        "105d2455demshbb11cbd66ff3507p14d643jsn20a20fcd1b15",
+        "8a7c72f194msh1329748676c28fep1725a9jsn0e5fcbf8e204",
+        "07c1edd006msh85c523454fca2d2p1f6412jsn75fd18d82767"
+    ],
+    "provinces": {
+        "Granada": "0-EU-ES-18",
+        "Sevilla": "0-EU-ES-41",
+        "Málaga": "0-EU-ES-29",
+        "Cádiz": "0-EU-ES-11",
+        "Córdoba": "0-EU-ES-14",
+        "Huelva": "0-EU-ES-21",
+        "Almería": "0-EU-ES-04",
+        "Jaén": "0-EU-ES-23"
+    }
+}
