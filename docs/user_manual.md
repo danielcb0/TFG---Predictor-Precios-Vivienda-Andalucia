@@ -1,3 +1,5 @@
+pip install -r requirements.txt
+
 Te voy a presentar mi tfg,, como lo tengo estrucutrado y como quiero que me ayudes.
 
 El proyecto tiene como objetivo construir una plataforma interactiva que utilice modelos de
