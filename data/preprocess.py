@@ -3,7 +3,7 @@
 import os
 import glob
 import pandas as pd
-
+#DEPRECATED: NO USAR YA, MEJOR EL ARCHIVO PROCESAMIENTOCSVS.PY
 def consolidate_raw_data(raw_dir='data/raw', processed_dir='data/processed'):
     """
     Carga todos los CSV *_SALE_*.csv de raw_dir, añade las columnas Province y SortOrder,
