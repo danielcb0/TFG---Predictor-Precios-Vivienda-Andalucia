@@ -1,0 +1,330 @@
+---
+title: "Recuperación Módulo 3"
+author: "Antonio Carrera Giralde"
+date: "2024-04-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+En esta práctica de recuperación del módulo tres, exploraremos el conjunto de datos 'Boston' de la 
+librería `MASS` en R, que proporciona información detallada sobre diversas características de las 
+viviendas en Boston. Mediante el análisis de estas variables, nuestro objetivo es entender mejor 
+los factores que influencian el valor de las propiedades en esta región. 
+
+Utilizaremos técnicas estadísticas avanzadas, incluyendo regresión lineal, modelos lineales 
+generalizados y análisis de varianza, con el objetivo de modelar y predecir el valor medio de 
+las viviendas. 
+
+A través de estos ejercicios, buscamos no solo aplicar nuestros conocimientos teóricos en estadística 
+y programación en R, sino también desarrollar una comprensión práctica sobre cómo los datos reales 
+pueden ser analizados para extraer insights significativos y relevantes en un contexto económico 
+y social real.
+
+### Ejercicio 1: Acceder a la Base de Datos Boston
+En primer lugar, procederemos con la carga de librería `MASS` de la cual vamos a obtener los datos.
+```{r}
+# Cargar la librería MASS que contiene la base de datos Boston
+library(MASS)
+
+head(Boston, 5)
+
+tail(Boston, 5)
+```
+Los registros muestran características de viviendas en diferentes ubicaciones, 
+donde variables como el tamaño de las habitaciones (rm) y la tasa de criminalidad (crim) varían, 
+ofreciendo una mirada al entorno y condiciones del vecindario que podrían influir en su valor de 
+mercado (medv).
+```{r}
+# Histograma para rm
+hist(Boston$rm, main="Histograma del Número de Habitaciones", xlab="Número de habitaciones", col="blue")
+
+# Histograma para lstat
+hist(Boston$lstat, main="Histograma de Estatus Socioeconómico Bajo (% LSTAT)", xlab="% LSTAT", col="green")
+
+```
+
+El primer gráfico muestra la distribución del porcentaje de estatus socioeconómico bajo (% LSTAT) en el conjunto de datos de Boston. La mayoría de las observaciones se agrupan en torno al extremo inferior de la escala, indicando que hay una concentración de áreas con un porcentaje bajo a moderado de estatus socioeconómico bajo. Sin embargo, hay una cola larga hacia la derecha, lo que sugiere que algunas áreas tienen porcentajes significativamente más altos de población de estatus socioeconómico bajo.
+
+El segundo gráfico, que presenta el número de habitaciones (rm) por vivienda, muestra una distribución que parece ser aproximadamente normal, centrada alrededor de 6 habitaciones por vivienda. La mayoría de las viviendas tienen entre 5 y 7 habitaciones, con menos viviendas que caen en los extremos inferior y superior del rango de número de habitaciones. Esto podría reflejar un tamaño estándar de vivienda dentro del área de Boston.
+
+
+
+### Explicación de Cada Variable
+
+- **crim**: Tasa de criminalidad per cápita por ciudad. Un indicador de la seguridad en el área.
+- **zn**: Proporción de terreno residencial zonificado para lotes de más de 25,000 pies cuadrados. Refleja el tipo de desarrollo en el área.
+- **indus**: Proporción de acres de negocios no minoristas por ciudad. Indica la presencia de actividad industrial o comercial.
+- **chas**: Variable ficticia que indica si la propiedad colinda con el río Charles (1 si colinda, 0 si no). Puede afectar el valor de la propiedad debido a la vista o accesibilidad al río.
+- **nox**: Concentración de óxidos nítricos (partes por 10 millones). Un indicador de la contaminación del aire.
+- **rm**: Número promedio de habitaciones por vivienda. Generalmente, un mayor número de habitaciones incrementa el valor de la propiedad.
+- **age**: Proporción de unidades ocupadas por el propietario construidas antes de 1940. Muestra la antigüedad de las construcciones.
+- **dis**: Distancias ponderadas a cinco centros de empleo de Boston. Una medida de la accesibilidad al trabajo.
+- **rad**: Índice de accesibilidad a carreteras radiales. Mayor accesibilidad puede mejorar la conveniencia pero también aumentar el ruido y el tráfico.
+- **tax**: Tasa de impuesto a la propiedad por cada $10,000. Un factor importante en el costo total de propiedad.
+- **ptratio**: Proporción de estudiantes por maestro por ciudad. Un indicador de la calidad de las escuelas locales.
+- **black**: 1000(Bk - 0.63)^2 donde Bk es la proporción de personas negras por ciudad. Mide de alguna manera la diversidad racial o posibles problemas socioeconómicos.
+- **lstat**: Porcentaje de población de menor estatus socioeconómico. Altos valores podrían indicar más problemas económicos en el área.
+- **medv**: Valor medio de las viviendas ocupadas por sus propietarios en $1000s. Es el objetivo de predicción y refleja el valor del mercado inmobiliario en el área.
+
+ 
+### Ejercicio 2: Selección de Variables para Modelo de Regresión Lineal
+
+En el ejercicio 2, utilizaremos la función `regsubsets` del paquete `leaps` para realizar una 
+selección exhaustiva de variables que influyen en el valor medio de las viviendas (`medv`) en el 
+conjunto de datos de Boston. Este método nos ayudará a identificar las variables más significativas 
+que pueden predecir el valor de la propiedad de manera efectiva. Al final del proceso, examinaremos 
+un resumen de los modelos generados para evaluar cuáles combinaciones de variables proporcionan el 
+mejor ajuste, basado en criterios estadísticos como el criterio de información Akaike (AIC), 
+entre otros.
+```{r}
+# Cargar la librería  
+library(leaps)
+
+# Realizar la selección exahustiva de variables
+boston.regsubsets <- regsubsets(medv ~ ., data = Boston, nbest = 1, method = "exhaustive")
+
+# Obtener el resumen de los modelos
+summary(boston.regsubsets)
+reg.summary <- summary(boston.regsubsets)
+
+# Sumamos las filas para obtener la frecuencia de cada variable
+variable.freq <- colSums(reg.summary$which, na.rm = TRUE)
+
+barplot(variable.freq, main="Frecuencia de Selección de Variables", ylab="Frecuencia", 
+        xlab="Variables", las=2, col="blue")
+
+```
+
+Los resultados del summary de regsubsets muestran que el mejor modelo de regresión lineal simple para predecir 
+el valor medio de las viviendas (medv) incluye solo la variable lstat.
+
+Vemos que lstat, o el estatus socioeconómico más bajo de la población, 
+se identifica como un factor individual significativo para predecir el valor medio de las viviendas, 
+lo que resalta la posible relación entre la riqueza del área y el valor inmobiliario.
+
+Sin embargo, al añadir más variables al modelo, como rm (el número promedio de habitaciones), 
+que intuitivamente podríamos asociar con un mayor valor de vivienda, y otras como ptratio 
+(la relación entre estudiantes y profesores), que quizás refleje la calidad de las escuelas
+y, por ende, la deseabilidad de la zona, nos percatamos de la complejidad y multifaceticidad de los 
+factores que inciden en el precio de una casa. 
+
+Observar cómo se añaden variables como indus, tax 
+y nox al incrementar el tamaño del modelo sugiere una red de relaciones más densa y tal vez 
+interdependiente, donde múltiples aspectos característicos del entorno urbano y social impactan 
+simultáneamente el valor de las propiedades.
+
+
+### Ejercicio 3: Realizar Mínimos Cuadrados con el Modelo Seleccionado
+
+En este siguiente ejerccicio, aplicaremos la técnica de mínimos cuadrados para ajustar un modelo de 
+regresión lineal utilizando las variables seleccionadas previamente. 
+
+Este método nos permitirá estimar de manera óptima los coeficientes que minimizan 
+la suma de cuadrados de los errores entre los valores observados y los predichos por el modelo. 
+Usaremos rm, el número promedio de habitaciones, y lstat, el porcentaje de población con bajo 
+estatus socioeconómico, como predictores.
+ 
+```{r}
+# Ajustar el modelo con los coeficientes seleccionados  en este caso
+model <- lm(medv ~ rm + lstat, data = Boston)
+
+summary(model)
+```
+Al aplicar la regresión lineal con mínimos cuadrados en nuestro modelo seleccionado, 
+observamos resultados intrigantes. El número de habitaciones (`rm`) tiene un coeficiente positivo de 
+aproximadamente 5.09, lo que indica que a medida que aumenta el número de habitaciones, 
+el valor medio de las viviendas (`medv`) tiende a aumentar significativamente; 
+esto se evidencia por un valor p muy cercano a cero y un alto valor de t. 
+
+Por otro lado, la variable `lstat`, que representa el porcentaje de población con un estatus 
+socioeconómico bajo, tiene un efecto negativo en `medv` con un coeficiente de aproximadamente -0.64. 
+Este también es significativo, mostrando un efecto contrario al de `rm`. El intercepto no es 
+significativo, dado su alto valor p. 
+
+Además, el R-cuadrad# Resumen del modelo para discusión
+bueno para un modelo con solo dos variables. La alta estadística F y su p-valor 
+asociado indican que el modelo es estadísticamente significativo. Con estos resultados, empezamos a 
+ver cómo se entrelazan las características de las viviendas y su entorno socioeconómico para 
+determinar su valor en el mercado.
+
+
+```{r}
+# Gráfico de dispersión para "rm" vs "medv"
+plot(Boston$rm, Boston$medv, main="Relación entre Número de Habitaciones y Valor Medio de Vivienda", xlab="Número de Habitaciones", ylab="Valor Medio de Vivienda (medv)")
+abline(lm(medv ~ rm, data=Boston), col="red")
+
+# Gráfico de dispersión para "lstat" vs "medv"
+plot(Boston$lstat, Boston$medv, main="Relación entre Estatus Socioeconómico Bajo y Valor Medio de Vivienda", xlab="% LSTAT", ylab="Valor Medio de Vivienda (medv)")
+abline(lm(medv ~ lstat, data=Boston), col="blue")
+
+```
+
+Para el primer gráfico, la relación entre el número de habitaciones y el valor medio de la vivienda (medv) se muestra con una tendencia positiva. A medida que aumenta el número de habitaciones, el valor medio de la vivienda también tiende a aumentar, lo que se evidencia por la línea de regresión ascendente. Esto sugiere que las viviendas más grandes, en términos de número de habitaciones, pueden tener un mayor valor en el mercado.
+
+En el segundo gráfico, la relación entre el estatus socioeconómico bajo (lstat) y el valor medio de la vivienda muestra una tendencia negativa clara. A medida que aumenta el porcentaje de la población con estatus socioeconómico bajo, el valor medio de las viviendas tiende a disminuir, como lo indica la línea de regresión descendente. Esto podría interpretarse como que las áreas con una mayor proporción de población de bajo estatus socioeconómico están asociadas con valores de vivienda más bajos.
+### Ejercicio 4: Modelo Lineal Generalizado con Función Logarítmica
+
+Avanzaremos ahora en nuestro análisis explorando la aplicación de modelos lineales generalizados (GLM)
+utilizando la misma combinación de variables `rm` y `lstat`. Esta vez, transformaremos nuestra 
+respuesta a través de una función logarítmica, lo cual es adecuado para tratar con datos una respuesta 
+que siguen una distribución asimétrica.
+
+
+Para ello, examinaremos y discutiremos las métricas de ajuste y la interpretación de los coeficientes 
+resultantes, buscando claridad en qué modelo se ajusta mejor a nuestras observaciones.
+```{r}
+# Ajustamos el modelo lineal generalizado con enlace logarítmico
+glm_model <- glm(medv ~ rm + lstat, family = gaussian(link = "log"), data = Boston)
+
+summary(glm_model)
+```
+El modelo lineal generalizado (GLM) con enlace logarítmico ha producido estimaciones significativas 
+para las variables `rm` y `lstat`. El coeficiente positivo para `rm` sugiere  que un incremento en el 
+número de habitaciones se asocia exponencialmente con un aumento en el valor medio de las viviendas, 
+dado que estamos trabajando con el logaritmo del `medv`. A su vez, `lstat` tiene un efecto 
+exponencial negativo en el valor de las viviendas. Ambos predictores son estadísticamente 
+significativos, lo cual es respaldado por valores p extremadamente bajos.
+
+El intercepto tiene un valor grande y significativo, lo que indica el valor de partida para el `medv` 
+cuando `rm` y `lstat` son cero en la escala logarítmica. La desviacion residual y la desviacion nula nos 
+proporcionan una medida de cuán bien el modelo se ajusta a los datos, con una gran reducción de la 
+desviacion nula a la desviacion residual, lo que sugiere un buen ajuste. 
+
+Además, el AIC (Criterio de Información de Akaike) es de 3020, proporcionando un punto de referencia 
+para comparar la calidad del modelo con otros modelos. El bajo AIC en combinación con las otras 
+estadísticas sugiere que este modelo podría ser un buen candidato para predecir el valor medio de 
+las viviendas.
+
+```{r}
+# Diagrama Q-Q para el modelo lineal
+qqnorm(resid(model))
+qqline(resid(model), col="red")
+
+# Diagrama Q-Q para el modelo GLM
+qqnorm(resid(glm_model))
+qqline(resid(glm_model), col="blue")
+
+```
+
+Para el primer gráfico, el Q-Q Plot normal muestra una distribución de residuos que, aparte de algunos datos extremos, sigue de cerca la línea de referencia. Esto indica que los residuos del modelo de regresión se ajustan razonablemente bien a una distribución normal, lo cual es un supuesto clave en la regresión lineal.
+
+Para el segundo grráfico, también un Q-Q Plot normal, notamos una desviación más clara de la normalidad, especialmente en los extremos. Esto sugiere la presencia de colas más pesadas que lo esperado bajo una distribución normal, lo que podría afectar la fiabilidad de las estimaciones del modelo y señalar la necesidad de considerar modelos alternativos o transformaciones de datos.
+
+### Ejercicio 5: Realizar un ANCOVA
+Ahora nos adentraremos en el análisis de covarianza, o ANCOVA, para profundizar en cómo la proximidad
+al río Charles (`chas`) y la edad de las construcciones (`age`) afectan al valor de los pisos en 
+Boston. El ANCOVA combina técnicas de análisis de varianza y regresión lineal, permitiéndonos 
+explorar la relación entre una variable dependiente continua y una combinación de variables 
+categóricas y continuas. 
+
+En este ejercicio, `chas` actuará como nuestro factor categórico, mientras 
+que `age` será la covariable continua. Nuestra meta es determinar no solo el efecto individual de 
+estos predictores en el valor medio de las viviendas (`medv`), sino también investigar si existe una 
+interacción significativa entre ellos, es decir, si la influencia de estar cerca del río varía según 
+la antigüedad de la vivienda. Este análisis nos proporcionará una visión más matizada de cómo los 
+factores geográficos y temporales influyen conjuntamente en el mercado inmobiliario.
+
+```{r}
+# modelo ANCOVA
+modelo_ancova <- lm(medv ~ chas + age, data = Boston)
+
+ summary(modelo_ancova)
+```
+La proximidad al río Charles (`chas`) muestra un coeficiente positivo, indicando que las viviendas 
+cercanas al río tienden a tener un valor más alto en promedio en comparación con aquellas que no 
+están cerca. El coeficiente es significativamente distinto de cero, lo que sugiere un efecto claro 
+de `chas` en el valor de las viviendas.
+
+En cuanto a la edad de las propiedades (`age`), encontramos un coeficiente negativo, lo que implica 
+que las viviendas más antiguas tienden a tener un valor menor, un hallazgo estadísticamente 
+significativo y quizás reflejo de la preferencia por viviendas más nuevas o mejor mantenidas.
+
+Sin embargo, el R-cuadrado ajustado del modelo es relativamente bajo (aproximadamente 0.1824), lo 
+que indica que, aunque las variables son significativas, ellas solas no explican una gran parte de 
+la variabilidad en el valor de los pisos. Esto sugiere que hay otros factores no incluidos en el 
+modelo que también afectan el valor de las viviendas. Además, la significativa estadística F confirma
+que el modelo en su conjunto es relevante.
+
+### Ejercicio 6: Regresión Robusta
+
+Para fortalecer nuestro análisis y asegurarnos de que sea resistente a posibles valores atípicos, 
+procederemos a realizar una regresión robusta con el modelo que hemos seleccionado previamente, 
+utilizando `rm` y `lstat` como predictores del valor medio de las viviendas (`medv`). 
+
+Este tipo de regresión minimiza la influencia de puntos anómalos, lo que puede ser especialmente 
+útil en conjuntos de datos reales donde estos valores atípicos son comunes y pueden distorsionar 
+los resultados de una regresión estándar. Utilizaremos la función `rlm` del paquete `MASS` en R, 
+que está diseñada para este fin. Al final, examinaremos el resumen del modelo para ver cómo varían 
+los coeficientes y las métricas de ajuste en comparación con la regresión lineal mínimos cuadrados. 
+Este ejercicio será esencial para confirmar la confiabilidad de nuestro modelo frente a la presencia 
+de datos irregulares.
+
+```{r}
+# Ajustmos una regresión robusta con los mismos predictores
+modelo_robusto <- MASS::rlm(medv ~ rm + lstat, data = Boston)
+
+summary(modelo_robusto)
+```
+El resumen de la regresión robusta muestra que, al igual que en la regresión lineal estándar, la variable `rm` tiene un coeficiente positivo, indicando que un mayor número de habitaciones se asocia con un incremento en el valor medio de las viviendas (`medv`). El valor es bastante alto y significativo, dada la magnitud del valor t. Por otro lado, `lstat` continúa mostrando un efecto negativo en `medv`, con un coeficiente que también es significativo.
+
+Un aspecto destacable es el cambio en el intercepto, que ahora es mucho más negativo que en la regresión lineal estándar, aunque su significancia sigue siendo baja (t-value es -2.2224). Esto puede deberse a que la regresión robusta reduce la influencia de valores extremos, que pueden haber inflado el intercepto en la regresión lineal ordinaria.
+
+La reducción en el error estándar residual a 4.028 refleja una menor variabilidad en los residuos comparado con la regresión lineal estándar, sugiriendo que el modelo robusto podría estar ofreciendo una mejor representación de la estructura central de los datos. Esto sugiere que el modelo robusto es más resistente a la influencia de los valores atípicos y, por lo tanto, podría ser una estimación más fiable del efecto de las variables `rm` y `lstat` en el valor medio de las viviendas en el área de Boston.
+
+### Ejercicio 7: Regresión Bayesiana
+Daremos un paso adelante en nuestro análisis aplicando principios bayesianos al modelo que hemos 
+identificado previamente como el más adecuado para predecir el valor medio de las viviendas en Boston.
+La regresión bayesiana nos permite incorporar conocimientos previos o creencias en nuestro modelo 
+estadístico a través del uso de priors, ofreciendo una perspectiva más flexible y completa en 
+comparación con los métodos de inferencia tradicionales. 
+
+Utilizaremos la librería `brms` para ajustar un modelo bayesiano con las variables `rm` y `lstat`. Nuestros "prior" serán distribuciones 
+normales centradas en cero con una desviación estándar de 10, reflejando una creencia inicial de que, 
+aunque esperamos que las variables sean relevantes, no tenemos una preferencia fuerte sobre la 
+magnitud de sus efectos. Al final, interpretaremos el resumen del modelo para entender las 
+estimaciones posteriores de los parámetros, que sintetizan tanto la información proporcionada por los 
+datos como nuestras creencias previas.
+ 
+```{r}
+library(brms)
+
+# Ajustamos modelo bayesiano
+modeloo_bayesiano <- brm(medv ~ rm + lstat, data = Boston, family = gaussian(), prior = prior(normal(0, 10), class = "b"))
+
+summary(modeloo_bayesiano)
+```
+
+En el resumen del modelo bayesiano, los coeficientes para `rm` y `lstat` son consistentes con los 
+resultados previos de la regresión lineal estándar y la robusta, sugiriendo que ambas variables son 
+importantes predictores del valor medio de las viviendas. En particular:
+
+- El coeficiente para `rm` es 5.08, con un intervalo de credibilidad del 95% (CI) que no cruza cero 
+(4.21 a 5.94), lo cual indica que hay una alta certeza de que el número promedio de habitaciones tiene un efecto positivo sobre el valor de las viviendas.
+- El coeficiente para `lstat` es -0.64, y su intervalo de credibilidad también está lejos de cero 
+(-0.73 a -0.56), sugiriendo que el estatus socioeconómico bajo está negativamente relacionado con el 
+valor de las viviendas.
+
+El sigma, que indica la desviación estándar de los errores del modelo, es de 5.55, reflejando el 
+
+nivel de ruido o variabilidad en los datos que el modelo no puede explicar.
+
+La convergencia del modelo se confirma con el valor de Rhat que es 1.00 para ambos predictores y 
+sigma, indicando que la cadena de muestreo es estable y confiable. Los valores de Bulk Effective 
+Sample Size (ESS) y Tail ESS son lo suficientemente altos para todas las estimaciones, lo que indica 
+que tenemos una muestra efectiva grande para realizar inferencias precisas.
+
+Los resultados bayesianos proporcionan no solo una estimación puntual sino también una medida de 
+incertidumbre en torno a las estimaciones de los parámetros, lo que añade una capa adicional de 
+información comparada con las técnicas de regresión tradicionales. Esto nos da mayor confianza en 
+nuestras conclusiones acerca de cómo `rm` y `lstat` afectan el valor de las viviendas en Boston.
+
+
+### Conclusión
+
+En conclusión, a través de la exploración meticulosa del conjunto de datos de Boston y el empleo de diversas técnicas estadísticas, hemos podido apreciar la complejidad de factores que influyen en el valor de las viviendas. La selección de modelos ha revelado que tanto la estructura física de las viviendas, reflejada en el número de habitaciones, como la condición socioeconómica de la zona, medida por LSTAT, tienen efectos significativos y predecibles en los precios de las propiedades.
+
+Nuestro análisis ha confirmado hipótesis intuitivas, como el valor positivo asociado con un mayor número de habitaciones, y ha desentrañado otras menos evidentes, como la correlación inversa entre el estatus socioeconómico bajo y el valor de la vivienda. Hemos ampliado nuestra comprensión utilizando regresión robusta para mitigar la influencia de valores atípicos y hemos avanzado hacia modelos más sofisticados, como la regresión bayesiana, que integra conocimientos previos en las estimaciones.
+
+Este ejercicio de recuperación no solo ha fortalecido mi base teórica en estadística y R, sino que también ha proporcionado valiosas lecciones sobre la interpretación de datos reales. Al hacerlo, he podido establecer una base sólida para futuras investigaciones y aplicaciones prácticas en el ámbito del análisis de datos inmobiliarios y económicos. 
