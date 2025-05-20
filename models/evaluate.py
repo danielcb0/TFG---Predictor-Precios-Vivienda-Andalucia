@@ -3,8 +3,10 @@ import joblib
 import pandas as pd
 import os
 import numpy as np # Importar numpy para manejar tipos de datos
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app) # Habilitar CORS para todas las rutas
+
 
 # --- Carga del Modelo ---
 MODEL_FILE = 'final_housing_price_model_andalucia_v3.joblib'
@@ -48,7 +50,7 @@ except Exception as e:
 # --- Características esperadas por el modelo (según model_testing v2.ipynb) ---
 # Estas son las columnas que el DataFrame de entrada debe tener ANTES del preprocesamiento por el pipeline.
 EXPECTED_NUMERIC_FEATURES = ['superficie', 'habitaciones', 'baños', 'latitud', 'longitud']
-EXPECTED_CATEGORICAL_FEATURES = ['tipo_propiedad', 'provincia']
+EXPECTED_CATEGORICAL_FEATURES = ['tipo_propiedad']
 ALL_EXPECTED_FEATURES = EXPECTED_NUMERIC_FEATURES + EXPECTED_CATEGORICAL_FEATURES
 # --- Fin Características ---
 

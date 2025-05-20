@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictor de Precios de Vivienda</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        input[type="number"],
+        select {
+            width: calc(100% - 22px); /* Full width minus padding and border */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            text-align: center;
+        }
+        #result h2 {
+            margin-top: 0;
+            color: #17a2b8;
+        }
+        #result p {
+            font-size: 1.2em;
+            color: #28a745;
+            font-weight: bold;
+        }
+        #result .error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Predictor de Precios de Vivienda en Andalucía</h1>
+        <form id="predictionForm">
+            <div>
+                <label for="superficie">Superficie (m²):</label>
+                <input type="number" id="superficie" name="superficie" value="120" required>
+            </div>
+
+            <div>
+                <label for="habitaciones">Número de Habitaciones:</label>
+                <input type="number" id="habitaciones" name="habitaciones" value="3" required>
+            </div>
+
+            <div>
+                <label for="baños">Número de Baños:</label>
+                <input type="number" id="baños" name="baños" value="2" required>
+            </div>
+
+            <div>
+                <label for="latitud">Latitud:</label>
+                <input type="number" id="latitud" name="latitud" value="37.196993481556994" step="any" required>
+            </div>
+
+            <div>
+                <label for="longitud">Longitud:</label>
+                <input type="number" id="longitud" name="longitud" value="-3.6164274080288976" step="any" required>
+            </div>
+
+            <div>
+                <label for="tipo_propiedad">Tipo de Propiedad:</label>
+                <select id="tipo_propiedad" name="tipo_propiedad" required>
+                    <option value="piso" selected>Piso</option>
+                    <option value="chalet">Chalet</option>
+                    <option value="casa_rural">Casa Rural</option>
+                    <option value="duplex">Dúplex</option>
+                    <option value="atico">Ático</option>
+                    <option value="estudio">Estudio</option>
+                </select>
+            </div>
+
+            <button type="submit">Generar Predicción</button>
+        </form>
+
+        <div id="result">
+            <!-- El resultado de la predicción aparecerá aquí -->
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('predictionForm');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Evitar el envío tradicional del formulario
+
+            const formData = new FormData(form);
+            const data = {};
+
+            // Convertir FormData a un objeto JSON y asegurar tipos numéricos
+            formData.forEach((value, key) => {
+                if (key === 'superficie' || key === 'habitaciones' || key === 'baños' || key === 'latitud' || key === 'longitud') {
+                    data[key] = parseFloat(value); // Convertir a número flotante
+                } else {
+                    data[key] = value;
+                }
+            });
+
+            resultDiv.innerHTML = 'Calculando predicción...';
+
+            try {
+                // Asegúrate de que la URL sea la correcta para tu API
+                // Si la API está en un puerto diferente (ej. 5000) y este HTML se abre como archivo local:
+                // const response = await fetch('http://localhost:5000/predict', {
+                const response = await fetch('http://127.0.0.1:5000/predict', { // Ruta relativa si se sirve desde el mismo origen
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    if (result.prediction !== undefined) {
+                        resultDiv.innerHTML = `
+                            <h2>Precio Estimado:</h2>
+                            <p>€ ${parseFloat(result.prediction).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                        `;
+                    } else {
+                         resultDiv.innerHTML = `<p class="error">Respuesta inesperada del servidor.</p>`;
+                    }
+                } else {
+                    resultDiv.innerHTML = `<p class="error">Error: ${result.error || response.statusText}</p>`;
+                }
+
+            } catch (error) {
+                console.error('Error al realizar la petición:', error);
+                resultDiv.innerHTML = `<p class="error">Error de conexión o al procesar la solicitud. Revisa la consola.</p>`;
+            }
+        });
+    </script>
+
+</body>
+</html>
