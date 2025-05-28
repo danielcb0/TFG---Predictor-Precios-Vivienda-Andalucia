@@ -31,7 +31,7 @@ def get_properties(api_key, province_id, sort_order, province_name):
     total_properties = 0
     
     # Crear archivo CSV para guardar datos en la carpeta `raw`
-    filename = os.path.join(output_directory, f"{province_name}_SALE_{sort_order.upper()}.csv")
+    filename = os.path.join(output_directory, f"2{province_name}_SALE_{sort_order.upper()}.csv")
     with open(filename, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         writer.writerow(['Price', 'Property Type', 'Size (m2)', 'Number of Rooms', 'Number of Bathrooms', 'Latitude', 'Longitude', 'Location'])

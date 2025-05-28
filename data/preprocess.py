@@ -6,7 +6,7 @@ import pandas as pd
 #DEPRECATED: NO USAR YA, MEJOR EL ARCHIVO PROCESAMIENTOCSVS.PY
 def consolidate_raw_data(raw_dir='data/raw', processed_dir='data/processed'):
     """
-    Carga todos los CSV *_SALE_*.csv de raw_dir, añade las columnas Province y SortOrder,
+    Carga todos los CSV *_SALE_*.csv de raw_dir, añade la columna Province,
     concatena en un único DataFrame y guarda el resultado en processed_dir/andalucia_raw.csv.
     """
     # Asegurar que la carpeta de procesado existe
@@ -30,7 +30,6 @@ def consolidate_raw_data(raw_dir='data/raw', processed_dir='data/processed'):
         sort_order = parts[2].replace('.csv', '')
         # Añadir columnas
         df['Province']  = province
-        df['SortOrder'] = sort_order.upper()
         df_list.append(df)
 
     # Concatenar todos los DataFrames
@@ -38,7 +37,7 @@ def consolidate_raw_data(raw_dir='data/raw', processed_dir='data/processed'):
     print(f"Total filas consolidadas: {len(df_all)}")
 
     # Guardar CSV maestro
-    output_path = os.path.join(processed_dir, 'andalucia_raw.csv')
+    output_path = os.path.join(processed_dir, 'andalucia_rawv2.csv')
     df_all.to_csv(output_path, index=False, encoding='utf-8-sig')
     print(f"CSV consolidado guardado en: {output_path}")
 

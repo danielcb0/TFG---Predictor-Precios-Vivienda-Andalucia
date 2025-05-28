@@ -1,0 +1,681 @@
+Price,Property Type,Size (m2),Number of Rooms,Number of Bathrooms,Latitude,Longitude,Location
+3525.0,chalet,70.0,2,1,36.7145139,-5.2500922,"MA-8400, 3"
+6200.0,chalet,35.0,1,1,36.7352616,-5.2525411,avenida Andalucía
+6200.0,chalet,35.0,1,1,36.7363596,-5.2506677,avenida Andalucía
+13000.0,flat,24.0,1,2,36.7705133,-4.0404801,calle Antonio Ruiz Rivas
+15000.0,chalet,36.0,0,0,36.784158,-4.8416734,"calle Barranco, 6"
+15000.0,chalet,35.0,1,1,36.6294076,-5.1216476,Igualeja
+18600.0,chalet,64.0,2,1,37.1885874,-4.4523882,calle Jaen
+18600.0,chalet,64.0,3,1,37.188639,-4.4529029,calle Jaen
+18600.0,chalet,64.0,3,1,37.1889009,-4.4526611,calle Jaen
+20000.0,chalet,60.0,1,0,36.843369,-4.270172,Paraje Los Ventorros s/n
+21100.0,chalet,99.0,3,1,37.1140027,-4.7015014,Barrio el Loro
+21100.0,chalet,99.0,3,1,37.1102766,-4.7014747,Barrio el Loro
+23000.0,flat,38.0,3,1,36.7408534,-4.4287115,calle Francisco Carter
+23000.0,flat,38.0,3,1,36.7400289,-4.4295145,calle Francisco Carter
+24000.0,countryHouse,54.0,2,1,36.8550144,-4.0242401,Salares
+25000.0,countryHouse,75.0,3,1,36.79034,-4.01522,Sayalonga
+25000.0,chalet,130.0,2,1,36.7299828,-4.857216,El higueral
+25000.0,chalet,170.0,4,3,36.9013476,-4.3403188,Colmenar
+29000.0,chalet,50.0,2,1,36.8725669,-4.0798511,Canillas de Aceituno
+29334.0,chalet,99.0,3,1,37.1798236,-4.3358833,"avenida de la Constitucion, 83"
+30000.0,chalet,49.0,0,0,36.8516098,-4.0246024,Salares
+30000.0,countryHouse,62.0,1,0,36.6906633,-4.9025943,Tolox
+30000.0,countryHouse,74.0,2,1,36.6451877,-5.1532129,"calle Nueva, 14"
+30000.0,countryHouse,128.0,3,1,36.6173439,-5.3422793,"San Jose, 23"
+30000.0,countryHouse,114.0,0,0,36.5647361,-5.2152497,"Consuelo, 4"
+30000.0,chalet,60.0,2,1,36.5391369,-5.3879197,"calle Guadiaro, 5 Nmero"
+30000.0,countryHouse,65.0,2,1,36.6297472,-5.1216041,"c santa rosa 4 Igualeja, 4 csantarosaIgualeja"
+31100.0,flat,103.0,4,1,36.7240152,-5.2504092,calle Presbitero Jose Moreno
+31100.0,flat,103.0,4,1,36.7251961,-5.2516706,avenida Constitucion
+32800.0,flat,80.0,3,1,36.7397238,-4.4312947,calle Ebro
+32800.0,flat,80.0,3,1,36.7426006,-4.4321041,calle Ebro
+32800.0,flat,80.0,3,1,36.7415915,-4.4322318,calle Ebro
+33000.0,chalet,122.0,2,1,37.1137188,-4.7011821,Barrio Iglesia
+34000.0,chalet,108.0,3,1,36.6858109,-4.9043848,calle San Cristobal
+34000.0,chalet,70.0,3,1,37.1118705,-4.7008473,Barrio el Loro s/n
+34900.0,chalet,110.0,1,1,36.816429,-4.0486175,Arenas
+35000.0,countryHouse,92.0,3,1,37.0973453,-4.3921339,"calle Pilarejo, 77"
+35000.0,countryHouse,92.0,3,1,37.0973453,-4.3921339,"calle Pilarejo, 77"
+35000.0,chalet,80.0,2,1,36.8760842,-4.8452735,"calle Iglesia, 43 A"
+35000.0,chalet,105.0,3,1,36.9316216,-4.6827306,calle el Sol
+35000.0,flat,91.0,3,1,37.2339138,-4.4860135,calle Archidona
+35000.0,chalet,48.0,2,1,36.8349004,-4.1002732,"calle Rubite, 9"
+35000.0,chalet,64.0,1,1,36.6314121,-5.2025287,Alpandeire
+35000.0,chalet,221.0,1,1,37.0724122,-4.9140657,Campillos
+35000.0,chalet,150.0,4,1,36.872051,-4.0825965,Canillas de Aceituno
+35000.0,chalet,70.0,1,1,36.63313,-5.20366,"calle Fray Leopoldo, 13"
+35000.0,chalet,100.0,2,0,36.7906359,-4.9481733,"Las Erillas, 25"
+35000.0,countryHouse,149.0,3,2,36.8151943,-4.380713,barrio escribano s/n
+35000.0,countryHouse,113.0,4,1,37.1838367,-4.3364309,"paseo de la Alameda, 56"
+35100.0,flat,84.0,3,1,36.7394968,-4.4329312,calle Guadalén
+35100.0,flat,84.0,1,1,36.7389191,-4.4327024,calle Guadalén
+36000.0,chalet,65.0,3,1,36.7860832,-4.1021597,calle Eloy Téllez s/n
+36000.0,flat,80.0,3,1,36.7387959,-4.4301188,calle Guadalén
+36000.0,chalet,65.0,3,1,36.7853091,-4.1006189,calle Eloy Téllez
+36000.0,countryHouse,123.0,3,2,36.8614378,-4.1415459,Viñuela
+36000.0,chalet,65.0,3,1,36.7873029,-4.1007102,calle Eloy Téllez
+36000.0,flat,79.0,1,1,36.7375764,-4.4295748,calle Guadalén
+36000.0,chalet,65.0,3,1,36.7874213,-4.1026451,calle Eloy Téllez
+36500.0,chalet,80.0,3,1,36.80707,-4.21754,Almáchar
+37000.0,chalet,140.0,1,1,36.6255245,-5.1716076,"calle Los Molinos, 6"
+37000.0,countryHouse,84.0,4,1,36.9819371,-4.9209327,"calle Grande, 50"
+38000.0,chalet,128.0,3,1,36.8002131,-5.1386269,Arriate
+38000.0,flat,84.0,3,1,36.7368311,-4.4318595,calle Guadalbullón
+38000.0,flat,84.0,3,1,36.736451,-4.4329955,calle Guadalbullón
+38000.0,countryHouse,80.0,2,1,36.7866902,-4.8417007,"calle Jose Hidalgo, 23 d"
+39000.0,chalet,126.0,3,1,36.734063,-5.254083,"calle Doctor Vázquez Y Gutiérrez, 33"
+39000.0,chalet,169.0,4,2,37.270447,-4.4149382,Cuevas de San Marcos
+39500.0,flat,43.0,3,1,36.7135031,-4.4464875,"calle Hernando de Soto, 8"
+39500.0,flat,43.0,2,1,36.7139758,-4.4483476,calle Hernando de Soto
+39500.0,flat,55.0,3,1,37.0644971,-4.721513,Bobadilla - Bobadilla Estación - La Joya
+39800.0,countryHouse,46.0,1,1,36.540122,-5.3871344,Cortes de la Frontera
+39900.0,flat,80.0,3,1,36.7515066,-5.1558416,San Cristóbal
+39900.0,chalet,28.0,2,0,36.7630484,-3.9540479,calle Pontil
+39900.0,chalet,64.0,3,0,36.8208494,-4.0033797,calle Altillo
+39900.0,countryHouse,102.0,3,2,37.1815572,-4.3354967,Villanueva de Tapia
+39990.0,chalet,123.0,4,2,36.6610105,-4.7594522,calle la Feria
+40000.0,chalet,100.0,4,1,37.234861,-4.4860796,calle San Anton
+40000.0,chalet,20.0,1,1,36.44324,-5.27332,"calle Villa, 38"
+40000.0,chalet,108.0,3,2,36.8642303,-4.032757,Sedella
+40000.0,chalet,102.0,3,1,37.0970898,-4.3904862,Archidona
+40000.0,chalet,70.0,2,2,37.2701142,-4.4152019,"calle San Juan, 37"
+40000.0,chalet,11.0,1,1,36.443346,-5.2732691,"calle villa, 20"
+40000.0,countryHouse,76.0,3,1,36.9782895,-4.2729806,"calle Real, 24"
+40000.0,chalet,143.0,4,1,37.0913601,-4.3958049,"calle Fuente Nueva, 4"
+40000.0,countryHouse,135.0,0,0,36.616913,-5.1885693,"calle Jose Antonio, 7"
+40000.0,countryHouse,100.0,2,2,36.7892212,-4.9463702,"calle enmedio, 17"
+40200.0,flat,84.0,3,1,36.7405178,-4.4318367,"calle Ebro, 12"
+40200.0,flat,83.0,3,1,36.7402301,-4.4328551,calle Ebro
+40300.0,flat,77.0,3,1,36.7406779,-4.4321565,"calle Ebro, 3"
+40300.0,flat,77.0,3,1,36.7418451,-4.4334912,calle Ebro
+40300.0,flat,77.0,3,1,36.7386803,-4.4341442,calle Ebro
+40990.0,chalet,101.0,3,2,36.7145139,-5.2500922,"MA-8400, 3"
+41000.0,chalet,124.0,3,1,37.1876436,-4.4519162,calle Cerrillo s/n
+41000.0,chalet,124.0,2,1,37.1886958,-4.4517874,calle Cerrillo
+41000.0,chalet,124.0,2,1,37.1859377,-4.4526731,calle Cerrillo
+41000.0,chalet,124.0,2,1,37.1895025,-4.4532461,calle Cerrillo
+41000.0,chalet,86.0,3,1,36.8606831,-4.0312463,Sedella
+41000.0,chalet,67.0,3,1,36.8636012,-4.0312276,Sedella
+41000.0,chalet,33.0,1,1,36.4449488,-5.2743997,Casares
+41300.0,flat,88.0,3,1,36.7412786,-4.4314314,"calle Esla, 2"
+41300.0,flat,87.0,3,1,36.7396266,-4.4318462,calle Esla
+41500.0,chalet,24.0,1,1,36.4436083,-5.2742918,"calle Arrabal, 58"
+42000.0,chalet,46.0,2,1,37.0214307,-4.5573024,calle Cerro San Joaquín
+42000.0,chalet,22.0,1,1,36.4437094,-5.2739487,calle Arrabal s/n
+42000.0,chalet,87.0,4,2,36.7971698,-5.1437401,Arriate
+42000.0,chalet,58.0,2,1,36.611562,-5.1490582,Pujerra
+42000.0,countryHouse,29.0,1,0,36.8009064,-4.2148298,camino Moclinejo s/n
+42000.0,flat,59.0,1,1,36.9500399,-5.0225145,"calle Calvario, 8"
+42000.0,flat,59.0,1,1,36.9508065,-5.0206621,calle Calvario
+42000.0,chalet,250.0,2,2,36.7275666,-4.8583502,Alozaina
+42500.0,chalet,120.0,2,1,36.746647,-5.1596505,ronda de l'Alcúdia
+42500.0,chalet,120.0,3,1,36.7669438,-5.2005781,Partida Sanguijuela s/n
+42500.0,chalet,120.0,3,1,36.7643912,-5.1995803,Partida Sanguijuela s/n
+42800.0,chalet,103.0,3,1,37.1135506,-4.7074498,calle Cataluña
+43000.0,chalet,85.0,3,1,37.021992,-4.5578728,calle Cerro de la Cruz
+43000.0,chalet,85.0,2,1,37.0232132,-4.5546769,calle Cerro de la Cruz
+43000.0,chalet,85.0,3,1,37.0229041,-4.5553618,calle Cerro de la Cruz
+43500.0,countryHouse,178.0,4,1,36.8597695,-4.3084778,"DS DISEMINADO, 27"
+44000.0,chalet,225.0,4,2,36.8846158,-4.9821943,calle Nueva
+44000.0,countryHouse,94.0,3,2,36.84117,-4.1697899,Norte - Barrio del Pilar - El Reñidero
+44200.0,flat,89.0,3,1,36.7388681,-4.4315478,calle Eume
+44200.0,flat,89.0,3,1,36.7420511,-4.4293003,calle Eume
+44200.0,flat,89.0,3,1,36.7397767,-4.4298188,calle Eume
+44500.0,chalet,64.0,1,1,36.7843251,-4.1023396,Centro Histórico
+45000.0,chalet,65.0,2,1,37.0189343,-4.5509399,Zona Cueva de Menga
+45000.0,chalet,50.0,1,1,36.7341302,-4.9188385,Yunquera
+45000.0,flat,43.0,3,1,36.7146556,-4.4468128,calle Virgen del Pilar
+45000.0,flat,100.0,3,2,37.1240538,-4.8678855,"calle Iglesias, 9"
+45000.0,chalet,55.0,1,1,36.5200718,-5.3178539,calle Lorenzo Garcia
+45000.0,flat,71.0,2,1,36.7994126,-5.1385193,Luis Buñuel
+45000.0,chalet,78.0,2,1,37.112089,-4.7033318,calle Pablo Picasso
+45000.0,chalet,78.0,2,1,37.112992,-4.701745,calle Pablo Picasso
+45000.0,countryHouse,42.0,2,1,36.6176735,-5.3435534,Cortes de la Frontera
+45000.0,flat,43.0,3,1,36.7138377,-4.4473767,Barrio Cruz del Humilladero - Los Tilos
+45000.0,countryHouse,75.0,2,1,36.596906,-5.333914,Cortes de la Frontera
+45000.0,countryHouse,106.0,3,1,36.73161,-4.91795,"calle Alozaina, 57"
+45000.0,flat,84.0,2,1,36.7209221,-5.2508157,"Jose Moreno, 20"
+45000.0,countryHouse,103.0,4,1,36.87015,-4.1078599,"Diseminado Diseminados, 153"
+45000.0,countryHouse,104.0,2,1,36.9027246,-4.1158393,"calle la Fuente, 2"
+45500.0,flat,88.0,3,1,36.7425999,-4.433343,calle Ebro
+45500.0,flat,87.0,3,2,36.742366,-4.4326019,calle Ebro
+45500.0,flat,87.0,3,2,36.7389896,-4.4318617,calle Ebro
+45900.0,countryHouse,6000.0,1,1,36.8528409,-4.1750541,Viñuela
+46000.0,flat,84.0,3,2,36.739009,-4.4318568,"calle Deva, 14"
+46000.0,flat,84.0,3,1,36.7397961,-4.432633,calle Deva
+46000.0,chalet,151.0,4,1,36.8180178,-4.6960166,calle Arroyo
+46000.0,chalet,167.0,3,1,37.1821331,-4.3359946,Villanueva de Tapia
+46000.0,chalet,151.0,4,1,36.8241743,-4.7040675,calle Peligros
+46000.0,chalet,151.0,4,1,36.8257967,-4.7073212,calle Peligros
+46000.0,countryHouse,75.0,2,1,36.8552374,-4.0217525,Salares
+46000.0,countryHouse,107.0,2,2,36.8534427,-4.0251508,Salares
+46400.0,flat,84.0,3,2,36.7359345,-4.4335846,calle Eresma
+47000.0,flat,84.0,3,1,37.184383,-4.4506499,calle San Francisco
+47000.0,flat,84.0,3,1,37.1857585,-4.4479655,calle San Francisco
+47000.0,flat,85.0,3,1,37.1846032,-4.4479747,calle San Francisco
+47000.0,chalet,235.0,3,2,36.7349583,-4.921644,calle Jaėn s/n
+47000.0,flat,75.0,3,1,37.18501,-4.44895,"calle San Francisco, 4"
+47000.0,chalet,189.0,6,1,36.9318642,-4.6842971,calle Damas
+47000.0,flat,84.0,3,1,37.1849768,-4.4489428,"calle San Francisco, 4"
+47000.0,flat,36.0,2,1,36.7853012,-4.1033294,calle Eloy Téllez
+47150.0,chalet,150.0,4,2,36.7864476,-4.1041837,calle Salvador Rueda
+47150.0,chalet,150.0,1,1,36.7848528,-4.1026254,calle Salvador Rueda
+47900.0,flat,91.0,3,1,36.7204055,-5.2503495,calle Presbitero Jose Moreno
+47900.0,flat,91.0,3,1,36.7232961,-5.2504706,avenida Constitucion s/n
+48000.0,chalet,47.0,2,1,37.0933984,-4.3900664,Archidona
+48000.0,chalet,60.0,2,1,36.7828586,-4.104206,calle Real Villa
+48000.0,countryHouse,92.0,1,1,36.9248669,-4.1921179,calle Federico García Lorca s/n
+48000.0,chalet,154.0,0,0,37.2061449,-4.6553021,"calle Sierpes, 1"
+48000.0,chalet,20.0,1,0,36.8158928,-4.6947887,"calle Arroyo, 19"
+48500.0,chalet,99.0,1,1,37.11227,-4.7043,"calle Versalles, 7"
+48900.0,countryHouse,177.0,5,1,37.0492027,-4.8637321,"salguero, 69"
+49000.0,chalet,64.0,1,2,36.7194251,-5.2507835,Benaojan
+49000.0,chalet,80.0,3,2,36.7866501,-4.1024464,Centro Histórico
+49000.0,countryHouse,70.0,2,1,36.8249628,-4.7057687,"Majada Vieja, 12 Poligono"
+49000.0,chalet,50.0,4,1,36.7971594,-4.0105038,Sayalonga
+49000.0,countryHouse,160.0,4,1,36.7347059,-5.2518726,"calle Cervantes, 4"
+49000.0,chalet,150.0,3,2,36.8102453,-4.2177351,Almáchar
+49000.0,chalet,118.0,3,1,36.7307358,-4.9192874,Yunquera
+49000.0,countryHouse,25.0,1,1,36.8777175,-4.8462303,"Poligono 19, 28  y 29"
+49500.0,flat,84.0,3,1,36.7383687,-4.4308702,"calle Guadalén, 4"
+49500.0,chalet,90.0,3,2,36.8712155,-4.0806841,Canillas de Aceituno
+49500.0,flat,84.0,3,2,36.7368953,-4.4317286,calle Guadalén
+49500.0,flat,84.0,3,2,36.7390803,-4.4296113,calle Guadalén
+49500.0,chalet,95.0,3,1,36.8681027,-4.1961681,Viñuela
+49900.0,studio,33.0,0,1,36.7709753,-4.0418271,Terreno Uei
+49900.0,chalet,115.0,1,1,37.13248,-4.72975,"calle Cristobal Toral, 3"
+49900.0,countryHouse,43.0,2,0,36.7820723,-3.9361319,Diseminado el Pago Rio
+49950.0,chalet,107.0,3,1,36.775057,-4.1837806,Iznate
+50000.0,countryHouse,103.0,3,1,36.903124,-4.1146982,"calle Seis de Febrero, 18"
+50000.0,chalet,68.0,3,1,36.6866087,-4.9047736,calle Higuera s/n
+50000.0,countryHouse,180.0,4,1,36.9393198,-4.2271952,Periana
+50000.0,chalet,60.0,1,1,36.7182956,-5.2522934,Benaojan
+50000.0,chalet,256.0,2,1,36.7333188,-5.1665206,calle Torrejones
+50000.0,studio,150.0,0,2,37.1239069,-4.8689189,Real s/n
+50000.0,studio,150.0,0,2,37.1268782,-4.8652502,calle Real
+50000.0,flat,111.0,5,1,36.7157406,-5.2527691,calle Fuente
+50000.0,chalet,184.0,4,1,37.2648337,-4.4094873,Cuevas de San Marcos
+50000.0,chalet,77.0,3,2,36.8633827,-4.0320428,Sedella
+50000.0,countryHouse,129.0,2,2,36.8535596,-4.0255608,Salares
+50000.0,chalet,140.0,3,2,37.0471415,-4.8640157,"calle San Benito, 3 -"
+50000.0,countryHouse,60.0,3,1,36.5403425,-5.386647,"calle Santa Maria, 1"
+50000.0,chalet,160.0,3,2,36.8077651,-4.2187302,Almáchar
+50000.0,chalet,70.0,2,1,37.0125247,-4.5605455,"cuevas de Jesús, 5"
+50300.0,flat,49.0,1,1,36.7636816,-4.706216,calle Miguel de Cervantes s/n
+50999.0,chalet,300.0,4,1,36.7657,-5.18322,"Lugar Partido Rural Fuente de la Higuera, 47"
+51000.0,chalet,100.0,3,1,36.7198402,-5.2509208,Benaojan
+51000.0,countryHouse,15.0,1,1,36.8836773,-4.5101743,Lugar Arroyo Coche
+52000.0,chalet,63.0,2,1,37.0940988,-4.3929676,"calle Puentezuela, 35"
+52000.0,chalet,130.0,3,2,37.0983399,-4.3924957,puerta Hoya
+52000.0,chalet,100.0,2,1,37.1001721,-4.3913622,puerta Hoya
+52000.0,chalet,150.0,1,0,36.53965,-5.38455,"avenida Santiago, 9"
+52000.0,chalet,145.0,3,2,37.26766,-4.41294,"plaza del Angel, 8"
+52000.0,studio,37.0,0,1,36.7682879,-4.0413764,"avenida de Karat, 20"
+52200.0,chalet,84.0,1,1,36.784244,-4.8427401,"calle alta, 5"
+52400.0,flat,104.0,4,2,36.7399515,-4.4290372,calle Eume
+52400.0,flat,104.0,4,2,36.7394858,-4.4312113,calle Eume
+52745.0,flat,84.0,3,1,37.185078,-4.4488269,calle San Francisco s/n
+53000.0,chalet,130.0,2,2,37.2128584,-4.3768306,calle Parrilla
+53000.0,chalet,86.0,3,1,37.0212283,-4.5581587,calle Consuelo
+53000.0,chalet,130.0,2,2,37.211141,-4.3771983,calle Parrilla
+53000.0,chalet,130.0,2,2,37.2076687,-4.3730265,calle Parrilla
+53000.0,chalet,130.0,2,2,37.2113514,-4.3795512,calle Parrilla
+53000.0,chalet,86.0,3,1,37.0209178,-4.5601209,calle Consuelo
+53000.0,chalet,86.0,3,1,37.0217218,-4.5598809,calle Consuelo
+54000.0,countryHouse,30.0,1,1,36.7170896,-4.3143806,carretera Totalan
+54000.0,chalet,235.0,1,1,37.2715967,-4.415109,calle San Juan
+54000.0,chalet,90.0,3,0,36.8244836,-4.5390621,"Cerrillo, 48"
+54308.0,flat,64.0,1,1,36.950044,-5.0225058,"calle Calvario, 8"
+54500.0,chalet,64.0,2,1,36.8320516,-3.9768105,Competa
+54500.0,chalet,76.0,2,0,36.6580708,-4.7561646,Coin
+55000.0,flat,101.0,4,2,36.7386758,-4.4311492,calle Cabriel
+55000.0,flat,54.0,2,1,36.7377046,-4.4202656,calle Obispo Cañedo y Vigil
+55000.0,countryHouse,90.0,2,1,36.8739244,-4.083735,Canillas de Aceituno
+55000.0,chalet,99.0,2,1,36.7173469,-5.2525093,Benaojan
+55000.0,chalet,44.0,1,1,36.7552274,-3.9522098,Torrox Pueblo
+55000.0,chalet,127.0,3,2,37.0525127,-4.8610376,"calle Cecilio Sánchez, 1"
+55000.0,chalet,64.0,2,1,36.8218942,-4.0056674,calle Alta s/n
+55000.0,flat,90.0,3,1,36.7383815,-4.4308707,Barrio Palma - Palmilla
+55000.0,countryHouse,90.0,4,1,36.8728155,-4.0816841,"Cuesta, 15"
+55000.0,countryHouse,200.0,3,2,36.8787364,-4.8447529,calle Cruz
+55000.0,chalet,50.0,1,1,36.7654211,-3.9491385,calle Pontil
+55000.0,countryHouse,12.0,1,1,36.7293714,-4.8561627,Alozaina
+55000.0,chalet,47.0,2,1,36.831785,-3.9745726,Competa
+55000.0,flat,86.0,3,1,36.7322599,-4.9190699,"calle San Sebastian, 28"
+55000.0,chalet,48.0,1,1,36.8346428,-4.1924697,Benamargosa
+55000.0,studio,33.0,0,1,36.6270859,-4.4993453,"calle Hoyo, 1"
+55800.0,flat,98.0,3,1,36.7263113,-4.4449617,calle Genoveses
+55900.0,chalet,76.0,2,1,36.8771826,-4.8440875,Ardales
+55900.0,flat,77.0,1,1,37.0270394,-4.5615854,avenida Miguel Palomo
+55900.0,flat,77.0,1,1,37.0270104,-4.5603482,avenida Miguel Palomo
+55900.0,flat,77.0,1,1,37.0271669,-4.5625077,avenida Miguel Palomo
+56000.0,chalet,90.0,1,2,36.9955959,-4.2625835,Alfarnate
+56000.0,chalet,150.0,1,1,36.766572,-5.1868169,"Partida Fuente de la Higuera, 9"
+56000.0,countryHouse,80.0,2,1,37.0972181,-4.3869561,Archidona
+57000.0,chalet,131.0,0,0,36.6579654,-4.7563625,calle Toledillo
+57000.0,flat,85.0,3,1,36.7875867,-4.1068764,calle Lino
+57000.0,chalet,136.0,3,2,36.7435969,-4.4378174,calle la Yesera
+57000.0,countryHouse,310.0,8,0,36.8615594,-4.031785,"calle Jardines, 17"
+58000.0,chalet,201.0,3,1,37.2100266,-4.392744,Diseminado la Parrilla
+58000.0,chalet,130.0,3,2,36.9815013,-4.9188359,calle Martires Campillos
+58000.0,chalet,201.0,3,1,37.2082257,-4.3927563,Paraje La Parrilla
+58000.0,chalet,201.0,3,1,37.2095106,-4.3920999,Diseminado la Parrilla s/n
+58000.0,chalet,130.0,3,2,36.9836414,-4.9198685,calle Nueva
+58000.0,chalet,87.0,3,2,36.8740276,-4.0792983,Canillas de Aceituno
+58000.0,flat,93.0,3,1,36.7519819,-5.1702817,calle Jimera de Libar
+58000.0,countryHouse,120.0,4,2,36.9274297,-4.1901157,avenida de la constituci
+58000.0,chalet,201.0,3,1,37.20967,-4.39335,"Diseminado la Parrilla, 71 D"
+58100.0,chalet,85.0,3,2,36.7126418,-4.626098,calle los Chorritos
+58400.0,flat,63.0,3,1,36.7279027,-4.4434943,calle Trinquete
+59000.0,flat,80.0,2,1,36.7867792,-4.1052572,"calle Vicario, 9"
+59000.0,chalet,90.0,3,2,36.5926785,-5.2633394,calle alta
+59000.0,chalet,55.0,1,1,36.9305221,-4.1685186,La Muela s/n
+59000.0,flat,80.0,2,1,36.7876354,-4.1065864,calle Vicario
+59000.0,chalet,107.0,3,1,36.6873426,-4.903275,Tolox
+59000.0,chalet,48.0,2,1,37.0216318,-4.5576069,calle Cerro San Joaquín
+59000.0,chalet,120.0,4,1,36.7169805,-5.2529735,calle Escambrones
+59000.0,chalet,118.0,3,2,37.2703517,-4.4136329,calle San Juan
+59000.0,duplex,78.0,3,1,36.6449847,-5.1524683,Cartajima
+59500.0,chalet,175.0,3,1,37.1947952,-4.4525406,Villanueva de Algaidas
+59900.0,chalet,70.0,2,2,37.2089074,-4.6620115,Alameda
+59900.0,chalet,202.0,4,1,37.2704717,-4.411107,calle Granada
+59900.0,chalet,179.0,3,1,36.7713792,-4.0406672,Siete Revueltas
+59900.0,chalet,202.0,0,0,36.9157277,-4.2955185,"paseo de Andalucía, 8"
+60000.0,flat,84.0,3,1,36.7390676,-4.4300639,calle Deva
+60000.0,flat,73.0,3,1,36.7346635,-4.4293868,calle Bullaque
+60000.0,flat,84.0,3,1,36.7387721,-4.4316692,calle Deva
+60000.0,chalet,158.0,4,1,36.71909,-5.2523799,"calle Cantillo, 5"
+60000.0,flat,97.0,2,1,36.7369818,-4.4289759,calle Arlanza
+60000.0,flat,70.0,2,1,36.7476164,-5.1558936,calle Viento s/n
+60000.0,chalet,75.0,4,1,36.9855322,-4.9183823,calle Albarrada
+60000.0,flat,85.0,3,1,36.7377106,-4.4306015,calle Bullaque
+60000.0,chalet,300.0,3,1,36.9534756,-5.023765,calle Nueva
+60000.0,chalet,146.0,4,2,36.7992115,-4.014597,Sayalonga
+60000.0,flat,84.0,3,2,36.7346236,-4.4300101,calle Bullaque
+60000.0,flat,84.0,3,2,36.737003,-4.4295299,calle Deva
+60000.0,chalet,193.0,3,1,36.9841093,-4.9174729,calle Santiago
+60000.0,chalet,67.0,2,1,36.5164574,-5.317536,Gaucin
+60000.0,chalet,175.0,3,1,37.1956143,-4.4529648,Villanueva de Algaidas
+60000.0,studio,20.0,0,1,36.8311374,-3.9744788,Competa
+60000.0,flat,60.0,2,1,37.2639806,-4.4094344,"calle Campillos, 35"
+60000.0,flat,190.0,3,1,37.2044287,-4.6534689,"calle garcía lorca, 7"
+60000.0,countryHouse,270.0,7,1,36.9509399,-5.0241,"calle parras, 1"
+60000.0,chalet,105.0,3,1,37.023251,-4.5590324,"calle san juaquin, 18"
+60000.0,flat,45.0,2,1,36.7422731,-4.4287642,"c, francisco carter, 16"
+60000.0,chalet,150.0,1,1,36.8154382,-4.2336866,El Borge
+60000.0,countryHouse,90.0,1,1,36.8658902,-4.593159,"Diseminado Diseminados, 336"
+61000.0,chalet,150.0,1,0,36.7460741,-5.1332722,Partidas norte
+62000.0,chalet,54.0,1,1,37.2418273,-4.4536319,A-7300
+62000.0,chalet,110.0,4,1,37.000389,-5.02147,calle Muelle
+62000.0,flat,47.0,2,1,36.8338234,-3.971392,Competa
+62500.0,chalet,80.0,3,2,36.8484115,-3.9851293,Canillas de Albaida
+63000.0,chalet,113.0,4,2,37.2083279,-4.6589728,"calle Enmedio, 18"
+63000.0,chalet,113.0,4,2,37.2087298,-4.6579198,calle Enmedio
+63000.0,chalet,153.0,3,1,36.734016,-5.2532835,"calle Doctor Vázquez Y Gutiérrez, 21"
+63000.0,countryHouse,30.0,1,1,36.7501991,-4.593417,El Sexmo s/n ElSexmo
+63000.0,chalet,40.0,2,1,36.8338327,-3.9738928,Competa
+63000.0,chalet,120.0,2,1,37.2056602,-4.6574894,"calle Pablo Ruíz Picasso, 9"
+63000.0,countryHouse,60.0,3,1,36.5452282,-5.235305,"calle Arroyo, 16"
+63000.0,countryHouse,25.0,1,0,36.562455,-5.2148043,"poligono 2, 222"
+63500.0,chalet,141.0,4,1,36.9062633,-4.3343874,calle Laurel
+64000.0,chalet,132.0,3,2,36.6058284,-5.270488,calle Aguayar
+64000.0,chalet,132.0,2,1,36.6057505,-5.2694688,"calle Aguayar, 11"
+64000.0,chalet,184.0,5,1,36.9499161,-5.0271404,Cañete la Real
+64000.0,flat,200.0,3,2,37.1254246,-4.8680837,"calle real, 14"
+64300.0,flat,100.0,3,1,36.7273249,-4.445593,"calle Genoveses, 8"
+64400.0,flat,58.0,1,1,36.6635992,-4.560599,"c/la mezquita, 10"
+64400.0,flat,57.0,1,1,36.6625537,-4.5593456,calle la Mezquita
+64500.0,flat,98.0,2,2,36.7275415,-4.4455948,"calle Genoveses, 6"
+64800.0,flat,76.0,3,1,36.7477184,-5.1702419,El Fuerte - La Dehesa
+64900.0,chalet,64.0,2,1,36.7605248,-3.9524654,calle Mirador
+64950.0,chalet,75.0,5,1,36.78545,-4.84154,"calle Zumaque, 19"
+64950.0,chalet,180.0,3,2,37.0015412,-5.023323,"calle Santa Ana, 70"
+65000.0,chalet,98.0,3,1,36.7271103,-4.8568137,"Granadillo, 5"
+65000.0,countryHouse,132.0,6,2,36.7311283,-4.9221895,"calle Agua, 66"
+65000.0,chalet,118.0,3,1,36.5174791,-5.316576,"calle Andres Silverio Martin, 8"
+65000.0,countryHouse,79.0,1,2,36.7362371,-4.9204169,Yunquera
+65000.0,chalet,140.0,3,1,37.116172,-4.7098453,calle Galicia
+65000.0,chalet,147.0,5,1,37.2054276,-4.6607938,Alameda
+65000.0,chalet,110.0,3,1,37.2665778,-4.4109312,calle Triana
+65000.0,chalet,41.0,1,1,36.7437839,-5.1579983,Centro
+65000.0,chalet,171.0,3,1,36.9169236,-4.291302,Riogordo
+65000.0,flat,84.0,3,1,36.7385791,-4.4341887,"calle Eresma, 5 -3"
+65000.0,flat,265.0,4,2,37.2685647,-4.4112841,"calle Granada, 18 -56"
+65000.0,flat,36.0,1,1,36.6455026,-4.6866469,calle Cilla
+65000.0,chalet,42.0,1,1,36.4450929,-5.2730326,calle Barrio Bajo s/n
+65000.0,chalet,242.0,3,2,37.011509,-4.5574761,"calle Palomos, 10"
+65000.0,flat,65.0,2,1,36.7516933,-5.1736307,El Fuerte - La Dehesa
+65000.0,countryHouse,40.0,1,1,36.5647361,-5.2152497,"Benajaron, 203"
+65000.0,chalet,97.0,3,1,36.8710971,-4.0804356,Canillas de Aceituno
+65000.0,chalet,89.0,3,1,36.9003201,-4.113342,Alcaucín
+65000.0,chalet,285.0,4,2,37.2662948,-4.4133437,calle Archidona s/n
+65000.0,countryHouse,165.0,3,2,37.27034,-4.41511,"plaza San Miguel, 15"
+65000.0,countryHouse,230.0,8,1,36.6832994,-4.9064123,Tolox
+65000.0,chalet,250.0,5,1,36.9812091,-4.9191315,Teba
+65000.0,chalet,86.0,2,1,36.633893,-5.1214244,Igualeja
+65000.0,chalet,119.0,2,1,37.0303631,-4.3382822,Villanueva del Trabuco
+65000.0,chalet,136.0,2,1,36.7331296,-5.2552765,calle Doctor Vázquez Y Gutiérrez
+65000.0,chalet,162.0,4,1,36.9817863,-4.9215872,calle Santa Ana
+65000.0,chalet,53.0,1,1,36.8303038,-4.5402978,Diseminado
+65000.0,chalet,80.0,2,2,36.8478614,-4.2478663,Comares
+65000.0,flat,43.0,3,1,36.7733087,-4.042171,centro
+65000.0,countryHouse,100.0,3,0,36.9156614,-4.2927527,Riogordo
+65000.0,chalet,100.0,2,1,36.5169431,-5.3155956,Gaucin
+65000.0,chalet,96.0,3,1,36.8741214,-4.0817844,Canillas de Aceituno
+65000.0,countryHouse,120.0,3,2,36.8458413,-3.9877644,"calle Almería, 9"
+65000.0,chalet,53.0,1,1,36.8236686,-4.5398077,Almogía
+65000.0,chalet,137.0,3,1,36.9815934,-4.9201917,calle Carrasco
+65000.0,chalet,93.0,4,1,37.0955832,-4.3920471,"calle Juan Cabrera, 31"
+65000.0,chalet,90.0,2,1,36.8725976,-4.0826633,Canillas de Aceituno
+65000.0,chalet,56.0,2,1,36.831207,-3.9743377,Competa
+65000.0,chalet,40.0,1,1,36.573235,-5.2767332,"calle Fuente, 17"
+65000.0,countryHouse,300.0,1,1,36.9927705,-4.2626704,"pozo Rincon, 12"
+65000.0,countryHouse,60.0,2,1,36.87997,-4.8475742,"calle de los Carros, 99"
+65000.0,countryHouse,200.0,6,2,36.8621072,-4.0336313,"calle Llana, 1"
+65400.0,flat,89.0,3,1,36.7413657,-4.4317678,"calle Esla, 3"
+65400.0,flat,89.0,3,2,36.7425323,-4.4317502,calle Esla
+65500.0,chalet,185.0,3,0,36.7995853,-4.0186595,calle Loma
+65900.0,chalet,178.0,5,1,36.875709,-4.8458502,Ardales
+66000.0,countryHouse,61.0,2,1,36.8375146,-3.9902415,Archez
+66000.0,countryHouse,75.0,2,1,36.9960116,-4.3650341,"calle Arroyo, 35"
+66000.0,flat,114.0,4,2,36.987466,-4.9172081,calle Antonio Machado
+66000.0,flat,24.0,2,1,36.8338551,-3.9742152,Competa
+66000.0,flat,24.0,2,1,36.8318107,-3.972713,Competa
+66000.0,flat,24.0,2,1,36.832,-3.97587,Competa
+66000.0,countryHouse,200.0,4,1,37.1092299,-4.5121399,"calle juan carlos i, 49"
+66000.0,flat,45.0,2,1,36.8339143,-3.9748301,Competa
+66500.0,flat,135.0,3,2,37.1285687,-4.8658958,calle Seguidillas
+66900.0,chalet,120.0,3,1,37.2063648,-4.6614381,Alameda
+66900.0,countryHouse,122.0,3,1,36.7709973,-4.3182975,Barrio Olías
+67000.0,countryHouse,85.0,2,1,36.7171151,-5.2535372,calle Egido
+67000.0,chalet,88.0,3,1,36.7826562,-4.8429153,Muro
+67000.0,countryHouse,168.0,1,0,36.7994115,-4.0132199,Sayalonga
+67000.0,chalet,44.0,2,1,36.8322306,-3.9724148,Competa
+67000.0,chalet,168.0,3,2,36.7965407,-4.0115515,Sayalonga
+67000.0,countryHouse,170.0,4,0,36.8000408,-4.0120353,Sayalonga
+67400.0,countryHouse,50.0,1,1,37.0030371,-4.2533457,camino de Alfarnate a Loja
+68000.0,chalet,86.0,3,1,37.2072903,-4.6596484,"calle Nueva, 18"
+68000.0,chalet,86.0,3,1,37.2080621,-4.6617588,calle Nueva
+68000.0,chalet,91.0,3,1,36.7746572,-4.1848175,Iznate
+68000.0,chalet,159.0,4,3,37.2064178,-4.6607602,calle Nueva
+68000.0,chalet,50.0,2,1,36.7853505,-4.0959256,calle Bellavista
+68000.0,countryHouse,100.0,2,2,36.9087362,-4.1632952,Periana
+68000.0,chalet,45.0,1,1,36.7847715,-3.9724994,Diseminado Pago Montealegre
+68000.0,chalet,46.0,2,1,36.8378807,-3.990798,Archez
+68000.0,countryHouse,70.0,2,2,36.5449472,-5.2354628,"calle San Juan, 5"
+68000.0,countryHouse,150.0,3,1,36.99397,-4.2603,"calle Miraflores, 4"
+68200.0,flat,30.0,1,1,36.6262621,-4.5010081,avenida de los Manantiales
+68200.0,flat,30.0,1,1,36.6214019,-4.5013625,"manantiales, estacion de autoúses"
+68250.0,countryHouse,10181.0,0,0,36.661601,-4.75751,"coin, 1"
+68318.0,flat,80.0,2,1,36.7867792,-4.1052572,"calle Vicario, 9"
+68500.0,chalet,119.0,2,1,37.0281583,-4.3380188,calle Rivera
+68500.0,chalet,119.0,2,1,37.0295978,-4.3373894,calle Rivera s/n
+68500.0,chalet,84.0,2,2,37.26592,-4.41528,"calle Malaga, 64"
+68500.0,countryHouse,134.0,2,1,37.0295046,-4.3362086,calle Rivera
+68600.0,chalet,94.0,3,1,36.7828005,-4.099605,calle Cañadú s/n
+68600.0,chalet,94.0,3,1,36.783033,-4.0997676,"calle Cañadú, 11"
+68600.0,chalet,94.0,3,2,36.7842764,-4.0979039,calle Cañadú
+68600.0,chalet,94.0,3,2,36.7826326,-4.1016272,calle Cañadú
+69000.0,chalet,76.0,3,1,36.822444,-4.7050622,Alora
+69000.0,chalet,90.0,3,2,36.7716381,-4.7079848,calle Nuestra Señora de Fátima
+69000.0,countryHouse,78.0,2,1,36.78943,-4.01232,Sayalonga
+69000.0,chalet,140.0,4,2,36.9331218,-4.6823423,Real
+69000.0,chalet,75.0,3,1,36.7890186,-4.9452253,"calle Casas Largas, 2 -16"
+69000.0,flat,75.0,3,1,36.7871151,-4.9473813,calle Casas Largas
+69000.0,chalet,76.0,3,1,36.8239133,-4.7032361,calle Juan Naranjo
+69000.0,chalet,90.0,4,1,36.9268335,-4.1907416,ECHEGARAY
+69000.0,chalet,108.0,2,1,37.0244989,-4.3375063,Villanueva del Trabuco
+69000.0,chalet,55.0,2,1,36.8328629,-3.9721402,Competa
+69000.0,chalet,87.0,3,1,36.8720376,-4.0801707,Canillas de Aceituno
+69000.0,chalet,90.0,3,2,36.7700894,-4.7073643,calle Nuestra Señora de Fátima
+69000.0,chalet,76.0,2,1,36.8244678,-4.7059898,Alora
+69000.0,countryHouse,30.0,1,1,36.5647361,-5.2152497,Jubrique s/n
+69000.0,countryHouse,201.0,4,1,36.6310513,-5.1217095,"barrio de santa rosa 5, 5 BarriodeSantaRosa"
+69300.0,flat,153.0,3,2,36.572941,-4.5994134,calle Perdices
+69900.0,chalet,181.0,4,2,36.7526868,-5.1557543,calle José Díaz Giles
+69900.0,chalet,179.0,1,1,36.7514891,-5.1560986,"Urbanizacion Ntra Sra del Rosario, 2 A"
+69950.0,chalet,250.0,7,2,36.7835492,-4.8417726,"calle Albaiva, 3"
+70000.0,penthouse,85.0,3,1,37.2085635,-4.6572647,calle Baja
+70000.0,chalet,90.0,3,1,36.7997528,-5.1395751,calle Casas Nuevas s/n
+70000.0,chalet,76.0,2,1,36.822143,-4.7034823,calle Juan Naranjo
+70000.0,studio,28.0,0,1,36.7112537,-4.6327688,Cártama pueblo
+70000.0,countryHouse,310.0,9,1,36.9291115,-4.5315756,Arroyo coche
+70000.0,chalet,250.0,6,2,36.8776615,-4.8461273,calle Andrade Navarrete
+70000.0,flat,140.0,4,1,36.9815235,-4.9190925,calle Grande
+70000.0,flat,65.0,2,1,36.7338996,-5.1654413,"calle amanecer, 20"
+70000.0,chalet,231.0,4,1,37.2050831,-4.663276,Alameda
+70000.0,countryHouse,70.0,3,1,36.5943747,-5.2609348,"Estacion, 470"
+70000.0,chalet,128.0,4,2,36.8143393,-5.2973075,calle Molino
+70000.0,chalet,110.0,5,1,36.9147636,-4.2961649,calle Real
+70000.0,flat,90.0,4,1,37.0436618,-4.8679639,calle San Vicente
+70000.0,chalet,166.0,5,1,36.8642831,-4.0332463,Sedella
+70000.0,chalet,178.0,5,2,36.8075602,-4.2156793,Almáchar
+70000.0,chalet,400.0,7,2,36.952105,-5.0266813,Cañete la Real
+70000.0,countryHouse,72.0,1,1,36.7611033,-3.952312,Torrox Pueblo
+70000.0,flat,117.0,3,1,37.1265709,-4.865816,"travesía del Norte, 32  primer piso"
+70000.0,chalet,68.0,3,1,36.8067268,-4.2163527,Almáchar
+70000.0,chalet,47.0,1,2,36.5641165,-5.2146572,"calle Llanete, 2"
+70000.0,countryHouse,180.0,4,1,36.99547,-4.25877,"calle Soledad, 5"
+70000.0,flat,60.0,2,1,37.2034914,-4.6526083,"calle Diamantino García, 9"
+70500.0,flat,85.0,3,1,36.7283134,-4.4460461,calle Genoveses
+70500.0,flat,85.0,3,1,36.7279025,-4.44421,calle Genoveses
+70500.0,flat,84.0,3,2,36.7264807,-4.4449953,calle Genoveses
+70500.0,flat,84.0,3,2,36.7280893,-4.4463216,calle Genoveses
+70500.0,flat,84.0,3,2,36.7287998,-4.4451156,calle Genoveses
+70500.0,flat,84.0,3,2,36.7270507,-4.4465039,calle Genoveses
+71000.0,chalet,102.0,3,1,36.8165748,-5.2985258,calle Brioles
+71000.0,chalet,266.0,3,2,36.8751898,-5.0471934,"calle Nueva, 20"
+71250.0,countryHouse,117.0,4,2,36.7697614,-4.2192408,Macharaviaya
+71400.0,chalet,122.0,3,1,37.2080258,-4.6615158,Alameda
+71700.0,flat,62.0,3,1,36.7109153,-4.4447882,"calle Polo, 4"
+71700.0,flat,62.0,2,1,36.7110072,-4.4429819,calle Polo
+72000.0,flat,80.0,3,1,36.7506304,-5.1702639,"calle Sevilla, 123"
+72000.0,countryHouse,82.0,2,1,37.0996761,-4.3933507,Archidona
+72000.0,chalet,122.0,3,1,37.2078408,-4.6603123,Alameda
+72700.0,chalet,200.0,5,1,37.1175138,-4.6997106,Barrio Los Reynas
+72700.0,chalet,200.0,5,1,37.1140621,-4.7004722,Barrio Los Reynas
+72900.0,countryHouse,215.0,3,2,37.1974553,-4.4511264,la yesera
+72900.0,chalet,112.0,3,2,36.950044,-5.0225058,"calle Calvario, 8"
+72900.0,duplex,112.0,3,2,36.9481665,-5.0234986,calle Calvario
+73000.0,flat,72.0,3,1,36.7279547,-4.445094,"C. Trinquete, 7"
+73000.0,flat,70.0,3,1,36.7355256,-5.1654875,San Francisco
+73000.0,countryHouse,110.0,3,2,36.8386488,-3.990075,calle Pilar s/n
+73000.0,flat,72.0,4,3,36.7293477,-4.4446362,calle Trinquete
+73000.0,countryHouse,50.0,3,1,36.8740497,-4.0810614,Canillas de Aceituno
+73000.0,chalet,171.0,3,1,36.9274414,-4.1884927,Periana
+73000.0,chalet,81.0,3,1,36.5647361,-5.2152497,"C/Palacios, 1"
+73600.0,chalet,387.0,3,3,36.831799,-4.5404192,Terreno Ur. 2 Pol 004
+74000.0,countryHouse,53.0,3,1,36.8399869,-3.9894225,Archez
+74000.0,penthouse,85.0,3,1,37.2084505,-4.658573,"calle Baja, 9"
+74000.0,countryHouse,76.0,2,1,36.9156057,-4.2929456,Riogordo
+74000.0,chalet,144.0,3,2,36.6881924,-4.904029,plaza Alta
+74000.0,countryHouse,90.0,4,1,36.9291492,-4.1889584,Periana
+74800.0,flat,85.0,3,1,36.7254158,-4.4454394,calle Genoveses
+74800.0,flat,84.0,3,2,36.7258518,-4.4451703,calle Genoveses
+74800.0,flat,84.0,3,2,36.7270724,-4.4461801,calle Genoveses
+74900.0,chalet,170.0,4,1,36.9151562,-4.2926671,calle Santo Cristo
+74900.0,flat,105.0,3,1,36.7507962,-5.1723605,El Fuerte - La Dehesa
+75000.0,flat,147.0,3,2,36.7838661,-4.1029171,calle Calzadilla Herrera
+75000.0,chalet,147.0,3,2,36.7824824,-4.1005428,calle Calzadilla Herrera s/n
+75000.0,flat,46.0,2,1,36.92673,-4.18956,"calle Huelva, 6"
+75000.0,chalet,69.0,2,1,36.6617199,-4.7592009,calle San Cristóbal
+75000.0,chalet,65.0,2,1,36.7636862,-3.9511141,"Diseminado el Pago Pino, 34"
+75000.0,flat,74.0,4,3,36.7292214,-4.4466087,calle Genoveses
+75000.0,flat,70.0,2,1,37.20642,-4.65602,"calle Nueva, 142"
+75000.0,chalet,164.0,1,0,36.6595585,-4.761297,calle Teniente Coronel de la Rubia
+75000.0,duplex,39.0,1,1,36.4419388,-5.2725325,casares
+75000.0,chalet,40.0,1,1,36.4446651,-5.2728206,"calle Barrio Bajo, 8"
+75000.0,chalet,94.0,2,2,36.7844832,-4.8408883,"calle Camarinz, 5"
+75000.0,chalet,42.0,1,1,36.551928,-5.2771398,"calle campillos, 16"
+75000.0,chalet,53.0,3,1,36.8728419,-4.0820504,Canillas de Aceituno
+75000.0,studio,147.0,0,2,36.7825633,-4.0994358,calle Calzadilla Herrera
+75000.0,countryHouse,135.0,2,1,36.5203987,-5.3164194,Gaucin
+75000.0,chalet,100.0,1,0,36.7670197,-4.7071025,"calle Málaga, 5"
+75000.0,countryHouse,150.0,3,1,36.8698096,-4.1231922,Canillas de Aceituno
+75000.0,chalet,88.0,2,2,36.8360547,-4.1939065,calle Manga
+75000.0,chalet,171.0,3,1,36.929647,-4.1901997,Periana
+75000.0,countryHouse,117.0,4,2,36.7700962,-4.2156285,MA-3201
+75000.0,chalet,116.0,3,1,36.9835787,-4.9226407,calle la Paz
+75000.0,countryHouse,40.0,2,2,36.780148,-4.1014669,Camino Algarrobo - Las Arenas
+75000.0,chalet,150.0,4,1,36.9161241,-4.2935993,calle Real
+75000.0,chalet,39.0,1,1,36.4410791,-5.2729505,calle de los barrios s/n
+75000.0,chalet,90.0,4,1,36.8635263,-4.0338372,Sedella
+75000.0,countryHouse,200.0,4,2,36.7283499,-4.8565496,"calle Rodahuevos, 14"
+75000.0,chalet,132.0,4,3,36.5648949,-5.2159198,"calle Fuene, 9"
+75000.0,chalet,230.0,6,2,36.9320493,-4.126151,Alcaucín
+75000.0,chalet,260.0,4,2,37.2649557,-4.4146484,"calle Juan Benitez Sanchez, 3"
+75000.0,chalet,35.0,1,1,36.4427549,-5.2732477,Casares
+75000.0,chalet,113.0,5,1,36.8623072,-4.0329486,"calle del príncipe, 12"
+75000.0,chalet,80.0,2,2,36.6028637,-5.2707354,"calle Horno, 11"
+75000.0,chalet,77.0,2,1,36.89427,-4.42846,"calle San Sebastián, 12"
+75000.0,flat,70.0,3,1,37.0492027,-4.8637321,"plaza las flores, 2 planta"
+75000.0,countryHouse,100.0,3,1,36.7184519,-5.2539401,"calle Peñon Gordo, 5"
+75000.0,flat,80.0,2,2,36.87596,-5.04282,"calle las viñas, 32"
+75000.0,countryHouse,90.0,2,1,36.8473919,-4.2461158,"calle real, 9"
+75900.0,flat,80.0,2,1,37.0279194,-4.5358406,"calle Río Guadalhorce, 2"
+76000.0,chalet,119.0,2,1,36.6863015,-4.9062765,calle Balneario
+76000.0,countryHouse,112.0,3,2,36.9298595,-4.1914658,Periana
+76000.0,penthouse,85.0,2,1,36.9245972,-4.1922813,"calle Peñas Pardas, 3"
+76000.0,chalet,165.0,4,2,37.2074245,-4.6597157,calle Gitana
+77000.0,flat,110.0,3,1,36.7785911,-4.0973785,calle Viernes Santo
+77000.0,flat,110.0,3,2,36.7800596,-4.0973608,"C. Viernes Santo, 4"
+77000.0,countryHouse,53.0,3,1,36.8404488,-3.988675,Archez
+77000.0,flat,110.0,3,1,36.7780749,-4.0977571,calle Viernes Santo
+77000.0,chalet,86.0,5,1,36.8369488,-3.991875,Archez
+77000.0,chalet,53.0,3,1,36.8393553,-3.9916486,Archez
+77000.0,chalet,75.0,2,1,36.5649143,-5.21549,Jubrique
+77000.0,countryHouse,130.0,4,1,36.7330898,-4.9182175,"calle 16, 22"
+77500.0,flat,102.0,3,1,36.7518619,-5.1575798,calle Ana Maria Luque Aguilar
+77500.0,chalet,148.0,7,2,37.2677507,-4.4145898,Cuevas de San Marcos
+77500.0,flat,101.0,3,2,36.7512478,-5.1571835,calle Ana Maria Luque Aguilar
+77500.0,flat,101.0,3,2,36.7526749,-5.1571306,calle Ana Maria Luque Aguilar
+77500.0,chalet,56.0,2,1,36.7555657,-3.9517764,Torrox Pueblo
+78000.0,chalet,74.0,2,2,36.6412669,-5.2452522,Atajate
+78000.0,countryHouse,86.0,5,1,36.8396511,-3.9909631,Archez
+78000.0,chalet,250.0,4,1,36.9036939,-4.1136796,Alcaucín
+78000.0,flat,67.0,2,1,36.6107825,-5.1490602,Pujerra
+78000.0,flat,70.0,2,1,36.6120008,-5.150203,Pujerra
+78100.0,flat,76.0,4,1,36.7058287,-4.4924173,"calle José María Jacquard, 12"
+78100.0,flat,76.0,4,1,36.7058803,-4.4928472,calle Guillermo Lee s/n
+78100.0,flat,88.0,4,1,36.7046693,-4.4928886,calle José María Jacquard
+78500.0,chalet,152.0,3,1,36.8608831,-4.0325463,Sedella
+79000.0,flat,59.0,2,1,36.6599188,-4.7534885,"calle Matías García, 1"
+79000.0,flat,59.0,1,1,36.6613134,-4.7549264,calle Matías García
+79000.0,chalet,145.0,3,1,37.0284191,-4.3415735,calle Juan Solano s/n
+79000.0,countryHouse,89.0,2,0,36.7771259,-4.1845112,Iznate
+79000.0,countryHouse,142.0,4,1,36.8141397,-4.2328442,calle Carril
+79000.0,chalet,160.0,4,2,36.6442275,-5.151925,calle Nueva
+79000.0,countryHouse,48.0,1,1,36.9315986,-4.1671669,Periana
+79000.0,chalet,86.0,3,2,37.0954159,-4.3929705,calle Puentezuela
+79000.0,chalet,198.0,3,1,37.0478038,-4.8670072,calle San Sebastián
+79000.0,chalet,70.0,1,1,36.9321735,-4.1705993,Periana
+79000.0,flat,55.0,2,1,36.7636816,-4.706216,calle Miguel de Cervantes s/n
+79000.0,countryHouse,125.0,2,2,36.7346826,-5.2533546,Montejaque
+79000.0,chalet,80.0,3,1,36.9280369,-4.1885638,paseo Bellavista
+79000.0,countryHouse,177.0,7,2,36.8229799,-4.7057877,"calle Rosales, 25"
+79000.0,countryHouse,99.0,2,1,36.7990571,-4.0139487,Sayalonga
+79000.0,flat,59.0,2,1,36.658679,-4.7522958,calle Matías García
+79000.0,chalet,165.0,3,1,36.8563264,-4.0247724,calle Castillejo
+79000.0,chalet,102.0,2,1,37.2344987,-4.487058,"la venta, 57"
+79000.0,chalet,90.0,3,2,36.8405065,-3.9918032,Archez
+79000.0,chalet,90.0,2,1,36.6861931,-4.9061586,"calle Chopillos, 16"
+79000.0,chalet,300.0,4,2,36.7207282,-5.2545076,Benaojan
+79000.0,chalet,146.0,2,1,36.7995594,-4.0122038,Sayalonga
+79000.0,chalet,99.0,2,1,36.7964111,-4.0129681,Sayalonga
+79000.0,chalet,72.0,2,1,36.8451115,-3.9879293,Canillas de Albaida
+79000.0,chalet,145.0,3,2,37.2693821,-4.4153681,calle San Antonio
+79000.0,countryHouse,48.0,1,1,36.7667294,-3.9500111,Torrox Pueblo
+79000.0,countryHouse,50.0,1,1,36.9307823,-4.1715731,Periana
+79000.0,chalet,132.0,4,2,36.71794,-5.25313,"calle Convento, 5"
+79500.0,flat,99.0,2,1,37.2048262,-4.6564019,Alameda
+79500.0,chalet,95.0,3,1,36.7834587,-4.1018005,"calle tras Casas Capitulares, 12"
+79500.0,countryHouse,65.0,3,1,36.825194,-4.7029937,Alora
+79500.0,countryHouse,39.0,1,1,36.8742655,-4.0841768,Canillas de Aceituno
+79500.0,flat,109.0,4,3,36.7837286,-4.1037486,calle tras Casas Capitulares
+79800.0,chalet,165.0,2,2,36.8550121,-4.0239641,"calle Castillejo, 25"
+79800.0,chalet,165.0,3,2,36.8546993,-4.0237385,1
+79900.0,chalet,62.0,2,1,36.7454132,-5.1578257,Centro
+79900.0,chalet,90.0,2,1,37.1124022,-4.7012504,Humilladero
+79900.0,countryHouse,48.0,1,1,36.6984798,-4.7954471,Vía
+79900.0,flat,64.0,1,1,36.9026343,-4.1119642,Alcaucín
+79900.0,countryHouse,106.0,2,0,36.7882964,-4.1574886,calle Grupo Cerro
+79900.0,countryHouse,80.0,1,1,36.854354,-3.9731255,Canillas de Albaida
+79900.0,chalet,220.0,6,2,36.9825,-4.91938,"calle Moral, 22"
+79950.0,chalet,128.0,3,1,36.9058934,-4.3372908,Colmenar
+79950.0,chalet,110.0,3,1,36.872701,-4.1917746,Barriada los Castillejos
+79950.0,chalet,106.0,3,2,36.939867,-4.2275686,Periana
+79999.0,chalet,75.0,4,1,36.6246955,-5.1691283,calle Solete s/n
+80000.0,chalet,429.0,4,2,36.7195563,-5.2534667,calle Barrio Alto s/n
+80000.0,chalet,236.0,3,2,36.8465115,-3.9859293,calle Vicario Martínez Navas s/n
+80000.0,countryHouse,50.0,2,2,36.8431547,-4.1743159,Norte - Barrio del Pilar - El Reñidero
+80000.0,countryHouse,120.0,5,1,36.8455187,-3.9883467,Canillas de Albaida
+80000.0,countryHouse,165.0,2,1,36.854791,-4.0245333,Salares
+80000.0,flat,101.0,3,2,37.0426599,-4.8628384,Campillos
+80000.0,chalet,69.0,2,1,36.7847382,-4.1029069,calle del Agua
+80000.0,chalet,77.0,4,2,37.2054401,-4.6641805,Alameda
+80000.0,chalet,81.0,1,1,36.7963409,-4.065287,camino de las casillas
+80000.0,countryHouse,300.0,0,0,36.6343928,-5.2016528,calle Fray Leopoldo
+80000.0,flat,85.0,3,1,36.7252432,-4.4422721,calle Magistrado Salvador Barbera
+80000.0,flat,88.0,3,1,37.0364866,-4.7295299,Bobadilla - Bobadilla Estación - La Joya
+80000.0,chalet,344.0,4,2,37.1368099,-4.7289899,"calle Manuel de Falla, 24"
+80000.0,chalet,98.0,2,2,36.764109,-4.2980928,calle Rafael Alberti
+80000.0,flat,84.0,3,1,36.7220668,-4.3532061,Barrio El Palo
+80000.0,chalet,54.0,3,1,36.6170529,-5.3421717,Cortes de la Frontera
+80000.0,countryHouse,165.0,3,1,36.8559425,-4.022347,Salares
+80000.0,chalet,62.0,3,1,36.9314807,-4.1913719,camino Barrero
+80000.0,chalet,74.0,4,1,36.6244352,-5.1695706,"av. havaral, 23"
+80000.0,countryHouse,138.0,3,1,36.8333107,-3.972713,Competa
+80000.0,countryHouse,175.0,3,1,36.8485115,-3.9864293,Canillas de Albaida
+80000.0,chalet,120.0,3,1,37.1251612,-4.869218,"Ramón y Cajal, 14"
+80000.0,chalet,138.0,3,1,36.8346107,-3.972613,Competa
+80000.0,chalet,40.0,1,1,36.8733307,-4.0805093,Canillas de Aceituno
+80000.0,countryHouse,150.0,2,2,36.545667,-5.2354772,"museo, 204"
+80000.0,countryHouse,175.0,5,1,36.8453019,-3.9892953,Canillas de Albaida
+80000.0,countryHouse,72.0,2,1,36.7583567,-3.9526305,Torrox Pueblo
+80000.0,flat,85.0,3,1,36.7394232,-4.4332533,"La Palma, 13"
+80000.0,chalet,306.0,7,1,37.1889182,-4.4510765,"calle Malaga, 34"
+80000.0,countryHouse,695.0,11,11,36.99534,-4.26076,"plaza Constitucion, 2 B"
+80000.0,chalet,121.0,3,2,36.7909924,-4.1057816,Norte - Barrio del Pilar - El Reñidero
+80000.0,chalet,69.0,2,1,36.7824536,-4.1011407,Centro Histórico
+80000.0,penthouse,70.0,1,1,36.7964329,-5.1389328,"calle Lope de Vega, 16"
+80000.0,flat,100.0,3,1,36.7283603,-4.8639151,"calle Vista Hermosa, 1"
+80000.0,flat,55.0,1,1,36.9024304,-4.1199455,"carril del Alcazar, 71"
+80000.0,chalet,241.0,5,3,36.6871847,-4.9016386,"camino Nuevo, 28"
+80000.0,chalet,40.0,2,1,36.923721,-4.2918067,"calle auta, 28"
+80300.0,chalet,168.0,4,2,36.8324102,-4.227969,Cutar
+80900.0,flat,115.0,4,2,36.6854625,-4.9043367,"avenida Balneario, 25"
+81000.0,chalet,402.0,3,2,36.7219821,-5.2489928,calle Manuel Carrasco
+81700.0,flat,80.0,3,1,36.7101686,-4.4441359,"calle Cepero, 1"
+81700.0,flat,79.0,3,1,36.7092286,-4.4450165,calle Cepero
+81980.0,countryHouse,60.0,1,1,36.9135743,-4.3483126,Colmenar
+82000.0,chalet,72.0,2,1,36.8700759,-4.1990413,Viñuela
+82000.0,flat,76.0,3,1,36.7046936,-4.4942822,calle Guillermo Lee
+82000.0,chalet,82.0,2,1,36.9344207,-4.6223368,calle los Verdiales
+82000.0,chalet,313.0,3,2,37.0497036,-4.863464,calle San Sebastián
+82000.0,countryHouse,31.0,1,1,36.884294,-4.5045716,arroyo coche
+82000.0,chalet,90.0,2,1,36.5178502,-5.3159397,calle alta
+82000.0,chalet,103.0,3,2,36.7176729,-5.2561993,Benaojan
+82000.0,countryHouse,210.0,4,2,36.8548012,-4.0237214,"calle Castillejo, 14"
+82000.0,countryHouse,84.0,2,1,36.8341535,-3.9727587,Competa
+82000.0,chalet,36.0,3,1,36.8366488,-3.991475,Archez
+82000.0,chalet,50.0,3,1,36.9047723,-4.3357773,Colmenar
+82000.0,flat,89.0,2,1,37.207846,-4.6581884,"plaza España, 13"
+82500.0,flat,76.0,3,1,37.0433949,-4.8635589,Campillos
+82500.0,countryHouse,138.0,3,1,36.8298238,-4.2267212,calle Rodríguez de la Fuente
+82500.0,flat,76.0,3,1,37.04423,-4.8619581,"calle las dalias, 1"
+82650.0,flat,45.0,1,1,36.6612404,-4.7613816,calle Antequera s/n
+82900.0,flat,144.0,3,2,37.2679027,-4.4158894,calle Encinas Reales
+82900.0,chalet,111.0,3,1,36.829263,-4.227622,calle la Fuente
+82950.0,flat,120.0,3,1,37.2083466,-4.6599566,"C ALLE Gitana, 30"
+83000.0,chalet,52.0,1,1,36.7792078,-4.1003427,calle Arroyo San Francisco
+83000.0,chalet,52.0,2,1,36.779305,-4.102804,calle Arroyo San Francisco
+83000.0,flat,111.0,3,1,36.8018548,-5.1413139,Arriate
+83000.0,chalet,60.0,2,1,36.8286579,-4.5412721,Almogía
+83000.0,chalet,85.0,3,1,36.8302575,-3.9721176,calle Horno
+83000.0,countryHouse,162.0,4,1,36.8212488,-4.0051583,Sayalonga
+83000.0,chalet,52.0,1,1,36.781634,-4.1009221,calle Arroyo San Francisco
+83000.0,countryHouse,68.0,1,1,36.9411377,-4.1548989,Periana
+83000.0,countryHouse,162.0,4,1,36.8223984,-4.004079,Sayalonga
+83000.0,chalet,55.0,2,1,37.0200362,-4.5547502,Zona Cueva de Menga
+84000.0,chalet,80.0,2,1,36.8326262,-3.9746521,Competa
