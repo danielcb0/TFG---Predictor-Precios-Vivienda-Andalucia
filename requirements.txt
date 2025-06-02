@@ -1,4 +1,4 @@
-contourpy==1.1.1
+
 cycler==0.12.1
 fonttools==4.57.0
 importlib-resources==6.4.5
@@ -20,3 +20,4 @@ scipy==1.15.3
 seaborn==0.13.2
 Flask==3.0.3
 flask-cors==6.0.0
+joblib==1.4.2
