@@ -17,7 +17,37 @@
      <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+
+    <!-- Contenedor donde inyectaremos header.html -->
+  <div id="header-container"></div>
+
+  <!-- Contenedor donde inyectaremos nav.html -->
+  <div id="nav-container"></div>
+
+<script>
+    // Función genérica para cargar un fragmento HTML y “pegarlo” en un contenedor
+    async function loadPartial(url, containerId) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Error ${res.status} al cargar ${url}`);
+        const html = await res.text();
+        document.getElementById(containerId).innerHTML = html;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Al cargar la página, llamamos a loadPartial para cada sección
+    document.addEventListener('DOMContentLoaded', () => {
+      loadPartial('partials/header.html', 'header-container');
+      loadPartial('partials/nav.html',    'nav-container');
+      loadPartial('partials/footer.html', 'footer-container');
+    });
+  </script>
+
+
     <div class="container">
+        
         <h1>Predictor de Precios de Vivienda en Andalucía</h1>
 
         <div id="map"></div> <!-- Contenedor para el mapa -->
