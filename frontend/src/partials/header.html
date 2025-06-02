@@ -1,0 +1,26 @@
+<?php
+// --------------------------------------------------
+// Cabecera común a todas las páginas
+// Asi me aseguro de que todas las páginas tienen una cabecera igual y no repetir codigo
+// --------------------------------------------------
+require_once __DIR__ . '/../config.php';
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><?= isset($pageTitle) ? htmlspecialchars($pageTitle) : 'Mi Aplicación'; ?></title>
+  <link rel="stylesheet" href="../src/styles/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.php" class="logo">
+        <img class="site-logo"src="../assets/img/logo.png" alt="Logo de la app">
+      </a>
+      
+    </div>
+  </header>

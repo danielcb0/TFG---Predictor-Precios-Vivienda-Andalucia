@@ -4,91 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Predictor de Precios de Vivienda</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 20px;
-            background-color: #f4f7f6;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #555;
-        }
-        input[type="number"],
-        select {
-            width: calc(100% - 22px); /* Full width minus padding and border */
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        input[type="number"]:focus,
-        select:focus {
-            border-color: #007bff;
-            outline: none;
-            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #result {
-            margin-top: 25px;
-            padding: 15px;
-            background-color: #e9ecef;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            text-align: center;
-        }
-        #result h2 {
-            margin-top: 0;
-            color: #17a2b8;
-        }
-        #result p {
-            font-size: 1.2em;
-            color: #28a745;
-            font-weight: bold;
-        }
-        #result .error {
-            color: #dc3545;
-            font-weight: bold;
-        }
-    </style>
+
+    <!-- Enlaza tu archivo de estilos externo en lugar del bloque <style> -->
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Predictor de Precios de Vivienda en Andalucía</h1>
+
+        <div id="map"></div> <!-- Contenedor para el mapa -->
+
         <form id="predictionForm">
             <div>
                 <label for="superficie">Superficie (m²):</label>
@@ -138,6 +71,55 @@
     <script>
         const form = document.getElementById('predictionForm');
         const resultDiv = document.getElementById('result');
+        const latitudInput = document.getElementById('latitud');
+        const longitudInput = document.getElementById('longitud');
+
+        // 1) Definimos los límites aproximados de Andalucía
+        const andaluciaBounds = [
+            [36.00, -7.80],   // esquina sudoeste (lat, lng)
+            [38.80, -0.10]    // esquina noreste  (lat, lng)
+        ];
+
+        // 2) Inicializamos el mapa “encerrado” solo en Andalucía
+        const map = L.map('map', {
+            maxBounds: andaluciaBounds,
+            maxBoundsViscosity: 1.0, // no deja desplazar ni un píxel fuera de Andalucía
+            minZoom: 7               // evita alejarse tanto que se vea fuera de Andalucía
+        });
+
+        // 3) Cargamos la capa base de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // 4) Ajustamos la vista inicial para encuadrar toda Andalucía
+        map.fitBounds(andaluciaBounds);
+
+        let marker;
+
+        // Función para actualizar los campos del formulario y el marcador
+        function updateCoordinates(lat, lng) {
+            latitudInput.value = lat.toFixed(10);
+            longitudInput.value = lng.toFixed(10);
+
+            if (marker) {
+                map.removeLayer(marker);
+            }
+            marker = L.marker([lat, lng]).addTo(map);
+            map.setView([lat, lng], map.getZoom());
+        }
+
+        // Si los inputs ya traían coordenadas al cargar la página, colocamos el marcador
+        const initialLat = parseFloat(latitudInput.value);
+        const initialLng = parseFloat(longitudInput.value);
+        if (!isNaN(initialLat) && !isNaN(initialLng)) {
+            updateCoordinates(initialLat, initialLng);
+        }
+
+        // Evento de clic en el mapa
+        map.on('click', function(e) {
+            updateCoordinates(e.latlng.lat, e.latlng.lng);
+        });
 
         form.addEventListener('submit', async function(event) {
             event.preventDefault(); // Evitar el envío tradicional del formulario
@@ -147,8 +129,8 @@
 
             // Convertir FormData a un objeto JSON y asegurar tipos numéricos
             formData.forEach((value, key) => {
-                if (key === 'superficie' || key === 'habitaciones' || key === 'baños' || key === 'latitud' || key === 'longitud') {
-                    data[key] = parseFloat(value); // Convertir a número flotante
+                if (['superficie', 'habitaciones', 'baños', 'latitud', 'longitud'].includes(key)) {
+                    data[key] = parseFloat(value);
                 } else {
                     data[key] = value;
                 }
@@ -157,10 +139,7 @@
             resultDiv.innerHTML = 'Calculando predicción...';
 
             try {
-                // Asegúrate de que la URL sea la correcta para tu API
-                // Si la API está en un puerto diferente (ej. 5000) y este HTML se abre como archivo local:
-                // const response = await fetch('http://localhost:5000/predict', {
-                const response = await fetch('http://127.0.0.1:5000/predict', { // Ruta relativa si se sirve desde el mismo origen
+                const response = await fetch('http://127.0.0.1:5000/predict', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -174,10 +153,13 @@
                     if (result.prediction !== undefined) {
                         resultDiv.innerHTML = `
                             <h2>Precio Estimado:</h2>
-                            <p>€ ${parseFloat(result.prediction).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                            <p>€ ${parseFloat(result.prediction).toLocaleString('es-ES', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            })}</p>
                         `;
                     } else {
-                         resultDiv.innerHTML = `<p class="error">Respuesta inesperada del servidor.</p>`;
+                        resultDiv.innerHTML = `<p class="error">Respuesta inesperada del servidor.</p>`;
                     }
                 } else {
                     resultDiv.innerHTML = `<p class="error">Error: ${result.error || response.statusText}</p>`;
@@ -189,6 +171,5 @@
             }
         });
     </script>
-
 </body>
 </html>
