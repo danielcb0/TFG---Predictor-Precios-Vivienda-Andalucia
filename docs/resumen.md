@@ -69,3 +69,4 @@ Las **partes o fases principales del proyecto** son:
    
 
 
+![alt text](image-5.png)
