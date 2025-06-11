@@ -1,0 +1,955 @@
+\documentclass[a4paper,11pt]{book}
+%\documentclass[a4paper,twoside,11pt,titlepage]{book}
+
+\usepackage{xspace} % Necesario para \xspace en las definiciones
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\decimalpoint
+\usepackage{dcolumn}
+\newcolumntype{.}{D{.}{\esperiod}{-1}}
+\makeatletter
+\addto\shorthandsspanish{\let\esperiod\es@period@code}
+\makeatother
+
+\RequirePackage{verbatim}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{afterpage}
+\usepackage{longtable}
+\usepackage[pdfborder={0 0 0}]{hyperref} % Se ajusta el valor pdfborder a 0 0 0
+\usepackage{url}
+\usepackage{colortbl,longtable}
+\usepackage[stable]{footmisc}
+
+% ********************************************************************
+% Definiciones de comandos reutilizables
+% ********************************************************************
+\newcommand{\myTitle}{Desarrollo y análisis de una Plataforma Predictiva de Precios Inmobiliarios mediante Machine Learning y Big Data para las Provincias de Andalucía\xspace}
+\newcommand{\myDegree}{Grado en Ingeniería Informática\xspace}
+\newcommand{\myName}{Daniel Carrera Bonilla\xspace}
+\newcommand{\myProf}{Ignacio Javier Pérez Gálvez\xspace}
+\newcommand{\myOtherProf}{Nombre Apellido1 Apellido2 (tutor2)\xspace}
+\newcommand{\myFaculty}{Escuela Técnica Superior de Ingenierías Informática y de Telecomunicación\xspace}
+\newcommand{\myFacultyShort}{E.T.S. de Ingenierías Informática y de Telecomunicación\xspace}
+\newcommand{\myDepartment}{Departamento de Ciencias de la Computación e Inteligencia Artificial\xspace}
+\newcommand{\myUni}{Universidad de Granada\xspace}
+\newcommand{\myLocation}{Granada\xspace}
+\newcommand{\myTime}{\today\xspace}
+\newcommand{\myVersion}{Version 0.1\xspace}
+
+% ********************************************************************
+% Configuración de hiperreferencias y cabeceras
+% ********************************************************************
+\hypersetup{
+  pdfauthor={\myName\ (email@ugr.es)},
+  pdftitle={\myTitle},
+  pdfsubject={},
+  pdfkeywords={machine learning, big data, precios inmobiliarios, Andalucía},
+  pdfcreator={LaTeX},
+  pdfproducer={pdflatex}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO]{\leftmark}
+\fancyhead[RE]{\rightmark}
+\fancyhead[RO,LE]{\textbf{\thepage}}
+\renewcommand{\chaptermark}[1]{\markboth{\textbf{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{\textbf{\thesection. #1}}}
+\setlength{\headheight}{1.5\headheight}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\newtheorem{teorema}{Teorema}[chapter]
+\newtheorem{ejemplo}{Ejemplo}[chapter]
+\newtheorem{definicion}{Definición}[chapter]
+
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+\definecolor{gray30}{gray}{.94}
+
+\lstset{ 
+    frame=Ltb,
+    framerule=0.5pt,
+    aboveskip=0.5cm,
+    framextopmargin=3pt,
+    framexbottommargin=3pt,
+    framexleftmargin=0.1cm,
+    framesep=0pt,
+    rulesep=.4pt,
+    backgroundcolor=\color{gray97},
+    rulesepcolor=\color{black},
+    stringstyle=\ttfamily,
+    showstringspaces = false,
+    basicstyle=\scriptsize\ttfamily,
+    commentstyle=\color{gray45},
+    keywordstyle=\bfseries,
+    numbers=left,
+    numbersep=6pt,
+    numberstyle=\tiny,
+    breaklines=true,
+}
+ 
+\lstnewenvironment{listing}[1][]
+   {\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
+
+\lstdefinestyle{CodigoC}{
+  basicstyle=\scriptsize,
+  frame=single,
+  language=C,
+  numbers=left
+}
+\lstdefinestyle{CodigoC++}{
+  basicstyle=\small,
+  frame=single,
+  backgroundcolor=\color{gray30},
+  language=C++,
+  numbers=left
+}
+\lstdefinestyle{Consola}{
+  basicstyle=\scriptsize\bf\ttfamily,
+  backgroundcolor=\color{gray30},
+  frame=single,
+  numbers=none
+}
+\newcommand{\bigrule}{\titlerule[0.5mm]}
+
+% ********************************************************************
+% Comienzo del documento
+% ********************************************************************
+\begin{document}
+
+% Se comentan las inclusiones de archivos externos no disponibles para compilar
+%\input{portada/portada}
+%\input{prefacios/prefacio}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+\setlength{\parskip}{5pt}
+
+% ********************************************************************
+% Capítulo 1: Introducción y Extracción de Datos
+% ********************************************************************
+\chapter{Introducción }
+\section{Contextualización y Objetivos del Proyecto}
+\subsection{Motivación del trabajo}
+-- MEJORAR POR TI
+El mercado inmobiliario constituye uno de los pilares fundamentales para el análisis de la situación socioeconómica de una región, ya que afecta directamente a la calidad de vida de la población, a la capacidad de inversión y al equilibrio territorial. En particular, la vivienda representa no solo una necesidad básica, sino también una de las principales vías de ahorro y endeudamiento de las familias españolas. Sin embargo, en los últimos años, el acceso a una vivienda digna se ha convertido en un desafío creciente para gran parte de la población, especialmente en regiones como Andalucía.
+
+Factores estructurales como la evolución de la oferta y la demanda, el encarecimiento de los costes de financiación y las tensiones inflacionarias están generando un entorno de alta incertidumbre. Según datos del Consejo General del Notariado (2023), el precio medio de la vivienda en España ha aumentado un 29,2% desde 2020, mientras que los salarios apenas lo han hecho un 8,8% en el mismo periodo (Fotocasa, 2023). Esta brecha cada vez mayor entre precios y poder adquisitivo ha provocado una caída generalizada en la demanda de vivienda, que en Andalucía ha pasado del 34% al 28% entre 2022 y 2023 (Idealista, 2023).
+
+Además, la realidad inmobiliaria andaluza presenta una marcada heterogeneidad. Mientras que provincias como Málaga o Sevilla experimentan una fuerte presión turística y urbanística, con incrementos de precio sostenidos, otras como Jaén o Huelva muestran mercados más estables, con escasa actividad o incluso retrocesos en las compraventas (Ministerio de Vivienda y Agenda Urbana, 2023). Esta diversidad geográfica, demográfica y económica dificulta enormemente la toma de decisiones informadas por parte de compradores, vendedores, inversores y administraciones públicas.
+
+En este contexto, resulta especialmente llamativa la escasez de herramientas públicas que permitan analizar el mercado de forma predictiva, personalizada y granular. Aunque existen numerosos portales inmobiliarios que ofrecen listados actualizados, la mayoría carecen de funcionalidades analíticas avanzadas o de modelos automatizados capaces de prever la evolución de los precios o de contextualizar una oferta en su entorno económico. Esta carencia se traduce en una clara asimetría informativa, donde el usuario final —sin conocimientos técnicos— debe interpretar datos dispersos y no estructurados para tomar decisiones críticas.
+
+El presente Trabajo Fin de Grado surge, por tanto, de la necesidad de cubrir ese vacío mediante el desarrollo de una plataforma inteligente que aproveche técnicas de Big Data y Machine Learning para predecir precios inmobiliarios, analizar tendencias territoriales y ofrecer información personalizada a cada usuario según su ubicación, necesidades y perfil. Con ello, se pretende no solo facilitar el acceso a la información, sino también fomentar una toma de decisiones más racional, transparente y fundamentada en el contexto inmobiliario andaluz.
+
+\chapter{Contexto y Estado del Arte}
+\subsection{Descripción del problema}
+
+El mercado de la vivienda en Andalucía enfrenta día tras días grandes retos tanto a nivel macroeconómico como técnico, como también personal en la vida de todas las personas.
+
+En primer lugar, la fuerte subida de precios, cercanos al 30\% en los últimos años, (La Razón, 2024) provocada por diversos factores sociales y globales. Todo ello combinado a su vez con el escaso incremento de los salarios, solo un 8,8\% en los últimos 3 años (La Razón, 2024), está provocando grandísimas dificultades en cuanto al acceso de la vivienda. Esta brecha-precio-salario convierte la vivienda en un problema de "primer orden" en España, y en especial, en Andalucía, comunidad autónoma donde nos vamos a centrar. 
+Esta comunidad del sur de España, donde la variabilidad regional, por ejemplo, los altos precios en Máñaga frente a las caídas de otras ciudades andaluzas como Jaén o Córdoba (La Razón, 2024), provoca una gran incertidumbre al ciudadano. Además, la demandad de vivienda ha caído recientemente: grande portales online de vivienda, apuntan una notable contracción de la actividad inmobiliaria en Andalucía, con una reducción de la participación de compradores del 34\% al 28\% en pocos meses (Fotocasa, 2025).
+
+Desde el punto de vista técnico, estos fenómenos indican un merado muy dinámico y altamente sensible a factores externos (inflación, variación del euríbor, eventos mundiales, legislación nacional e internacional). Sin embargo, los agentes y usuarios en general, carecen de herrramientas analíticas avanzadas para anticipar estas tendencias. La mayoría de los portales inmobiliarios actuales ofrecen estadísticas descriptivas (precios medios, históricos de ventas), pero no cuentan con modelos predictivos de cara a sus usuarios, que permitan integrar enormes volúmenes de datos ni que brinden recomendaciones automatizadas. Expertos del sector señalas que la inteligencia artificial puede ser "una buena aliada para discenir la evolución de los precios" (Idealista, 2022), con un poder predictivo mucho mayor que los métodos tradicionales.
+No obstante, en la práctica cotidiana no existe aún una plataforma pública que aprovec he estas técnicas para ofrecer predicciones claras de precio, tiempos de venta u otros indicadores que puedan ser clave para el usuario final. 
+
+En definitiva, la falta de sistemas automatizados basados en Big Data y Machine Learning deja a comrpadores, vendedores y profesionales del sector sin herramientas para afrontar la complejidad del mercado inmobiliario andaluz. Al mismo tiempo, la tecnología actual permite procesar grandes volúmenes de datos y finalmente, obtener resultados en tiempo real (Blog Fotocasa, 2024), lo que subraya definitivamente la necesidad de cubrir este vacío tecnológico.
+
+\subsection{Descripción de la solución a abordar}
+La solución propuesta es el desarrollo de una plataforma integral que utilice Big Data y Machine Learning para predecir precios inmobiliarios en las ocho provincias de Andalucía. Esta plataforma combina cuatro componentes principales:
+\begin{itemize}
+    \item \textbf{Modelo predictivo}: 
+    Se diseñará un modelo de aprendizaje automático supervisado capaz de estimar el precio más aproximado posible de venta de un inmueble según sus características (metros cuadrados, antigüedad, número de habitaciones, etc.). Para ello, se emplearán técnicas de regresión avanzada (por ejemplo, árboles de decisión, random forest o XGBoost) y se explorarán modelos de tasación automática (AVM, Automated Valuation Models), los cuales son impulsados por IA para generar valoraciones no presenciales de carteras completas de inmuebles.
+    Estos modelos se nutrirán de los datos históricos recopilados a través de las fuentes próximamente descritas, y se entrenarán de forma generativa. Es decir, el modelo aportará a usuarios y profesionales una estimación automática de precios que, aunque requiere validación experta, reduce sustancialmente el trabajo manual.
+    
+    \item \textbf{Análisis de los datos del mercado inmobiliario}: Junto al modelo predictivo, la plataforma ofrecerá herramientas de análisis exploratorio que permitan comprender el mercado. Se generarán estadísticas descriptivas, gráficos dinámicos y mapas de calor georreferenciados, entre más análisis, para visualizar tendencias regionales. El procesamiento combinará todos estos datos, aprovechando técnicas de inteligencia artificial. Por ejemplo, se podrá estudiar cómo varía la demanda según el precio,qué zonas tienen mayores tendencia a la demanda marcada por el precio, así como, los casos contrarios de zonas menos urbanas con menos demanda. La idea es obtener un análisis exhaustivo del mercado y presentar esa información al usuario de forma accesible (gráficas interactivas, tablas comparativas).
+
+    \item \textbf{Interatividad}: La plataforma se implementará como una aplicación web interactiva. El usuario final podrá consultar los distintos tipos de análisis realizado para esta comunidad de Andalucía con datos filtrables por provincia o ciudad, navegar por indicadores clave. Así como, podrá obtener predicciones personalizadas introduciendo las características de un inmueble específico. Por ejemplo, al ingresar una dirección o unas coordenadas y atributos de la vivienda, junto a varias características más, el sistema será capaz mediante el modelo predicitivo generado, mostrar la estimación de precio de venta. Este componente de front-end hará uso de librerías gráficas modernas y APIs de mapas para facilitar la exploración de datos, de modo que el análisis sea accesible sin necesidad de conocimientos técnicos previos.
+
+    \item \textbf{Reproducibilidad y escalabilidad}: Dada la alta cantidad de datos (cientos de miles de anuncios históricos), la plataforma se diseñará siguiendo principios de Big Data. Se utilizarán tecnologías de procesamiento en paralelo que permitan escalar el análisis a todo el territorio andaluz y prepararse para añadir nuevas fuentes de información. Además, el despliegue web estará montado sobre una arquitectura escalable que soporte múltiples usuarios simultáneos. De esta forma, el sistema podrá actualizar los modelos predictivos de forma periódica al incorporar nuevos datos y responder con velocidad a consultas interactivas. En resumen, la solución implementa un entorno integral de extracción de datos, preprocesamiento, modelado predictivo y presentación web, maximizando la reutilización de tecnología Big Data existente y adaptándola a las necesidades específicas del mercado inmobiliario andaluz.
+\end{itemize}
+
+\section{Estado del Arte}
+
+\subsection{Mercado Inmobiliario}
+\subsection{Puntos a destacar - Importancia de la educación financiera e inmobiliaria}
+\subsection{Proyectos Similares}
+\subsection{Mejoras a esos proyectos}
+\subsection{Conclusión}
+
+\chapter{Objetivos y Metodología}
+ 
+
+ 
+
+\section*{Objetivos del TFG}
+
+Este Trabajo Fin de Grado tiene como objetivo principal aplicar técnicas avanzadas de ciencia de datos y desarrollo web para ofrecer una solución tecnológica al análisis y predicción de precios en el mercado inmobiliario andaluz. Los objetivos específicos son los siguientes:
+
+\begin{itemize}
+  \item \textbf{Generar un modelo predictivo de precios:} Aplicar técnicas de \textit{Machine Learning} y \textit{Big Data} para entrenar un algoritmo que estime con precisión el precio de venta o alquiler de viviendas en Andalucía, a partir de datos históricos y variables relevantes (localización, características físicas, contexto socioeconómico).
+  
+  \item \textbf{Analizar datos de forma exhaustiva:} Recopilar y procesar los datos del mercado inmobiliario andaluz (oferta, demanda, transacciones) y realizar un estudio exploratorio que permita identificar patrones, tendencias y factores determinantes en los precios.
+  
+  \item \textbf{Desarrollar una plataforma web interactiva:} Diseñar e implementar una aplicación web accesible que integre el análisis de datos y el modelo predictivo, ofreciendo visualizaciones dinámicas del mercado y permitiendo al usuario realizar consultas personalizadas.
+  
+  \item \textbf{Asegurar la escalabilidad y actualización:} Montar la solución sobre infraestructuras \textit{Big Data} que permitan manejar grandes volúmenes de información y actualizar periódicamente el modelo con nuevos datos, garantizando así su vigencia en el tiempo.
+  
+  \item \textbf{Validar y documentar los resultados:} Evaluar el rendimiento del modelo con métricas cuantitativas (por ejemplo, error medio cuadrático o $R^2$) y casos reales, y elaborar la memoria final documentando metodología, experimentos y conclusiones.
+\end{itemize}
+
+
+
+\section{Objetivos específicos}
+--rellenar--
+\begin{enumerate}
+    \item \textbf{Análisis general de datos}
+   Explorar la base de datos agregada para toda Andalucía. Esto incluye limpiar y transformar los datos que serán recopilados por provincias, calcular estadísticas globales (precio medio por metro cuadrado, distribución por rangos, etc.), y aplicar visualizaciones de conjunto (mapa de toda la región, series temporales generales). También se utilizarán técnicas de agrupamiento o reducción de dimensionalidad para identificar segmentos de mercado generales. En suma, determinar las variables clave que influyen en el precio medio regional y obtener un panorama completo del mercado andaluz.
+    
+    \item \textbf{Análisis por provincia}
+    Repetir el proceso de análisis de forma granular en cada una de las ocho provincias, con el objetivo de poder ofrecer enfoques más concretos y no tan amplios como el comunitario, sino poder llevar el análisis al marco provincial incluso local. Se calcularán indicadores específicos por provincia (por ejemplo, precios medios provinciales, índices de variación interanual) y se compararán con los datos agregados. Este análisis local permitirá detectar disparidades (por ejemplo, provincias con precios atípicos o dinámicas diferentes) y ajustar el modelo predictivo para cada contexto. Se crearán gráficos y paneles interactivos donde el usuario podrá seleccionar una provincia y ver su comportamiento particular frente al conjunto autonómico.
+
+
+    \item \textbf{Análisis y profundización de los datos}
+    \begin{itemize}
+        \item Creación de un cuadro de mando que ofrezca una primera visión general del conjunto de los datos obtenidos. Además, de proporcionar un análisis preliminar y conclusiones tempranas. 
+        \item Análisis general COMPLETAR COMPLETAR COMPLETAR
+        \item Análisis por provincia COMPLETAR COMPLETAR COMPLETAR
+    \end{itemize}
+
+    \item \textbf{Construcción y validación de modelos predictivos}
+    \begin{itemize}
+        \item Entrenar y comparar distintos algoritmos de regresión (lineal, árboles, ensamblados, redes neuronales y AutoML).
+        \item Interpretar los resultados con métricas estadísticas (MSE, MAE, $R^2$) y herramientas de explicabilidad (SHAP).
+        \item Obtención del mejor modelo para el consumo de por parte de usuarios.
+    \end{itemize}
+
+    \item \textbf{Despliegue de la API de predicción}
+    \begin{itemize}
+        \item Exponer un endpoint REST (Flask) capaz de recibir características de una vivienda y devolver la predicción.
+    \end{itemize}
+
+    \item \textbf{Desarrollo de la interfaz web}
+    \begin{itemize}
+        \item Implementar un \textit{frontend} con filtros dinámicos y mapas interactivos.
+        \item Adaptar visualizaciones al modelo y anális de la provincia seleccionada. [quitar luego: explicar aquí un poco más a lo mejor parte web que al pinchar en una provincia muestre análisis notebook especifico]
+    \end{itemize}
+\end{enumerate}
+
+\section{Objetivos personales}
+Con este proyecto busco consolidar mis competencias en ciencia de datos y desarrollo de software avanzado. Entre los aprendizajes esperados destacan los siguientes:
+
+\begin{enumerate}
+  \item Dominar el manejo y preprocesamiento de grandes conjuntos de datos con herramientas de \textit{Big Data} (p.\ ej., \texttt{PySpark}, bases \texttt{NoSQL}, etc.), lo que ampliará mi experiencia en ingeniería de datos.
+  \item Profundizar en el entrenamiento y validación de modelos de \textit{Machine Learning}, experimentando con librerías como \texttt{Scikit-learn} o \texttt{TensorFlow}, para entender a fondo cómo seleccionar algoritmos y parámetros según la calidad de los datos.
+  \item Mejorar mi habilidad en el desarrollo de aplicaciones web interactivas (backend y frontend) que permitan presentar resultados de forma accesible al usuario.
+\end{enumerate}
+
+Además, este trabajo me permitirá practicar una gestión ágil del proyecto: planificar las tareas en \textit{sprints}, documentar el progreso y ajustarme a objetivos intermedios. En definitiva, espero adquirir una visión integral del ciclo de vida de un producto de datos, desde la extracción y modelado hasta su despliegue web, lo que reforzará mi formación práctica en tecnologías emergentes.
+
+\section{Casos de uso: Aplicación predictiva mediante modelo}
+
+\subsection{Proyectos Relevantes}
+\subsection{Resultados y Beneficios}
+
+
+\section{Metodologías seguidas}
+\subsection{Metodologías tradicionales y ágiles}
+En el área del desarrollo de software y en proyectos generales de informática de cualquier ámbito, contamos con numerosos tipos de métodos para abordarlos.
+
+Métodos tradicionales, como el modelo en cascada (waterfall), planifican el proyecto en fases secuenciales rígidas: primero se definen requisitos, luego se diseña el sistema, se implementa, se prueba y finalmente se despliega. Este enfoque lineal suele requerir entregas completas al final de cada fase y es poco flexible ante cambios, lo que puede ser problemático en proyectos donde los requerimientos o los datos evolucionan. 
+
+Por el contrario, también se cuentan con  las metodologías ágiles que promueven un desarrollo iterativo e incremental. En la metodología conocida como Agile, el proyecto se divide en ciclos cortos (iteraciones o sprints) con entregas parciales frecuentes. Cada iteración permite revisar y ajustar los objetivos según el feedback obtenido. De hecho, los creadores de Scrum (un marco de trabajo ágil) surgieron como respuesta al modelo cascada, buscando un enfoque más flexible que permitiera a los equipos “responder y adaptarse continuamente a su entorno” para construir el mejor producto posible. 
+
+En otras palabras, Scrum propone equipos pequeños trabajando en ciclos iterativos centrados en el cliente, con mejoras continuas al producto. Este cambio de paradigma agiliza la entrega de valor y facilita afrontar la incertidumbre propia de los datos y requisitos cambiantes.
+
+\subsection{Adecuación a un TFG individual con fases delimitadas}
+Dado que este TFG se realiza de forma individual pero contempla fases o estadios bien definidas (extracción de datos, preprocesamiento, modelado predictivo y despliegue web), la metodología ágil favorece la gestión ordenada del trabajo. Se han planificado varios sprints que coinciden con cada fase del desarrollo: por ejemplo, el primer sprint se dedicará a configurar la arquitectura de datos y extraer la información necesaria; en los siguientes se realizará el preprocesado y análisis exploratorio; luego se desarrollará y optimizará el modelo predictivo; y finalmente se construirá el back-end y front-end interactivo que permitirá a los usuarios explotar la aplicación. 
+
+Al final de cada sprint se realiza una revisión de lo conseguido y una retrospectiva para corregir posibles desviaciones. Esta dinámica permite detectar a tiempo problemas (por ejemplo, dificultades al limpiar datos o la necesidad de fuentes adicionales) y redefinir el alcance de las tareas futuras. Todo esto nos permite asegurar los pasos dados, con la certeza de que únicamente se vuelva para atrás en caso de necesitar relanzar el circuito entero, no para hacer cambios por problemas encontrados en estadios posteriores.
+
+En definitiva, un enfoque Scrum permite estructurar y agilizar un proyecto de TFG individual como este, garantizando entregas parciales de valor en cada etapa y un continuo aprendizaje a lo largo del desarrollo.
+
+
+
+
+\chapter{Planificación}
+
+\subsection{Temporización}
+
+\subsection{Daigrama de Gantt}
+
+\subsection{Costes}
+
+
+
+
+
+
+
+\chapter{Extracción de Datos}
+
+\section{Planteamiento}
+En proyectos de \textbf{Big Data} y \textbf{Machine Learning}, la fase de \textbf{extracción de datos} constituye el punto de partida crítico del ciclo de vida analítico. De su correcta ejecución depende en gran medida la calidad del conjunto de datos con el que se entrenarán modelos predictivos. Una extracción deficiente, con datos de poca calidad o incompleta puede traducirse en el clásico “\textbf{garbage in, garbage out}”, donde incluso los algoritmos más avanzados producirán resultados poco fiables debido a datos de baja calidad. 
+
+
+ -- Inserto figura 1 
+ Proceso general de Extracción, Transformación y Carga de datos (ETL)
+--
+
+Todo este proceso se va a basar en varias etapas, fundamentales todas ellas. En primer lugar, se cuenta con la fase de \textbf{extracción} (\textbf{Extract}), la cual consiste en recopilar datos en brutos de diversas fuentes u orígenes; luego los datos se \textbf{transforman} (\textbf{Transform}) limpiándolos y adecuándolos a las necesidades. Finalmente se \textbf{cargan} (\textbf{Load}) en un sistema de destino, en nuestro caso un csv, para su posterior análisis. En muchos proyectos de data science, la extracción es parte de la etapa de \textbf{Data Understanding} o \textbf{Data Collection} (Provost y Fawcett, 2013), siendo el primer paso para disponer de un dataset de calidad sobre el cual aplicar técnicas de aprendizaje automático y estudios analíticos de datos.
+
+--
+Buscar Provost & Fawcett, 2013 la cita para las definiciones esas
+--
+
+En el contexto de una plataforma predictiva de precios inmobiliarios, la extracción de datos cobra especial relevancia técnica. Se requiere obtener información, tanto actualizada como a nivel histórico pero siempre dentro de un periodo razonable como un año natural, de propiedades (precios de oferta, características de viviendas, localizaciones, etc.) que sirva como base para entrenar modelos de predicción de precios. Dicha información suele provenir de fuentes heterogéneas: bases de datos oficiales, portales web inmobiliarios, APIs públicas y/o privadas, entre otras. Cada fuente presenta desafíos distintos en cuanto a formato, volumen y frecuencia de actualización de los datos. En nuestro caso necesitamos \textbf{características muy concretas de cada vivienvda}. Es fundamental diseñar un proceso de extracción capaz de integrar datos de múltiples orígenes de forma eficiente y escalable, garantizando a su vez la calidad e integridad de los datos recopilados, así como la posiblidad de poder ir aumentando y actualizando el futuro dataset. 
+
+A continuación, se revisan las fuentes de datos consideradas para este proyecto y las razones técnicas que llevaron a descartar algunas de ellas en favor de la solución finalmente adoptada.
+
+
+
+\section{Investigación de fuentes de datos y APIS descartadas}
+-- Desarrolla más --
+Las posibles fuentes de datos que podemos encontrar a día de hoy son numerosas y de distintos tipos. Basta con una simple búsqueda en cualquier buscador de interner para encontrar diversos orígenes de datos donde poder explotar estas posibilidades. Sin embargo, la clave está en poder encontrar una o varias fuentes de datos, lo suficientemente fiables y robustas como para poder asegurar que la integridad y calidad de los datos con los que trabajamos es lo suficientemente alta.
+
+En primer lugar, vamos a explorar posiblidades de fuentes de datos que fueron descartadas. Por último, exploraremos la fuente de datos elegida, como funciona y su por qué.
+
+Esto es debido a que, en fases iniciales de esta etapa, se exploraron diversas fuentes de datos  potenciales para construir el dataset inmobiliario de Andalucía. A continuación se detallan dichas fuentes y una revisión crítica de por qué fueron descartadas como fuente principal de extracción de datos:
+
+\subsection{Instituto Nacional de Estadística (INE)}
+
+El INE ofrece estadísticas oficiales sobre diversos indicadores, incluyendo índices de precios de vivienda. Por ejemplo, publica trimestralmente el Índice de Precios de Vivienda (IPV), que refleja la variación de precios de compraventa a nivel agregado, con grandes posibilidades en cuanto al estudio de variaciones, medias y comparativas en general entre las distintas comunidades autónomas y por trimestres o fechas más generales. 
+
+Si bien estos datos son confiables y útiles para análisis macro, presentan dos limitaciones para nuestro objetivo:
+\begin{enumerate}
+    \item Están \textbf{altamente agregados} (por trimestre, provincia, tipo de vivienda, etc.), lo que impide obtener el detalle a nivel de cada inmueble.
+    \item Suelen tener un \textbf{desfase temporal}, pues se enfocan en transacciones ya registradas. Para un modelo predictivo de precios de oferta “a nivel de anuncio”, el IPV u otras estadísticas del INE no proporcionan las variables granularizadas necesarias (superficie, habitaciones, ubicación exacta, etc.), por lo que el INE se descartó como fuente primaria.
+\end{enumerate}
+
+En definitiva, y auqnue datos útiles y confiables, esta fuente de datos se descarta ya que nos impide por las razones comentadas anteriormente su uso.
+
+\subsection{APIs y datos abiertos públicos (estatales y autonómicos)}
+Se investigaron portales de datos abiertos del gobierno de España (datos.gob.es) y de la Junta de Andalucía, en busca de información relevante de vivienda. En el ámbito público, la información disponible suele versar sobre vivienda protegida, stock de viviendas oficiales, o estadísticas de oferta y demanda, pero no existen APIs públicas con datos detallados de anuncios inmobiliarios del mercado libre. Por ejemplo, el Portal de Datos Abiertos de Andalucía incluye datasets de inmuebles de la Junta (viviendas oficiales) y documentos normativos, pero no registros de todas las viviendas en venta del mercado privado. Del mismo modo, a nivel estatal, se encuentran conjuntos de datos con precios medios por municipio o series históricas de ventas, pero nada equiparable a una fuente actualizada y granular de cada inmueble en venta.
+
+Dado que el objetivo del proyecto es predecir precios usando Big Data, estas fuentes públicas quedaron descartadas por cobertura insuficiente del mercado libre y por la ausencia de detalles críticos (características individuales de cada vivienda).
+
+\subsection{Datos y apis de Portales inmobiliarios} 
+\subsubsection{Portal raro aquel}
+--
+Aqui hace falta poner la api del portal aquel raro que estuve mandando correos y que contaba con una api
+pero que nunca me respondieron
+--
+\subsubsection{Fotocasa}
+Fotocasa, uno de los portales inmobiliarios líderes en España, no ofrece una API pública para terceros que permita descargar todos sus anuncios. En 2018 lanzó una iniciativa de open data mediante una página interactiva del Índice Inmobiliario Fotocasa, que muestra en tiempo real precios medios por metro cuadrado de oferta de vivienda, filtrables por comunidad, provincia o municipio. Esta herramienta aporta datos \textbf{macro agregados valiosos} (e.g., precio medio de oferta en una ciudad dada) y fomenta la transparencia, pero no expone los \textbf{datos micro} de cada anuncio individual. Para acceder a los anuncios concretos de Fotocasa, la única vía sería el \textbf{web scraping} de su sitio web – una técnica poco sostenible debido a obstáculos técnicos (paginación dinámica, riesgo de bloqueos) y legales (términos de uso del portal). 
+
+Por estas razones, Fotocasa quedó descartada como fuente directa de datos para este proyecto, aunque sus datos agregados podrían usarse para contrastar resultados a nivel regional.
+
+\subsubsection{Pisos.com}
+Pisos.com es otro portal inmobiliario nacional con amplio inventario de anuncios. Al igual que Fotocasa, no proporciona una API pública abierta para descargar en masa sus listados. Existen referencias a APIs internas de pisos.com (orientadas a desarrolladores o integraciones con inmobiliarias), pero su uso requiere credenciales y acuerdos especiales, fuera del alcance de un proyecto académico. No obstante se probó a solicitar unos credenciales por motivos académicos de investigación, los cuales fueron rechazados. La alternativa sería recurrir también al scraping, enfrentando problemas similares a los de Fotocasa. 
+
+Considerando además que la cuota de mercado de pisos.com es menor comparada con Idealista o Fotocasa, se decidió no emplear este portal como fuente de datos debido a la dificultad de acceso automatizado y a posibles redundancias con la información proveniente de otros portales.
+
+\subsubsection{Conclusión}
+En resumen, las fuentes de datos tradicionales (INE, ministerios) proporcionaban solo datos agregados insuficientes para nuestro propósito microanalítico, mientras que los principales portales inmobiliarios poseían la granularidad y actualidad necesarias pero sin un acceso abierto sencillo. Ante este panorama, se optó por una solución intermedia: utilizar la API de Idealista a través de la plataforma RapidAPI, tal como se explica en la siguiente sección.
+
+\section{Fuente de Datos elegida}
+
+\subsection{API de Idealista de RapidAPI}
+
+Idealista es el portal inmobiliario líder en España por volumen de anuncios, con más de 1.200.000 anuncios activos de venta o alquiler de inmuebles en su plataforma. Dispone de una API oficial de búsqueda de inmuebles pensada para integraciones profesionales, la cual permite consultar información de las propiedades publicadas. Sin embargo, para acceder a dicha API es necesario solicitar una clave (API key) directamente a Idealista y obtener aprobación, lo que conlleva trámites y potenciales restricciones de uso. Dado el tiempo y alcance de un TFG, esta vía se consideró poco práctica. Además, la API oficial podría imponer límites estrictos de consultas diarias o requerir fines comerciales específicos para su autorización. Por lo tanto, aunque Idealista se identificó como la fuente de datos más relevante por cobertura y detalle, su API directa no era fácilmente utilizable. Esto llevó a explorar soluciones alternativas para aprovechar los datos de Idealista de forma legítima y efectiva.
+
+
+
+\subsection{Justificación técnica de la elección de la API de Idealista vía RapidAPI}
+Tras la evaluación de alternativas, se decidió centrar la extracción de datos en Idealista mediante el servicio \textbf{RapidAPI}. \textbf{RapidAPI} es un marketplace de APIs que ofrece acceso unificado a diversas APIs de terceros. En particular, dispone de un endpoint para Idealista (identificado como idealista2 en RapidAPI) que permite realizar consultas de inmuebles en España de forma relativamente abierta. Esta elección se justifica por varios aspectos técnicos:
+
+\section{Características de la API}
+
+\subsubsection{Cobertura y representatividad}
+Idealista es el portal con mayor número de anuncios inmobiliarios en España, por lo que sus datos ofrecen una cobertura amplia del mercado de vivienda en Andalucía. Al extraer datos de Idealista, se incorporan anuncios de particulares y agencias, abarcando desde grandes capitales hasta localidades más pequeñas, lo que en conjunto proporciona un panorama muy representativo de los precios ofertados en la región. Esta amplitud de cobertura es crítica en proyectos de Big Data, pues asegura volumen suficiente de datos para entrenar modelos robustos. Por ejemplo, Idealista reportaba más de 1,2 millones de anuncios activos a nivel nacional, cifra muy superior a la que maneja cualquier fuente pública. Incluso si restringimos a Andalucía, se obtienen decenas de miles de registros, lo cual otorga al modelo capacidad de generalización y evita sesgos derivados de muestras pequeñas.
+
+
+\subsubsection{Estructura y detalle de los datos}
+
+Esta API retorna los datos en formato JSON estructurado, lo que facilita su procesamiento. Cada inmueble viene representado por un objeto JSON con campos como \textbf{precio, tipo de propiedad, superficie, número de habitaciones y baños, coordenadas de localización, dirección aproximada,} entre otros detalles clave. Esta riqueza de atributos era imprescindible para el modelo de machine learning, pues permite construir un dataset con las variables relevantes que influyen en el precio (metraje, ubicación, etc.). 
+
+Además, la API soporta filtros por ubicación geográfica mediante identificadores de zonas (locationId), permitiendo acotar la búsqueda a Andalucía provincia por provincia. La información está disponible tanto para operaciones de venta como de alquiler, y para diferentes países donde Idealista opera (España, Italia, Portugal), aunque en nuestro caso nos centramos en España. 
+
+Al obtener directamente datos ya estructurados desde la API, se evita el tener que hacer scraping HTML y parseo manual, reduciendo errores y esfuerzos de limpieza posteriores.
+
+\subsubsection{Robustez y confiabilidad del acceso}
+Acceder a Idealista mediante RapidAPI presentó ventajas prácticas significativas. En primer lugar, no fue necesario realizar ingeniería inversa ni solicitar permisos especiales a Idealista, dado que RapidAPI ya provee un punto de acceso listo para usar con sólo registrarse y obtener una API key. En segundo lugar, RapidAPI proporciona cierta abstracción y estabilidad: maneja la comunicación HTTP con Idealista y devuelve siempre JSON bien formado (en caso de cualquier error, se puede manejar vía códigos de estado). En nuestras pruebas, el endpoint demostró ser consistente – las respuestas llegaban rápidamente (usualmente en pocos cientos de milisegundos) y con el contenido esperado. Cada consulta especificando una provincia de Andalucía y un número de página devolvía hasta 40 anuncios (este es el máximo de elementos por request definido por la API). Además, la API incluye en su respuesta metadatos como el número total de anuncios encontrados para la query, lo que facilita saber cuántas páginas iterar. Esta robustez contrastaba con la incertidumbre de hacer *scraping*, donde cualquier cambio en el HTML del portal podría romper el extractor.
+
+
+\subsubsection{Límites y estrategias de mitigación}
+
+Como es natural, el uso de la API de Idealista vía RapidAPI conlleva limitaciones que requirieron consideración. RapidAPI impone límites de uso por clave (API key), típicamente un número máximo de consultas por día o por mes en el plan gratuito. Se cuentan con más planes a diversos precios (hasta 300€) pero se descartan. 
+
+Para un volumen masivo de peticiones (como descargar decenas de miles de anuncios), es necesario implementar estrategias para no exceder esos límites. Una de ellas fue registrar múltiples claves de API (usando varias cuentas de desarrollador si es necesario) y rotarlas durante la extracción, de modo que la carga de consultas se distribuya. Todos estos registros vinieron dados de registros a través de cuenas de gmail que ya existían. 
+
+Esta técnica, aunque manual, es aceptada en la medida en que cada clave respeta sus propias cuotas. Otra limitación es que la API no expone información multimedia (fotos) ni descripciones de texto extensas de los anuncios; sin embargo, esos datos no eran esenciales para el objetivo de predicción de precio, que se centra en atributos numéricos y categóricos. 
+
+El plan gratuito usado cuenta con \textbf{500 peticiones} mensuales que viene a extraer un máximo de unos \textbf{20000 registros}. 
+
+Resumen operacional:
+
+\textbf{5000} \, \text{ peticiones} \times \textbf{40} \, \text{resultado por petición} = \textbf{20.000} \, \text{ resultados por API\_KEY}
+
+
+Por último, se debe señalar que la API devuelve solo datos públicos ya visibles en el portal (precio, metros, etc.), respetando la privacidad, y que su uso está sujeto a las condiciones de la plataforma (por ejemplo, un uso excesivo podría implicar costes o bloqueos). No obstante, considerando el balance general – acceso estructurado a datos granulares, amplia cobertura geográfica y actualización en tiempo real – la API de Idealista vía RapidAPI resultó la alternativa más adecuada y eficaz para la fase de extracción de datos en este TFG.
+
+\subsubsection{Resumen}
+\begin{itemize}
+  \item \textbf{Endpoint principal:}
+  \begin{verbatim}
+GET https://idealista2.p.rapidapi.com/properties/list
+  \end{verbatim}
+  \item \textbf{Parámetros esenciales:}
+    \begin{itemize}
+      \item \texttt{locationId}: identificador interno de provincia (ej.\ \texttt{0-EU-ES-41} para Sevilla).
+      \item \texttt{operation}: tipo de operación (\texttt{sale} para venta).
+      \item \texttt{sort}: criterio de orden (\texttt{asc} o \texttt{desc}).
+      \item \texttt{numPage}: número de página de resultados.
+      \item \texttt{maxItems}: número de registros por página (hasta 40).
+      \item \texttt{locale}, \texttt{country}: configuración regional (\texttt{es}, \texttt{es}).
+    \end{itemize}
+  \item \textbf{Autenticación y cuotas:}
+    \begin{itemize}
+      \item Cabecera \texttt{x-rapidapi-key} con clave válida.
+      \item Límite aproximado de 10\,000 peticiones diarias por clave.
+      \item Rotación de múltiples claves para maximizar el volumen de datos sin superar cuotas.
+    \end{itemize}
+\end{itemize}
+
+
+\section{Descripción del script}
+
+Para llevar a cabo la extracción de datos de Idealista de forma automatizada y reproducible, se desarrolló un script en Python llamado `extraccionViviendasMensual.py`. A continuación se describe en detalle su estructura, funciones principales y mecanismos implementados, incluyendo fragmentos relevantes de código.
+
+
+\subsubsection{Estructura general y configuración inicial}
+
+El script está escrito en Python 3 e inicia importando las librerías necesarias (`http.client` para las peticiones HTTP, `json` para manejar las respuestas JSON, `csv` para escribir los datos, `time` para controlar esperas, y `os` para operaciones de sistema). 
+
+Seguidamente, carga la configuración desde un archivo externo `config.json` que contiene parámetros importantes, como la lista de claves de API y los identificadores de provincias a extraer. Esto permite separar la lógica del código de los datos de configuración sensibles, una práctica recomendable en proyectos académicos y profesionales. 
+
+
+En dicho JSON se definen dos estructuras: una lista \texttt{"api\_keys"} con varias claves de acceso (proporcionadas por RapidAPI) y un diccionario \texttt{"provinces"} que mapea los nombres de las provincias andaluzas a sus respectivos códigos de ubicación en Idealista (por ejemplo, \texttt{"Sevilla": "0-EU-ES-41"}). Esta estructura viene dado por la localización a nivel continental, nacional y por el número que cada provincia tiene asignada en España, y que por ejemplo, podemos comprobar por el código postal de las ciudades. Ejemplo: el código de provincia de Granada es el 18.
+
+También se establecen algunas constantes globales para controlar la extracción, tales como \texttt{MAX\_PROPERTIES\_PER\_API = 20000} (límite máximo de anuncios a obtener por cada clave API, para no sobrepasar cuotas), \texttt{MAX\_ITEMS\_PER\_REQUEST = 40} (máximo de anuncios por petición, dado por la API) y \texttt{MAX\_RETRIES = 5} (número de reintentos ante fallos de red o respuesta). Se especifica un directorio de salida (\texttt{output\_directory = 'raw/'}) donde se almacenarán los archivos CSV resultantes, y el script verifica si dicho directorio existe o lo crea en caso contrario. En código, esta inicialización se ve así:
+
+
+
+
+
+*Explicación:* Aquí se cargan los datos de `config.json` en la variable `config_data`. Por ejemplo, `config_data["api_keys"]` contendrá una lista de claves como `"bac21d693fmshe583..."` etc., y `config_data["provinces"]` un diccionario con provincias de Andalucía. Las constantes `MAX_PROPERTIES_PER_API` y otras servirán para controlar los bucles de extracción. Tras esto, se asegura que el subdirectorio `raw/` exista, pues allí se creará un fichero CSV por cada provincia y tipo de consulta (como se verá más adelante).
+
+
+\subsection*{Función de extracción por provincia (\texttt{get\_properties})}
+El núcleo del script reside en la función \texttt{get\_properties(api\_key, province\_id, sort\_order, province\_name)}. Esta función realiza la consulta paginada a la API de Idealista para una provincia dada (identificada por \texttt{province\_id}, por ej. \texttt{"0-EU-ES-41"} para Sevilla) y una ordenación de precios dada (\texttt{sort\_order}, que puede ser \texttt{"asc"} para precio ascendente o \texttt{"desc"} para descendente). Se incluye el parámetro de ordenación para, en este caso de uso, \textbf{recorrer la lista de resultados en ambos sentidos} (baratos a caros y viceversa) y así mitigar posibles límites en el número de resultados retornados por la API (una estrategia que discutiremos más adelante). A grandes rasgos, \texttt{get\_properties} establece una conexión HTTP, itera sobre páginas de resultados y escribe cada anuncio en un archivo CSV. A continuación se detalla su lógica paso a paso:
+
+\subsubsection*{Inicialización de la conexión y archivo CSV}
+Al entrar, la función crea una conexión HTTPS con el host de RapidAPI (\texttt{idealista2.p.rapidapi.com}) usando \texttt{http.client.HTTPSConnection}. Prepara también los \textbf{headers} de la petición incluyendo la clave de API (\texttt{'x-rapidapi-key': api\_key}) y el host objetivo. Luego inicializa variables locales: \texttt{num\_page = 1} (contador de páginas a solicitar), \texttt{total\_properties\_in\_file = 0} (contador de anuncios escritos a archivo). Seguidamente construye el nombre de archivo CSV donde se guardarán los datos de esa provincia y orden: por convenio se usó \texttt{"\{prefix\}\{province\_name\}\_SALE\_\{SORT\}.csv"}, siendo \texttt{prefix = "3"} para indicar que corresponde a la etapa 3 del proyecto (extracción), \texttt{province\_name} el nombre de la provincia, \texttt{SALE} para indicar operación de venta, y \texttt{SORT} el orden (\texttt{ASC} o \texttt{DESC}). Por ejemplo: \texttt{"raw/3Sevilla\_SALE\_ASC.csv"}. Este archivo se abre en modo escritura (\texttt{'w'}) con codificación UTF-8 y se escribe la fila de \textbf{cabecera} con los campos de interés: \textit{Price, Property Type, Size (m2), Number of Rooms, Number of Bathrooms, Latitude, Longitude, Location}. Este esquema define las columnas que luego formarán nuestro dataset bruto.
+
+\subsubsection*{Bucle de paginación y llamadas a la API}
+Tras la inicialización, la función entra en un bucle \texttt{while} que continuará mientras no se haya alcanzado \texttt{MAX\_PROPERTIES\_PER\_API} anuncios extraídos para esa provincia. En cada iteración, formará la URL de consulta para la página actual (\texttt{num\_page}). En la API de Idealista, los parámetros principales son \texttt{locationId} (zona geográfica), \texttt{operation=sale} (tipo de operación, venta en este caso), \texttt{sort=\{sort\_order\}} (ordenar por precio asc o desc), \texttt{maxItems=\{MAX\_ITEMS\_PER\_REQUEST\}} (límite de resultados por página, 40) y \texttt{numPage=\{num\_page\}} (número de página a obtener). Con estos parámetros, se envía una petición GET usando \texttt{conn.request("GET", params, headers=headers)}.
+
+\subsubsection*{Gestión de errores y reintentos}
+Dada la naturaleza de las comunicaciones de red, se implementó un mecanismo de reintentos para robustecer la extracción. Tras enviar la petición, el código lee la respuesta \texttt{res = conn.getresponse()} y su contenido (\texttt{response\_body = res.read()}). Se valida el código de estado HTTP (\texttt{res.status}) y el tipo de contenido devuelto. Si \textbf{no es 200 (OK)} o el contenido no es JSON (\texttt{'application/json'}), se asume que ocurrió un problema. En tal caso, se imprime un mensaje de error con detalles (código de estado, parte del body recibido) para depuración. Particular atención se presta a códigos \textbf{401/403 (no autorizado)} o \textbf{429 (demasiadas peticiones)}, ya que éstos sugieren que la clave de API ha sido rechazada o ha superado el límite de peticiones. Si ocurre alguno de esos códigos, el script rompe el bucle interno de reintentos marcando la situación como fallo de la clave (usando \texttt{retries = MAX\_RETRIES} para forzar la salida). En caso de otros errores (por ejemplo, un 500 del servidor, o un JSON mal formado), el código lanza una excepción (\texttt{raise ValueError}) que es capturada por el bloque \texttt{except}. El bloque de reintentos se resume en el siguiente fragmento simplificado del código:
+
+\begin{lstlisting}[style=mypython, caption=Gestión de reintentos en la solicitud a la API.]
+retries = 0
+request_successful = False
+while retries < MAX_RETRIES:
+    try:
+        conn.request("GET", params, headers=headers)
+        res = conn.getresponse()
+        response_body = res.read()
+        if res.status != 200 or 'application/json' not in res.getheader('Content-Type'):
+            error_message = f"Respuesta inesperada (Status: {res.status})"
+            if res.status in [401, 403, 429]:
+                # Clave API posiblemente agotada o inválida
+                retries = MAX_RETRIES
+                break
+            raise ValueError(error_message)
+        # Si llega aquí, status 200 y JSON válido
+        current_page_data = json.loads(response_body.decode("utf-8"))
+        request_successful = True
+        break  # sale del while de reintentos
+    except Exception as e:
+        retries += 1
+        print(f"Error en solicitud para {province_name} pág {num_page} (Intento {retries}/{MAX_RETRIES}): {e}")
+        if retries < MAX_RETRIES:
+            time.sleep(5)  # espera 5 segundos antes de reintentar
+\end{lstlisting}
+
+En este código, cada vez que hay un fallo se espera unos segundos antes de reintentar, para dar tiempo a la red o al servidor a recuperarse (por ejemplo, en casos de saturación temporal). Si tras \texttt{MAX\_RETRIES} intentos no se logra \texttt{request\_successful}, la función considera que la \textbf{clave API ha fallado} o alcanzó su límite, por lo que retorna un código de estado especial \texttt{'FAILURE\_API\_LIMIT\_OR\_ERROR'} y finaliza la extracción para esa provincia con esa clave.
+
+\subsubsection*{Procesamiento de la respuesta exitosa}
+Si la petición fue exitosa, se obtiene un objeto \texttt{current\_page\_data} (diccionario Python) desde el JSON. El código entonces verifica si la respuesta contiene la lista de inmuebles esperada: busca la clave \texttt{'elementList'} en el JSON. Si \textbf{no está presente o viene vacía}, significa que no hay más resultados que extraer. Esto puede ocurrir de dos modos:
+\begin{enumerate}
+    \item Si \texttt{num\_page == 1} y \texttt{total\_properties\_in\_file == 0}, es decir, en la primera página ya no se recibió ningún inmueble, implica que \textbf{no hay propiedades disponibles} para esa provincia bajo ese filtro (posiblemente el portal no tiene anuncios en ese momento para esa provincia, lo cual es poco común pero contemplado). En tal caso, la función imprime un mensaje indicándolo y retorna \texttt{'SUCCESS\_NO\_MORE\_DATA'}.
+    \item Si es una página subsecuente (por ejemplo, al pedir la página 21 no llegan datos), significa que se ha alcanzado el final de los anuncios (todas las páginas anteriores ya contenían todos los resultados). En este caso, se imprime que \textbf{no hay más propiedades} y se retorna \texttt{'SUCCESS\_DATA\_FETCHED'} para indicar que la extracción concluyó correctamente. Este mecanismo corta el bucle de paginación en el punto adecuado.
+\end{enumerate}
+
+\subsubsection*{Escritura de los datos en CSV}
+Si la página contiene inmuebles (es decir, \texttt{'elementList'} existe y no está vacía), el script procede a iterar sobre cada inmueble (\texttt{for property\_item in current\_page\_data['elementList']}:) y escribir una fila CSV con los campos de interés. La función utiliza \texttt{property\_item.get('campo', 'N/A')} para extraer cada atributo, de modo que si alguno no existe en el JSON se pone \texttt{"N/A"} por defecto, evitando errores. Los campos escritos son, en orden: \textbf{Price} (precio de oferta en euros), \textbf{Property Type} (tipo de inmueble: piso, casa, etc.), \textbf{Size (m2)} (metros cuadrados), \textbf{Number of Rooms} (número de habitaciones), \textbf{Number of Bathrooms} (número de baños), \textbf{Latitude} y \textbf{Longitude} (coordenadas geográficas), y \textbf{Location} (dirección o barrio). Estos valores proveen las características principales para el análisis. Cada vez que escribe una fila, incrementa el contador \texttt{total\_properties\_in\_file}. Si este contador alcanza el límite \texttt{MAX\_PROPERTIES\_PER\_API} (20.000 anuncios), se hace un \texttt{break} para salir del bucle y no pedir más páginas, protegiendo así contra extracciones excesivamente grandes. Adicionalmente, el código lleva un conteo de cuántos inmuebles se procesaron en la página actual (\texttt{properties\_on\_page}) para propósitos de logging.
+
+\subsubsection*{Mensajes de registro (logging) y continuación}
+Al final de cada página procesada, se imprime un mensaje informativo indicando el número de propiedades guardadas de esa página y el acumulado total para la provincia. Luego, si no se ha alcanzado el máximo y quedan más páginas, incrementa \texttt{num\_page += 1}, espera 1 segundo (\texttt{time.sleep(1)}) para no bombardear la API, y continúa el bucle para la siguiente página. Cuando finalmente se sale del bucle (ya sea por haber alcanzado el máximo o por no haber más datos), se imprime un mensaje final indicando que la extracción de esa provincia ha terminado y cuántos inmuebles se guardaron en total. La función entonces retorna \texttt{'SUCCESS\_DATA\_FETCHED'} para señalar éxito (excepto en el caso especial de primera página vacía mencionado antes).
+
+En resumen, \texttt{get\_properties} encapsula la lógica de consultar la API de Idealista de manera paginada, robusta a errores transitorios, y almacenar los resultados en un CSV estructurado. Se encarga de una provincia a la vez con una clave de API dada. Es importante destacar que el diseño es \textbf{modular}: la función devuelve códigos de estado semánticos en vez de, por ejemplo, finalizar el programa por sí misma. Esto permite que la parte principal del script decida cómo reaccionar si una clave falla o si ya no hay datos.
+
+\subsection*{Lógica principal: iteración sobre provincias y rotación de API keys}
+Fuera de la función \texttt{get\_properties}, el resto del script orquesta la iteración sobre todas las provincias de Andalucía y maneja la rotación de las claves de API para sortear límites. Primero, se leen desde \texttt{config\_data} la lista \texttt{api\_keys\_list = config\_data["api\_keys"]} y el diccionario \texttt{provinces\_dict = config\_data["provinces"]}. Se calcula \texttt{num\_api\_keys = len(api\_keys\_list)} y se inicializa un índice \texttt{current\_api\_key\_idx = 0} para apuntar a la clave en uso. Luego se construye una lista \texttt{tasks} que contiene todas las combinaciones de provincias y ordenaciones a ejecutar. Esto se hace con un doble bucle:
+
+
+De esta forma, por cada provincia se crean dos tareas: una para extraer anuncios ordenados por precio descendente (de mayor a menor) y otra por precio ascendente. El motivo de incluir ambas ordenaciones, como se insinuó antes, es maximizar la cantidad de anuncios distintos obtenidos. Dado que la API podría devolver un subconjunto limitado (por ejemplo los primeros 20.000 resultados) en un solo orden, al combinar dos órdenes opuestos se busca capturar potencialmente anuncios diferentes (los más baratos y los más caros) y minimizar cualquier sesgo de truncamiento en los datos recopilados. \textbf{Nota:} Esto implica que habrá anuncios duplicados entre ambas extracciones (los que estén en el rango intermedio aparecerán en ambos órdenes); en el posterior preprocesamiento se pueden eliminar duplicados.
+
+El script luego inicia un bucle principal \texttt{while current\_task\_idx < len(tasks):} que recorre la lista de tareas secuencialmente. Usa \texttt{current\_task\_idx} como índice de tarea actual y \texttt{current\_api\_key\_idx} como índice de clave API actual. En cada iteración:
+\begin{itemize}
+    \item Si \texttt{current\_api\_key\_idx} supera o iguala \texttt{num\_api\_keys} (es decir, ya se intentaron todas las claves disponibles), significa que \textbf{todas las claves se han agotado} (posiblemente alcanzando sus límites de cuota) antes de terminar las tareas. En tal caso, el script imprime un mensaje advirtiendo que no se completarán las tareas restantes y hace \texttt{break} para salir del bucle.
+    \item Si aún hay alguna clave disponible, toma la tarea actual (\texttt{task = tasks[current\_task\_idx]}) y selecciona la clave correspondiente (\texttt{api\_key\_to\_use = api\_keys\_list[current\_api\_key\_idx]}). Imprime por pantalla información de qué provincia y orden se va a extraer y qué clave (índice) se está usando, ocultando parcialmente la clave por seguridad. Luego invoca la función principal: \texttt{status = get\_properties(api\_key\_to\_use, task['province\_id'], task['sort\_order'], task['province\_name'])}.
+\end{itemize}
+
+Una vez \texttt{get\_properties} devuelve, el flujo de control analiza el \texttt{status} recibido:
+\begin{itemize}
+    \item Si el estado es \texttt{'SUCCESS\_DATA\_FETCHED'} o \texttt{'SUCCESS\_NO\_MORE\_DATA'}, se considera que la tarea se completó con éxito (ya sea porque se obtuvieron datos o simplemente no había datos que obtener). En tal caso, se imprime un mensaje de tarea manejada exitosamente, se incrementa \texttt{current\_task\_idx += 1} para pasar a la siguiente tarea, y \textbf{se rota la clave API} para la siguiente extracción. La rotación se realiza haciendo \texttt{current\_api\_key\_idx = (current\_api\_key\_idx + 1) \% num\_api\_keys}, es decir, se suma 1 al índice y se toma módulo con el número de claves (de modo que si estaba en la última clave, vuelva a la primera). Esta rotación round-robin distribuye la carga entre las múltiples claves. Así, aunque una clave no esté todavía agotada, el script la deja descansar y utiliza otra para la siguiente provincia, disminuyendo la probabilidad de llegar al límite de ninguna y permitiendo paralelizar futuras ejecuciones si se modificara el código a un enfoque asíncrono.
+    \item Si el estado es \texttt{'FAILURE\_API\_LIMIT\_OR\_ERROR'}, quiere decir que la clave actual no pudo completar la tarea (muy probablemente porque alcanzó su cupo de peticiones o fue bloqueada temporalmente). En este caso, \textbf{no se avanza de tarea} (no se incrementa \texttt{current\_task\_idx}), sino que se asume que la misma tarea deberá reintentarse con otra clave. Se imprime un mensaje indicando el fallo de la clave actual y que se intentará con la siguiente. Entonces simplemente se hace \texttt{current\_api\_key\_idx += 1} para pasar a la siguiente clave, y el bucle \texttt{while} itera de nuevo con la misma tarea pero nueva API key.
+    \item Si se recibiera un estado desconocido (distinto de los anteriores, lo cual en principio no debería suceder dado nuestro diseño), el script también lo trata como fallo de la clave: imprime un aviso y \texttt{current\_api\_key\_idx += 1} para intentar de nuevo la misma tarea con la siguiente clave.
+\end{itemize}
+
+Este esquema implementa el \textbf{mecanismo de rotación de claves} mencionado. En esencia, cada vez que una clave cumple su cometido con una tarea, el siguiente trabajo se delega a otra clave, y si una clave falla, se desecha para esa tarea en favor de la siguiente. De esta manera, incluso si alguna API key individual tiene una cuota limitada (por ejemplo, 5000 peticiones mensuales), el programa puede seguir usando automáticamente las siguientes claves para completar todas las provincias. Cabe destacar que el código evita un posible error de índice al comprobar la condición de salida de claves antes de usar \texttt{api\_keys\_list[current\_api\_key\_idx]}. También maneja correctamente el caso de no tener \textit{ninguna} API key (aunque en práctica siempre se proporcionó al menos una en la configuración).
+
+Tras salir del bucle principal (bien por completar todas las tareas o por quedarse sin claves), el script imprime un resumen indicando cuántas tareas de extracción se pudieron completar y cuántas quedaron pendientes, si las hubo. Idealmente, con suficientes API keys, todas las tareas (16 en total, 8 provincias × 2 órdenes) deberían completarse exitosamente. El script finaliza entonces su ejecución. Todo el proceso puede demorar varios minutos, dependiendo de la cantidad de anuncios por provincia (por ejemplo, provincias costeras como Málaga pueden tener decenas de miles de anuncios, frente a provincias del interior con menos actividad inmobiliaria).
+
+En síntesis, \texttt{extraccionViviendasMensualv2.py} constituye un \textbf{crawling automatizado} de la API de Idealista para Andalucía, incorporando buenas prácticas como: lectura de configuración externa, segmentación del problema (provincia por provincia), manejo robusto de errores y reintentos, y un sistema de rotación de credenciales para superar limitaciones de cuota. El \textbf{output} de este script son archivos CSV en la carpeta \texttt{raw/}, uno por provincia y por orden de extracción, conteniendo los datos crudos de los anuncios inmobiliarios extraídos. Estos archivos, con miles de filas cada uno, conforman el \textit{dataset bruto inicial} que luego será sometido a preprocesamiento.
+
+
+
+
+--
+INSERTAR ESQUEMA GENERAL DEL FUNCIONAMIENTO DEL SCRIPT
+-- 
+
+
+
+
+
+
+
+
+
+\section*{Propuestas de mejora técnica del script}
+
+Si bien el script desarrollado cumple su cometido, se identifican varias \textbf{mejoras técnicas} posibles para optimizar su rendimiento, mantenibilidad y escalabilidad de cara a futuros desarrollos:
+
+\subsection*{Uso de biblioteca HTTP de alto nivel (\texttt{requests})}
+Actualmente se emplea \texttt{http.client} de la librería estándar para las peticiones. Una mejora sería utilizar la popular librería \texttt{requests}, que simplifica las llamadas HTTP y maneja internamente detalles como la decodificación de contenido y errores de conexión. Por ejemplo, \texttt{requests.get(url, headers=headers, timeout=...)} retornaría directamente un objeto con métodos como \texttt{.json()} para obtener el JSON, eliminando la necesidad de llamar manualmente a \texttt{json.loads}. Esto haría el código más legible y \textit{pythónico}. Además, \texttt{requests} facilita el uso de \textit{sessions} persistentes y puede integrarse con \textit{backoff} o reintentos mediante adaptadores, lo que complementaría el manejo de errores.
+
+\subsection*{Incorporación de \textit{logging} robusto}
+Actualmente el script utiliza \texttt{print()} para informar del progreso y errores. En un entorno de producción o en un proyecto más extenso, sería recomendable reemplazar estos prints por el módulo \texttt{logging} de Python. Con \texttt{logging} se pueden configurar niveles (\texttt{INFO}, \texttt{WARNING}, \texttt{ERROR}), crear un registro timestamp de cada evento, y opcionalmente volcar la salida a un archivo de log que pudiera consultarse en cualquier momento. Esto sería muy úitl de cara a un futuro en el que el script no es ejecutado a mano en una terminal sino que es ejecutado recurrentement en un servidor por ejemplo los días 1 de cada mes. De este modo, la ejecución del extractor quedaría documentada, ayudando a diagnosticar problemas (por ejemplo, qué clave falló y en qué punto) y posibilitando análisis posteriores de rendimiento (tiempos por provincia, etc.). Un buen enfoque sería loggear cada inicio y fin de extracción por provincia, los errores de cada intento, y un resumen final, con un formato consistente.
+
+\subsection*{Extracción asíncrona o paralela}
+La versión actual realiza las extracciones de forma \textbf{secuencial} (una provincia tras otra). Dado que las peticiones a la API son relativamente independientes por provincia, una mejora significativa sería ejecutar varias en paralelo para reducir el tiempo total. Existen varias opciones:
+\begin{itemize}
+    \item Emplear \textit{multi-threading} o \textit{multiprocessing} en Python para lanzar, por ejemplo, un hilo por provincia (o un pequeño pool de hilos) que ejecute \texttt{get\_properties}. Habría que tener precaución de no usar la misma API key simultáneamente en dos hilos, pero dado que rotamos claves por tarea, se podría segmentar por ejemplo asignando un subconjunto de claves a cada hilo.
+    \item Utilizar \textit{asyncio} con una librería HTTP asíncrona (como \texttt{aiohttp}), que permitiría hacer llamadas concurrentes a la API sin bloquear el programa. Esto requiere refactorizar \texttt{get\_properties} para ser una corrutina asíncrona, pero aportaría eficiencia en IO.
+    \item Una estrategia intermedia es paralelizar por orden: por ejemplo, lanzar simultáneamente la extracción \textit{ascendente} y \textit{descendente} de cada provincia utilizando dos hilos, ya que sus resultados complementarios podrían obtenerse a la vez.
+\end{itemize}
+Cualquiera de estas aproximaciones disminuiría drásticamente el tiempo de extracción, aprovechando mejor el hecho de tener múltiples claves API. No obstante, habría que vigilar no saturar la API con demasiadas peticiones concurrentes (respetando términos de uso y cuotas).
+
+
+\subsection*{Almacenamiento intermedio y recuperación ante fallos}
+Actualmente, si el script se detiene abruptamente (por ejemplo, por un apagón o excepción no controlada), las provincias pendientes no se extraerán hasta la siguiente ejecución manual. Se podría mejorar la \textbf{tolerancia a fallos} incorporando un mecanismo de checkpoint o almacenamiento intermedio. Por ejemplo, guardar en un archivo de estado la última tarea completada o incluso progresos parciales (página actual por provincia), de modo que al reiniciar el script salte las tareas ya realizadas y retome donde quedó. Otra idea es escribir los resultados en una base de datos o almacenamiento persistente a medida que se obtienen (en lugar de sólo CSV), lo que facilitaría reanudar el proceso sin duplicar datos. En esta línea, integrar la extracción con un pipeline de almacenamiento tipo \textbf{data warehouse} (por ejemplo, insertando directamente en una tabla de \texttt{MongoDB} o \texttt{SQL} conforme llegan los datos) mejoraría la robustez y haría más inmediato el análisis de los datos.
+
+\subsection*{Integración en un flujo automatizado (\textit{pipeline})}
+Para un proyecto de índole de  \textit{Big Data}, suele ser deseable automatizar la ejecución periódica de la extracción. Una mejora a tener en cuenta es encapsular este script en una tarea programada, por ejemplo usando \textbf{Airflow} o similares, o simplemente un cron job en servidor, para que se ejecute mensualmente (tal como sugiere el nombre del script \textit{ViviendasMensual}) y que depende de la disponibilidad de actualización de las API_KEYS. Asimismo, podría integrarse con la siguiente fase (preprocesamiento) de forma que al terminar la extracción se dispare automáticamente el script de limpieza y consolidación del dataset. Herramientas de \textit{pipeline} permitirían monitorizar el éxito de cada corrida mensual y enviar alertas en caso de fallo (por ejemplo, si ninguna clave API funciona). Incluso se podría empaquetar el script en un contenedor \texttt{Docker} para su despliegue consistente en diferentes entornos, garantizando que las dependencias (como la versión de Python) sean las adecuadas.
+
+En conjunto, estas mejoras apuntan a \textbf{profesionalizar} el componente de extracción de datos, haciéndolo más eficiente y fácil de mantener. Implementarlas todas podría exceder el alcance de un TFG, pero serían pasos lógicos si el proyecto evolucionase hacia un producto en producción. Por ejemplo, migrar a \texttt{requests} y \texttt{logging} sería relativamente sencillo y aportaría claridad; la paralelización requeriría más pruebas para balancear carga y límites de la API; mientras que la integración en pipelines dependerá de la infraestructura disponible.
+
+
+\section*{Conclusión}
+
+En este capítulo se ha abordado en profundidad la fase de \textbf{extracción de datos}, justificando su importancia dentro de un proyecto de análisis predictivo inmobiliario y detallando cómo se llevó a cabo la obtención de datos de Idealista para la región de Andalucía. Se discutieron las alternativas consideradas y por qué se descartaron fuentes como el INE o otros portales, llegando a la solución de emplear la API de Idealista vía RapidAPI por su equilibrio entre alcance y facilidad de uso. Asimismo, se describió minuciosamente el script desarrollado para la extracción mensual de viviendas, desde su estructura modular hasta las técnicas implementadas para manejar errores y límites de la API, incluyendo la rotación de múltiples claves. Este script proporcionó un \textbf{dataset crudo} consistente en varios archivos CSV con miles de registros de propiedades, que constituyen la materia prima para el análisis.
+
+Con los datos en mano, el siguiente paso del proyecto se enfoca en el \textbf{preprocesamiento y construcción del dataset consolidado}. Es decir, limpiar y depurar los datos extraídos, unificar los distintos archivos en un solo conjunto coherente, manejar duplicados (particularmente porque cada provincia se obtuvo en dos ordenaciones), enriquecer o transformar variables según se requiera, y preparar el conjunto resultante para la fase de \textit{modelado predictivo}. En el próximo capítulo se tratará detalladamente ese proceso de preprocesamiento del dataset, donde se aplicarán técnicas de tratamiento de valores atípicos, codificación de variables categóricas, normalización de escalas y otras tareas propias de la etapa de \textit{Data Preparation}. La sólida base de datos lograda gracias a una extracción cuidadosa permitirá que estas siguientes fases se lleven a cabo sobre datos de calidad, incrementando las posibilidades de éxito en la construcción del modelo de predicción de precios inmobiliarios. En el texto final del TFG, se sugiere incluir esquemas o pseudocódigo adicional si fuera necesario para ilustrar tanto la extracción (descrita aquí) como las transformaciones realizadas en el preprocesamiento, reforzando así la claridad y carácter didáctico del documento.
+
+
+% ********************************************************************
+% Capítulo 2: Preprocesado de Datos
+% ********************************************************************
+\chapter{Preprocesado de datos: pasos para ETL y Cuadro de Mando en Power BI}
+\section{Carga y limpieza de los datos}
+
+\subsubsection{Introducción al propósito del análisis exploratorio}
+Empezamos este nuevo capítulo y fase de nuestro proyecto siendo conocedores de un gran problema y reto: la calidad y consistencia de los datos que se obtengan a través de los datos brutos extraídos en el capítulo anterior son fundamentales para el éxito de las etapas posteriores de análisis avanzado y modelado predictivo. 
+
+Es por ello, que de  antes de acometer un análisis exploratorio detallado, debemos realizar un preprocesamiento exhaustivo del conjunto de datos con el fin de asegurar su integridad y calidad. 
+
+En esta fase inicial de carga y limpieza, llevada a cabo mediante un notebook, se aplican diversas técnicas para detectar y corregir anomalías, estandarizar formatos y enriquecer la información disponible. El resultado es un conjunto de datos depurado y coherente, listo para ser utilizado con confianza en fases posteriores de la investigación. 
+
+\subsubsection{Análisis de valores extremos como motivación para las reglas de limpieza}
+Como primer paso, se examinaron las distribuciones de las variables numéricas clave – en particular, la superficie (m²) de las propiedades y el precio de oferta (€) – con el objetivo de identificar valores extremos o inverosímiles. Mediante el método del rango intercuartílico (IQR) se calcularon los cuartiles \$Q1\$ y \$Q3\$ del precio, y se determinó el rango IQR = \$Q3 - Q1\$. 
+
+A partir de estos valores, se obtuvieron límites inferiores y superiores para detectar outliers en la variable *precio*.  
+
+%(\$Q1 - 1.5\cdot IQR\$ y \$Q3 + 1.5\cdot IQR\$)  
+
+Adicionalmente, se fijaron umbrales absolutos intuitivos para apoyar la detección de valores anómalos: por ejemplo, se consideraron *extremadamente bajos* aquellos inmuebles con precio menor a 1.000 €, y *extremadamente altos* los que superaban 1.000.000€. En cuanto a la superficie, cualquier propiedad con más de 10.000 m² de superficie construida fue marcada como fuera de rango típico, mientras que superficies no positivas (0 m² o negativas) se identificaron como datos inválidos. Este análisis exploratorio de valores extremos sirvió de motivación para establecer reglas de limpieza concretas: se decidiría descartar del dataset aquellos registros cuyas características (precio o tamaño) se apartaran de la realidad de forma evidente, evitando así que datos erróneos o atípicos distorsionen los resultados del estudio.
+
+\subsubsection{Visualización e interpretación básica como apoyo}
+Para complementar el análisis numérico y facilitar la identificación de outliers, se emplearon visualizaciones básicas de las distribuciones de datos. En particular, se realizaron muestras de las primeras líneas del DataSet. Así cómo, se mostró información general del contenido mediante la función \texttt{df\_raw.info()} y las descripciones estadísticas de las variables, tanto numéricas como categóricas con las que contamos, con las funciones \verb|df_raw.describe()| y \verb|df_raw.describe(include=['object'])|.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{imagenes/4_1_ev2.png}
+    \caption{Variables númericas y categóricas}
+    \label{fig:var_num_categ}
+\end{figure}
+
+
+También, se realizó una verificación de los valores únicos en la columna de tipo de propiedad. De esta manera, podemos conocer para nuestros próximos análisis con que tipo de propiedades contamos entre nuestras viviendas. Para ello, se utilizó el siguiente fragmento de código:
+
+\begin{lstlisting}
+if not df_raw.empty and 'Property Type' in df_raw.columns:
+    property_types = df_raw['Property Type'].value_counts()
+    print("Tipos de propiedades y su frecuencia:")
+    display(property_types)
+    
+    # visu
+    plt.figure(figsize=(10, 6))
+    sns.countplot(y=df_raw['Property Type'], order=property_types.index)
+    plt.title('Distribución de Tipos de Propiedades')
+    
+    plt.xlabel('Cantidad')
+    plt.ylabel('Tipo de Propiedad')
+    plt.tight_layout()
+    plt.show()
+else:
+    print("El DataFrame está vacío o no contiene la columna 'Property Type'.")
+\end{lstlisting}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{imagenes/4_1_ev1.png}
+    \caption{Tipos de proiedades}
+    \label{fig:tipos-propiedad}
+\end{figure}
+
+
+\subsubsection{Acciones realizadas para limpiar}
+A partir de los hallazgos anteriores, se llevaron a cabo las siguientes acciones de limpieza y transformación de datos, encaminadas a mejorar la calidad del conjunto de datos:
+
+\begin{enumerate}
+\item \textbf{Eliminación de duplicados y nulos}: Se detectaron y eliminaron registros nulos y   duplicados para evitar la redundancia de información. Esta depuración garantiza que cada inmueble aparezca en una sola vez en el dataset, previniendo sesgos en el análisis por sobre-representación de ciertas entradas.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{imagenes/4_1_ev3.png}
+    \caption{Registros duplicados}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{imagenes/4_1_ev4.png}
+    \caption{Registros nulos}
+\end{figure}
+
+\item \textbf{Renombrado de columnas}: Se renombraron los campos del dataset a nombres descriptivos en español, homogenizando la nomenclatura. Por ejemplo, columnas originalmente en inglés como \emph{Price}, \emph{Property Type} o \emph{Location} fueron renombradas a \emph{precio}, \emph{tipo\_propiedad} y \emph{ubicacion}, respectivamente. Esto facilita la interpretación semántica de cada campo y la comunicación de resultados.
+
+\item \textbf{Traducción y estandarización de categorías}: Se tradujeron los valores categóricos de \emph{tipo\_propiedad} del inglés al español y se unificó su formato. Así, categorías como \emph{flat}, \emph{duplex} o \emph{countryHouse} pasaron a \emph{piso}, \emph{duplex} (mantenido) y \emph{casa\_rural}, entre otras. Con esta estandarización, todas las propiedades comparten categorías coherentes, evitando duplicidades por diferencias lingüísticas o de ortografía.
+
+\item \textbf{Filtrado de superficies extremas}: Siguiendo las reglas motivadas por el análisis de outliers, se eliminaron las entradas con valores de superficie fuera de los límites razonables. En concreto, se descartaron las propiedades con superficie excesivamente grande (superior a 10.000 m², claramente atípica para inmuebles residenciales) así como aquellas con superficie no válida (0 m² o negativa). De este modo, se suprimieron del conjunto de datos registros evidentemente erróneos o irrelevantes desde el punto de vista práctico.
+
+\item \textbf{Identificación y tratamiento de outliers de precio}: Se llevó a cabo un examen detallado de los precios para detectar valores anómalos. Mediante la técnica IQR descrita, se identificaron propiedades con precio muy por debajo o por encima del rango intercuartílico esperado. Aunque se señalaron casos extremos (por ejemplo, propiedades con precio < 1.000 € o > 1.000.000 €), en esta etapa de limpieza no se optó por eliminarlos directamente, sino por dejarlos marcados para un análisis más profundo en fases posteriores. No obstante, se introdujo una medida relativa más reveladora, el \emph{precio por metro cuadrado}. Tras calcular la nueva columna \texttt{precio\_m2} = precio / superficie para cada registro, se filtraron y eliminaron del dataset aquellos inmuebles con un valor de \texttt{precio\_m2} inverosímil (por debajo de 10 €/m² o por encima de 10.000 €/m²), entendiendo que tales casos representan errores de datos o situaciones fuera del alcance del estudio.
+
+\item \textbf{Creación de nuevas variables}: Además de \texttt{precio\_m2}, se creó la variable \texttt{densidad\_habitaciones}, definida como la relación entre el número de habitaciones y la superficie (\emph{habitaciones/m²}) de cada propiedad. Estas variables derivadas enriquecen el conjunto de datos al aportar información más interpretable: por ejemplo, \texttt{precio\_m2} permite comparar el valor de las viviendas independientemente de su tamaño, mientras que \texttt{densidad\_habitaciones} ofrece una medida del aprovechamiento del espacio (número de habitaciones por unidad de superficie).
+
+\item \textbf{Almacenamiento del dataset limpio}: Finalmente, tras aplicar todas las transformaciones y filtros, se guardó el conjunto de datos resultante en un nuevo archivo CSV (e.g., \emph{andalucia\_clean.csv}). Este fichero constituye la versión depurada del dataset original y será utilizado como base para el análisis exploratorio y el entrenamiento de modelos en capítulos posteriores. Al conservar una copia limpia de los datos, se asegura la reproducibilidad del proceso de limpieza y se facilita su reutilización en futuros experimentos.
+\end{enumerate}
+
+\subsubsection{Conclusión con implicaciones prácticas para la limpieza}
+En resumen, las acciones anteriores permitieron obtener un conjunto de datos limpio y consistente, adecuado para su uso en las siguientes fases del proyecto. Tras la limpieza, el dataset se encuentra libre de duplicados, con valores atípicos flagrantes removidos o controlados, y con una estructura de variables más informativa gracias a las nuevas columnas derivadas. Esto implica que los análisis exploratorios y modelos predictivos que se realizarán a continuación podrán apoyarse en datos de mayor calidad, reduciendo la posibilidad de sesgos o interpretaciones erróneas debidas a datos sucios. En la práctica, haber llevado a cabo esta depuración preliminar fortalece la confiabilidad de los resultados que se obtengan más adelante y sienta una base sólida sobre la cual construir conclusiones válidas.
+
+%-------------------------------------------------------------------------
+\subsection{Consolidación de CSVs crudos}
+
+\begin{enumerate}
+    \item Descubrir y listar todos los archivos \texttt{*\_SALE\_*.csv} en \texttt{data/raw/}.
+    \item Leerlos en un único \texttt{DataFrame} de \texttt{pandas}, añadiendo columnas auxiliares (\texttt{Province}, \texttt{SortOrder}).
+    \item Volcar el \texttt{DataFrame} combinado en un CSV maestro: \texttt{data/processed/andalucia\_raw.csv}.
+\end{enumerate}
+
+\subsection{Limpieza y transformación en Python}
+
+\begin{enumerate}
+    \item Identificación y eliminación de duplicados (ID geográfico + precio).
+    \item Detección de valores faltantes y estrategia de imputación.
+    \item Filtrado de \textit{outliers} extremos (precios o superficies fuera de rango).
+    \item Normalización y estandarización de nombres de columnas y formatos (fechas, textos).
+    \item Creación de nuevas columnas útiles (por ejemplo, precio por m², rangos de habitación).
+\end{enumerate}
+
+\subsection{Exportación del dataset final}
+
+\begin{enumerate}
+    \item Guardar el \texttt{DataFrame} limpio como \texttt{andalucia\_final.csv}.
+    \item (Opcional) Serializar a formatos alternativos (\texttt{Parquet}, \texttt{SQLite}) para mejorar rendimiento.
+\end{enumerate}
+
+\section{Cuadro de Mando en PowerBI}
+\subsection{Preparación del entorno Power BI}
+
+\begin{enumerate}
+    \item Crear un nuevo proyecto o informe.
+    \item Importar \texttt{andalucia\_final.csv} (o el origen elegido).
+    \item Configurar refresco de datos (fuente de carpeta o \textit{gateway}).
+\end{enumerate}
+
+\subsection{Modelado de datos en Power BI}
+
+\begin{enumerate}
+    \item Revisar tipos de datos (numéricos, texto, geográficos).
+    \item Crear tablas de dimensión si es necesario (por ejemplo, lista de provincias).
+    \item Definir relaciones (si se usan múltiples tablas).
+    \item Crear medidas DAX clave:
+    \begin{itemize}
+        \item Precio medio por provincia
+        \item Precio por m²
+        \item Distribución por número de habitaciones
+        \item Conteo de inmuebles
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Diseño de visualizaciones}
+
+\begin{enumerate}
+    \item Mapa coroplético o \textit{scatter map} con precios geolocalizados.
+    \item Gráficos de barras o columnas por provincia y rango de precios.
+    \item \textit{Slicers} para filtrar por provincia, orden, rango de habitaciones y superficie.
+    \item Gráfico de líneas para evolución (si se automatiza extracción histórica).
+    \item \textit{KPI cards} para métricas destacadas (precio medio, número total).
+\end{enumerate}
+
+\section{Análisis del DataSet}
+%A rellenar ahora por ti%
+
+% ********************************************************************
+% Capítulo 3: Creación del Modelo Predictivo
+% ********************************************************************
+\chapter{Implementación: Creación del Modelo Predictivo}
+\section{Selección de Características y Análisis de Correlación}
+En este apartado se expone el proceso de selección de las variables predictoras y la variable objetivo. Se realiza un análisis de correlación para determinar la influencia de cada característica (por ejemplo, número de habitaciones, tamaño del terreno, latitud y longitud) en el precio inmobiliario. Este análisis es crucial para descartar variables con baja relevancia y evitar el sobreajuste en el modelo.
+
+\section{Entrenamiento y Evaluación de Modelos de Regresión}
+\subsection{Implementación de Modelos Clásicos}
+Se describen los distintos modelos de regresión utilizados (como Regresión Lineal, Lasso, K-Nearest Neighbors, Árboles de Decisión, Random Forest, Gradient Boosting, SVR y Redes Neuronales). Se explica el procedimiento de división del dataset en conjuntos de entrenamiento y prueba (80\%-20\%), y se detalla el proceso de entrenamiento y evaluación utilizando métricas como MSE, MAE y R2. Se recomienda incluir tablas comparativas y gráficos que muestren el desempeño de cada modelo.
+
+\subsection{Interpretación del Modelo con SHAP}
+Para facilitar la interpretación del modelo seleccionado, se emplea la herramienta SHAP. Este apartado explica cómo se generan y analizan los valores SHAP para identificar la influencia de cada variable en la predicción del precio. Se incluye la interpretación de gráficos generados y se discuten los resultados obtenidos, destacando las variables más relevantes en el proceso predictivo.
+
+\subsection{Automatización del Proceso con H2O AutoML}
+Se presenta la integración de H2O AutoML para la automatización del entrenamiento de múltiples modelos en un entorno de validación cruzada. Se explica la conversión del dataset a un H2OFrame, la configuración del entorno (incluyendo el tiempo máximo de entrenamiento y el número de folds), y la evaluación del leaderboard que permite seleccionar el mejor modelo. Este proceso refuerza la robustez y escalabilidad del sistema predictivo.
+
+\section{Persistencia y Exportación del Modelo}
+Una vez identificado el modelo óptimo, se detalla el proceso de persistencia del mismo utilizando \texttt{joblib}. Se explica cómo se guarda el modelo en un archivo (por ejemplo, \texttt{best\_model.pkl}) para su posterior integración en la aplicación web. Se incluyen recomendaciones sobre el versionado y actualización del modelo en función de nuevos datos.
+
+% ********************************************************************
+% Capítulo 4: Desarrollo de la Aplicación Web
+% ********************************************************************
+\chapter{Desarrollo de la Aplicación Web}
+\section{Diseño y Arquitectura de la Plataforma Interactiva}
+En este apartado se describe la arquitectura general de la aplicación web diseñada para visualizar y analizar los resultados predictivos. Se explica el flujo de interacción del usuario, desde la selección de parámetros (número de habitaciones, tamaño, ubicación) hasta la visualización de las predicciones. Además, se discuten aspectos de usabilidad y diseño de la interfaz, destacando la importancia de una experiencia de usuario intuitiva y accesible.
+
+\section{Implementación de la API con Flask}
+\subsection{Desarrollo del Endpoint de Predicción}
+Se detalla el desarrollo de la API utilizando el microframework Flask. Se explica el funcionamiento del endpoint \texttt{/predict}, que recibe peticiones en formato JSON, procesa los datos de entrada y utiliza el modelo persistido para generar la predicción del precio inmobiliario. Se incluye el código fuente del script \texttt{flask-api.py} y se comentan los principales bloques de código para facilitar su comprensión.
+
+\subsection{Validación y Ejemplos de Uso}
+Se presenta un ejemplo práctico de cómo realizar una petición a la API utilizando \texttt{curl}, mostrando la estructura de la solicitud y la interpretación de la respuesta. Este apartado es fundamental para demostrar la integración entre el modelo predictivo y la interfaz web, validando el correcto funcionamiento del sistema en un entorno real.
+
+
+\chapter{Test}
+
+
+% ********************************************************************
+% Capítulo 5: Conclusiones y Trabajos Futuros
+% ********************************************************************
+\chapter{Conclusiones y Trabajos Futuros}
+En este capítulo se recogen las principales conclusiones obtenidas a lo largo del desarrollo del proyecto. Se evalúa el desempeño del modelo predictivo, la calidad de los datos y la eficacia de la plataforma interactiva. Además, se discuten las limitaciones encontradas y se proponen posibles líneas de mejora y ampliaciones futuras, tales como la incorporación de nuevas fuentes de datos, la optimización de los algoritmos de Machine Learning y la extensión de la aplicación web a otros mercados geográficos.
+
+% ********************************************************************
+% Bibliografía (opcional)
+% ********************************************************************
+%\bibliography{bibliografia/bibliografia}\addcontentsline{toc}{chapter}{Bibliografía}
+%\bibliographystyle{miunsrturl}
+Consejo General del Notariado. (2023). Informe Anual del Mercado Inmobiliario 2022–2023. https://www.notariado.org/portal/informes
+
+Fotocasa. (2023). Radiografía del comprador de vivienda en España. https://www.fotocasa.es
+
+Idealista. (2023). Estudio de la evolución de la demanda inmobiliaria por comunidades autónomas. https://www.idealista.com/news
+
+Ministerio de Vivienda y Agenda Urbana. (2023). Estadística de Transacciones Inmobiliarias. https://www.mivau.gob.es
+
+La Razón (2024). La brecha entre el precio de la vivienda y los salarios se agiganta en Andalucía
+https://www.larazon.es/andalucia/brecha-precio-vivienda-salarios-agiganta-andalucia_20250509681d7de6e52da91ed53d22cf
+
+
+Provost & Fawcett, 2013
+
+% ********************************************************************
+% Apéndices (comentados temporalmente por archivos faltantes)
+% ********************************************************************
+%\appendix
+%\chapter{Manual de Usuario}
+%\input{apendices/manual_usuario/manual_usuario}
+%
+%\chapter{Glosario de Términos}
+%\input{glosario/entradas_glosario}
+
+\end{document}
+
+
+
+
+
+
+```python
+import http.client, json, csv, time, os
+
+# Cargar JSON desde un archivo externo
+with open('config.json', 'r') as file:
+    config_data = json.load(file)
+
+# Parámetros generales
+MAX_PROPERTIES_PER_API = 20000
+MAX_ITEMS_PER_REQUEST = 40
+MAX_RETRIES = 5
+
+# Directorio donde se guardarán los archivos CSV
+output_directory = 'raw/'
+if not os.path.exists(output_directory):
+    os.makedirs(output_directory)
+```
+
+*Explicación:* Aquí se cargan los datos de `config.json` en la variable `config_data`. Por ejemplo, `config_data["api_keys"]` contendrá una lista de claves como `"bac21d693fmshe583..."` etc., y `config_data["provinces"]` un diccionario con provincias de Andalucía. Las constantes `MAX_PROPERTIES_PER_API` y otras servirán para controlar los bucles de extracción. Tras esto, se asegura que el subdirectorio `raw/` exista, pues allí se creará un fichero CSV por cada provincia y tipo de consulta (como se verá más adelante).
+
+**Función de extracción por provincia (`get_properties`):** El núcleo del script reside en la función `get_properties(api_key, province_id, sort_order, province_name)`. Esta función realiza la consulta paginada a la API de Idealista para una provincia dada (identificada por `province_id`, por ej. "0-EU-ES-41" para Sevilla) y una ordenación de precios dada (`sort_order`, que puede ser `"asc"` para precio ascendente o `"desc"` para descendente). Se incluye el parámetro de ordenación para, en este caso de uso, **recorrer la lista de resultados en ambos sentidos** (baratos a caros y viceversa) y así mitigar posibles límites en el número de resultados retornados por la API (una estrategia que discutiremos más adelante). A grandes rasgos, `get_properties` establece una conexión HTTP, itera sobre páginas de resultados y escribe cada anuncio en un archivo CSV. A continuación se detalla su lógica paso a paso:
+
+* **Inicialización de la conexión y archivo CSV:** Al entrar, la función crea una conexión HTTPS con el host de RapidAPI (`idealista2.p.rapidapi.com`) usando `http.client.HTTPSConnection`. Prepara también los **headers** de la petición incluyendo la clave de API (`'x-rapidapi-key': api_key`) y el host objetivo. Luego inicializa variables locales: `num_page = 1` (contador de páginas a solicitar), `total_properties_in_file = 0` (contador de anuncios escritos a archivo). Seguidamente construye el nombre de archivo CSV donde se guardarán los datos de esa provincia y orden: por convenio se usó `"{prefix}{province_name}_SALE_{SORT}.csv"`, siendo `prefix = "3"` para indicar que corresponde a la etapa 3 del proyecto (extracción), `province_name` el nombre de la provincia, `SALE` para indicar operación de venta, y `SORT` el orden (`ASC` o `DESC`). Por ejemplo: `"raw/3Sevilla_SALE_ASC.csv"`. Este archivo se abre en modo escritura (`'w'`) con codificación UTF-8 y se escribe la fila de **cabecera** con los campos de interés: *Price, Property Type, Size (m2), Number of Rooms, Number of Bathrooms, Latitude, Longitude, Location*. Este esquema define las columnas que luego formarán nuestro dataset bruto.
+
+* **Bucle de paginación y llamadas a la API:** Tras la inicialización, la función entra en un bucle `while` que continuará mientras no se haya alcanzado `MAX_PROPERTIES_PER_API` anuncios extraídos para esa provincia. En cada iteración, formará la URL de consulta para la página actual (`num_page`). En la API de Idealista, los parámetros principales son `locationId` (zona geográfica), `operation=sale` (tipo de operación, venta en este caso), `sort={sort_order}` (ordenar por precio asc o desc), `maxItems={MAX_ITEMS_PER_REQUEST}` (límite de resultados por página, 40) y `numPage={num_page}` (número de página a obtener). Con estos parámetros, se envía una petición GET usando `conn.request("GET", params, headers=headers)`.
+
+* **Gestión de errores y reintentos:** Dada la naturaleza de las comunicaciones de red, se implementó un mecanismo de reintentos para robustecer la extracción. Tras enviar la petición, el código lee la respuesta `res = conn.getresponse()` y su contenido (`response_body = res.read()`). Se valida el código de estado HTTP (`res.status`) y el tipo de contenido devuelto. Si **no es 200 (OK)** o el contenido no es JSON (`'application/json'`), se asume que ocurrió un problema. En tal caso, se imprime un mensaje de error con detalles (código de estado, parte del body recibido) para depuración. Particular atención se presta a códigos **401/403 (no autorizado)** o **429 (demasiadas peticiones)**, ya que éstos sugieren que la clave de API ha sido rechazada o ha superado el límite de peticiones. Si ocurre alguno de esos códigos, el script rompe el bucle interno de reintentos marcando la situación como fallo de la clave (usando `retries = MAX_RETRIES` para forzar la salida). En caso de otros errores (por ejemplo, un 500 del servidor, o un JSON mal formado), el código lanza una excepción (`raise ValueError`) que es capturada por el bloque `except`. El bloque de reintentos se resume en el siguiente fragmento simplificado del código:
+
+```python
+retries = 0
+request_successful = False
+while retries < MAX_RETRIES:
+    try:
+        conn.request("GET", params, headers=headers)
+        res = conn.getresponse()
+        response_body = res.read()
+        if res.status != 200 or 'application/json' not in res.getheader('Content-Type'):
+            error_message = f"Respuesta inesperada (Status: {res.status})"
+            if res.status in [401, 403, 429]:
+                # Clave API posiblemente agotada o inválida
+                retries = MAX_RETRIES
+                break
+            raise ValueError(error_message)
+        # Si llega aquí, status 200 y JSON válido
+        current_page_data = json.loads(response_body.decode("utf-8"))
+        request_successful = True
+        break  # sale del while de reintentos
+    except Exception as e:
+        retries += 1
+        print(f"Error en solicitud para {province_name} pág {num_page} (Intento {retries}/{MAX_RETRIES}): {e}")
+        if retries < MAX_RETRIES:
+            time.sleep(5)  # espera 5 segundos antes de reintentar
+```
+
+En este código, cada vez que hay un fallo se espera unos segundos antes de reintentar, para dar tiempo a la red o al servidor a recuperarse (por ejemplo, en casos de saturación temporal). Si tras `MAX_RETRIES` intentos no se logra `request_successful`, la función considera que la **clave API ha fallado** o alcanzó su límite, por lo que retorna un código de estado especial `'FAILURE_API_LIMIT_OR_ERROR'` y finaliza la extracción para esa provincia con esa clave.
+
+* **Procesamiento de la respuesta exitosa:** Si la petición fue exitosa, se obtiene un objeto `current_page_data` (diccionario Python) desde el JSON. El código entonces verifica si la respuesta contiene la lista de inmuebles esperada: busca la clave `'elementList'` en el JSON. Si **no está presente o viene vacía**, significa que no hay más resultados que extraer. Esto puede ocurrir de dos modos:
+
+  1. Si `num_page == 1` y `total_properties_in_file == 0`, es decir, en la primera página ya no se recibió ningún inmueble, implica que **no hay propiedades disponibles** para esa provincia bajo ese filtro (posiblemente el portal no tiene anuncios en ese momento para esa provincia, lo cual es poco común pero contemplado). En tal caso, la función imprime un mensaje indicándolo y retorna `'SUCCESS_NO_MORE_DATA'`.
+  2. Si es una página subsecuente (por ejemplo, al pedir la página 21 no llegan datos), significa que se ha alcanzado el final de los anuncios (todas las páginas anteriores ya contenían todos los resultados). En este caso, se imprime que **no hay más propiedades** y se retorna `'SUCCESS_DATA_FETCHED'` para indicar que la extracción concluyó correctamente. Este mecanismo corta el bucle de paginación en el punto adecuado.
+
+* **Escritura de los datos en CSV:** Si la página contiene inmuebles (es decir, `'elementList'` existe y no está vacía), el script procede a iterar sobre cada inmueble (`for property_item in current_page_data['elementList']:`) y escribir una fila CSV con los campos de interés. La función utiliza `property_item.get('campo', 'N/A')` para extraer cada atributo, de modo que si alguno no existe en el JSON se pone "N/A" por defecto, evitando errores. Los campos escritos son, en orden: **Price** (precio de oferta en euros), **Property Type** (tipo de inmueble: piso, casa, etc.), **Size (m2)** (metros cuadrados), **Number of Rooms** (número de habitaciones), **Number of Bathrooms** (número de baños), **Latitude** y **Longitude** (coordenadas geográficas), y **Location** (dirección o barrio). Estos valores proveen las características principales para el análisis. Cada vez que escribe una fila, incrementa el contador `total_properties_in_file`. Si este contador alcanza el límite `MAX_PROPERTIES_PER_API` (20.000 anuncios), se hace un `break` para salir del bucle y no pedir más páginas, protegiendo así contra extracciones excesivamente grandes. Adicionalmente, el código lleva un conteo de cuántos inmuebles se procesaron en la página actual (`properties_on_page`) para propósitos de logging.
+
+* **Mensajes de registro (logging) y continuación:** Al final de cada página procesada, se imprime un mensaje informativo indicando el número de propiedades guardadas de esa página y el acumulado total para la provincia. Luego, si no se ha alcanzado el máximo y quedan más páginas, incrementa `num_page += 1`, espera 1 segundo (`time.sleep(1)`) para no bombardear la API, y continúa el bucle para la siguiente página. Cuando finalmente se sale del bucle (ya sea por haber alcanzado el máximo o por no haber más datos), se imprime un mensaje final indicando que la extracción de esa provincia ha terminado y cuántos inmuebles se guardaron en total. La función entonces retorna `'SUCCESS_DATA_FETCHED'` para señalar éxito (excepto en el caso especial de primera página vacía mencionado antes).
+
+En resumen, `get_properties` encapsula la lógica de consultar la API de Idealista de manera paginada, robusta a errores transitorios, y almacenar los resultados en un CSV estructurado. Se encarga de una provincia a la vez con una clave de API dada. Es importante destacar que el diseño es **modular**: la función devuelve códigos de estado semánticos en vez de, por ejemplo, finalizar el programa por sí misma. Esto permite que la parte principal del script decida cómo reaccionar si una clave falla o si ya no hay datos.
+
+**Lógica principal: iteración sobre provincias y rotación de API keys:** Fuera de la función `get_properties`, el resto del script orquesta la iteración sobre todas las provincias de Andalucía y maneja la rotación de las claves de API para sortear límites. Primero, se leen desde `config_data` la lista `api_keys_list = config_data["api_keys"]` y el diccionario `provinces_dict = config_data["provinces"]`. Se calcula `num_api_keys = len(api_keys_list)` y se inicializa un índice `current_api_key_idx = 0` para apuntar a la clave en uso. Luego se construye una lista `tasks` que contiene todas las combinaciones de provincias y ordenaciones a ejecutar. Esto se hace con un doble bucle:
+
+```python
+tasks = []
+for p_name, p_id in provinces_dict.items():
+    for s_order in ["desc", "asc"]:
+        tasks.append({
+            "province_name": p_name,
+            "province_id": p_id,
+            "sort_order": s_order
+        })
+```
+
+De esta forma, por cada provincia se crean dos tareas: una para extraer anuncios ordenados por precio descendente (de mayor a menor) y otra por precio ascendente. El motivo de incluir ambas ordenaciones, como se insinuó antes, es maximizar la cantidad de anuncios distintos obtenidos. Dado que la API podría devolver un subconjunto limitado (por ejemplo los primeros 20.000 resultados) en un solo orden, al combinar dos órdenes opuestos se busca capturar potencialmente anuncios diferentes (los más baratos y los más caros) y minimizar cualquier sesgo de truncamiento en los datos recopilados. **Nota:** Esto implica que habrá anuncios duplicados entre ambas extracciones (los que estén en el rango intermedio aparecerán en ambos órdenes); en el posterior preprocesamiento se pueden eliminar duplicados.
+
+El script luego inicia un bucle principal `while current_task_idx < len(tasks):` que recorre la lista de tareas secuencialmente. Usa `current_task_idx` como índice de tarea actual y `current_api_key_idx` como índice de clave API actual. En cada iteración:
+
+* Si `current_api_key_idx` supera o iguala `num_api_keys` (es decir, ya se intentaron todas las claves disponibles), significa que **todas las claves se han agotado** (posiblemente alcanzando sus límites de cuota) antes de terminar las tareas. En tal caso, el script imprime un mensaje advirtiendo que no se completarán las tareas restantes y hace `break` para salir del bucle.
+* Si aún hay alguna clave disponible, toma la tarea actual (`task = tasks[current_task_idx]`) y selecciona la clave correspondiente (`api_key_to_use = api_keys_list[current_api_key_idx]`). Imprime por pantalla información de qué provincia y orden se va a extraer y qué clave (índice) se está usando, ocultando parcialmente la clave por seguridad. Luego invoca la función principal: `status = get_properties(api_key_to_use, task['province_id'], task['sort_order'], task['province_name'])`.
+
+Una vez `get_properties` devuelve, el flujo de control analiza el `status` recibido:
+
+* Si el estado es `'SUCCESS_DATA_FETCHED'` o `'SUCCESS_NO_MORE_DATA'`, se considera que la tarea se completó con éxito (ya sea porque se obtuvieron datos o simplemente no había datos que obtener). En tal caso, se imprime un mensaje de tarea manejada exitosamente, se incrementa `current_task_idx += 1` para pasar a la siguiente tarea, y **se rota la clave API** para la siguiente extracción. La rotación se realiza haciendo `current_api_key_idx = (current_api_key_idx + 1) % num_api_keys`, es decir, se suma 1 al índice y se toma módulo con el número de claves (de modo que si estaba en la última clave, vuelva a la primera). Esta rotación round-robin distribuye la carga entre las múltiples claves. Así, aunque una clave no esté todavía agotada, el script la deja descansar y utiliza otra para la siguiente provincia, disminuyendo la probabilidad de llegar al límite de ninguna y permitiendo paralelizar futuras ejecuciones si se modificara el código a un enfoque asíncrono.
+* Si el estado es `'FAILURE_API_LIMIT_OR_ERROR'`, quiere decir que la clave actual no pudo completar la tarea (muy probablemente porque alcanzó su cupo de peticiones o fue bloqueada temporalmente). En este caso, **no se avanza de tarea** (no se incrementa `current_task_idx`), sino que se asume que la misma tarea deberá reintentarse con otra clave. Se imprime un mensaje indicando el fallo de la clave actual y que se intentará con la siguiente. Entonces simplemente se hace `current_api_key_idx += 1` para pasar a la siguiente clave, y el bucle `while` itera de nuevo con la misma tarea pero nueva API key.
+* Si se recibiera un estado desconocido (distinto de los anteriores, lo cual en principio no debería suceder dado nuestro diseño), el script también lo trata como fallo de la clave: imprime un aviso y `current_api_key_idx += 1` para intentar de nuevo la misma tarea con la siguiente clave.
+
+Este esquema implementa el **mecanismo de rotación de claves** mencionado. En esencia, cada vez que una clave cumple su cometido con una tarea, el siguiente trabajo se delega a otra clave, y si una clave falla, se desecha para esa tarea en favor de la siguiente. De esta manera, incluso si alguna API key individual tiene una cuota limitada (por ejemplo, 5000 peticiones mensuales), el programa puede seguir usando automáticamente las siguientes claves para completar todas las provincias. Cabe destacar que el código evita un posible error de índice al comprobar la condición de salida de claves antes de usar `api_keys_list[current_api_key_idx]`. También maneja correctamente el caso de no tener *ninguna* API key (aunque en práctica siempre se proporcionó al menos una en la configuración).
+
+Tras salir del bucle principal (bien por completar todas las tareas o por quedarse sin claves), el script imprime un resumen indicando cuántas tareas de extracción se pudieron completar y cuántas quedaron pendientes, si las hubo. Idealmente, con suficientes API keys, todas las tareas (16 en total, 8 provincias × 2 órdenes) deberían completarse exitosamente. El script finaliza entonces su ejecución. Todo el proceso puede demorar varios minutos, dependiendo de la cantidad de anuncios por provincia (por ejemplo, provincias costeras como Málaga pueden tener decenas de miles de anuncios, frente a provincias del interior con menos actividad inmobiliaria).
+
+En síntesis, `extraccionViviendasMensualv2.py` constituye un **crawling automatizado** de la API de Idealista para Andalucía, incorporando buenas prácticas como: lectura de configuración externa, segmentación del problema (provincia por provincia), manejo robusto de errores y reintentos, y un sistema de rotación de credenciales para superar limitaciones de cuota. El **output** de este script son archivos CSV en la carpeta `raw/`, uno por provincia y por orden de extracción, conteniendo los datos crudos de los anuncios inmobiliarios extraídos. Estos archivos, con miles de filas cada uno, conforman el *dataset bruto inicial* que luego será sometido a preprocesamiento.
+
+## Propuestas de mejora técnica del script
+
+Si bien el script desarrollado cumple su cometido, se identifican varias **mejoras técnicas** posibles para optimizar su rendimiento, mantenibilidad y escalabilidad de cara a futuros desarrollos:
+
+* **Uso de biblioteca HTTP de alto nivel (`requests`):** Actualmente se emplea `http.client` de la librería estándar para las peticiones. Una mejora sería utilizar la popular librería `requests`, que simplifica las llamadas HTTP y maneja internamente detalles como la decodificación de contenido y errores de conexión. Por ejemplo, `requests.get(url, headers=headers, timeout=...)` retornaría directamente un objeto con métodos como `.json()` para obtener el JSON, eliminando la necesidad de llamar manualmente a `json.loads`. Esto haría el código más legible y *pythónico*. Además, `requests` facilita el uso de *sessions* persistentes y puede integrarse con *backoff* o reintentos mediante adaptadores, lo que complementaría el manejo de errores.
+
+* **Incorporación de *logging* robusto:** Actualmente el script utiliza `print()` para informar del progreso y errores. En un entorno de producción o en un proyecto más extenso, sería recomendable reemplazar estos prints por el módulo `logging` de Python. Con `logging` se pueden configurar niveles (INFO, WARNING, ERROR), crear un registro timestamp de cada evento, y opcionalmente volcar la salida a un archivo de log. De este modo, la ejecución del extractor quedaría documentada, ayudando a diagnosticar problemas (por ejemplo, qué clave falló y en qué punto) y posibilitando análisis posteriores de rendimiento (tiempos por provincia, etc.). Un buen enfoque sería loggear cada inicio y fin de extracción por provincia, los errores de cada intento, y un resumen final, con un formato consistente.
+
+* **Extracción asíncrona o paralela:** La versión actual realiza las extracciones de forma **secuencial** (una provincia tras otra). Dado que las peticiones a la API son relativamente independientes por provincia, una mejora significativa sería ejecutar varias en paralelo para reducir el tiempo total. Existen varias opciones:
+
+  * Emplear *multi-threading* o *multiprocessing* en Python para lanzar, por ejemplo, un hilo por provincia (o un pequeño pool de hilos) que ejecute `get_properties`. Habría que tener precaución de no usar la misma API key simultáneamente en dos hilos, pero dado que rotamos claves por tarea, se podría segmentar por ejemplo asignando un subconjunto de claves a cada hilo.
+  * Utilizar *asyncio* con una librería HTTP asíncrona (como `aiohttp`), que permitiría hacer llamadas concurrentes a la API sin bloquear el programa. Esto requiere refactorizar `get_properties` para ser una corrutina asíncrona, pero aportaría eficiencia en IO.
+  * Una estrategia intermedia es paralelizar por orden: por ejemplo, lanzar simultáneamente la extracción *ascendente* y *descendente* de cada provincia utilizando dos hilos, ya que sus resultados complementarios podrían obtenerse a la vez.
+
+  Cualquiera de estas aproximaciones disminuiría drásticamente el tiempo de extracción, aprovechando mejor el hecho de tener múltiples claves API. No obstante, habría que vigilar no saturar la API con demasiadas peticiones concurrentes (respetando términos de uso y cuotas).
+
+* **Optimización de la lógica de resultados duplicados:** Como se mencionó, al extraer tanto en orden ascendente como descendente es inevitable obtener anuncios duplicados. Una mejora sencilla sería implementar una **deduplicación temprana**: por ejemplo, mantener un conjunto (`set`) de identificadores de anuncio ya vistos (Idealista provee un `propertyCode` o similar en cada item del JSON) y no volver a guardar el mismo ID en el CSV. Esto podría hacerse dentro de `get_properties` o en la fase de post-procesamiento. Alternativamente, se podría valorar extraer sólo en un orden (p.ej. descendente) si se comprueba que abarca la mayoría de resultados relevantes, aunque para asegurar exhaustividad en *Big Data* suele preferirse redundar y luego filtrar duplicados.
+
+* **Almacenamiento intermedio y recuperación ante fallos:** Actualmente, si el script se detiene abruptamente (por ejemplo, por un apagón o excepción no controlada), las provincias pendientes no se extraerán hasta la siguiente ejecución manual. Se podría mejorar la **tolerancia a fallos** incorporando un mecanismo de checkpoint o almacenamiento intermedio. Por ejemplo, guardar en un archivo de estado la última tarea completada o incluso progresos parciales (página actual por provincia), de modo que al reiniciar el script salte las tareas ya realizadas y retome donde quedó. Otra idea es escribir los resultados en una base de datos o almacenamiento persistente a medida que se obtienen (en lugar de sólo CSV), lo que facilitaría reanudar el proceso sin duplicar datos. En esta línea, integrar la extracción con un pipeline de almacenamiento tipo **data warehouse** (por ejemplo, insertando directamente en una tabla de MongoDB o SQL conforme llegan los datos) mejoraría la robustez y haría más inmediato el análisis de los datos.
+
+* **Integración en un flujo automatizado (*pipeline*):** Para un proyecto de índole *Big Data*, suele ser deseable automatizar la ejecución periódica de la extracción. Una mejora proponible es encapsular este script en una tarea programada, por ejemplo usando **Airflow** o similares, o simplemente un cron job en servidor, para que se ejecute mensualmente (tal como sugiere el nombre del script *ViviendasMensual*). Asimismo, podría integrarse con la siguiente fase (preprocesamiento) de forma que al terminar la extracción se dispare automáticamente el script de limpieza y consolidación del dataset. Herramientas de *pipeline* permitirían monitorizar el éxito de cada corrida mensual y enviar alertas en caso de fallo (por ejemplo, si ninguna clave API funciona). Incluso se podría empaquetar el script en un contenedor Docker para su despliegue consistente en diferentes entornos, garantizando que las dependencias (como la versión de Python) sean las adecuadas.
+
+En conjunto, estas mejoras apuntan a **profesionalizar** el componente de extracción de datos, haciéndolo más eficiente y fácil de mantener. Implementarlas todas podría exceder el alcance de un TFG, pero serían pasos lógicos si el proyecto evolucionase hacia un producto en producción. Por ejemplo, migrar a `requests` y `logging` sería relativamente sencillo y aportaría claridad; la paralelización requeriría más pruebas para balancear carga y límites de la API; mientras que la integración en pipelines dependerá de la infraestructura disponible.
+
+Finalmente, desde una perspectiva académica, también se podría añadir documentación más detallada al código (docstrings, comentarios explicativos) o incluso presentar **pseudocódigo** en el informe para resumir la lógica de extracción. Esto ayudaría a comunicar el funcionamiento sin necesidad de recorrer todo el código fuente. Un diagrama de flujo que ilustre el proceso (desde la inicialización, pasando por la iteración de provincias y claves, hasta la generación de archivos CSV) sería igualmente útil para comprender el algoritmo implementado. Se recomienda considerar la inclusión de dichas representaciones (pseudocódigo o diagrama) en el texto final del TFG para complementar la explicación técnica y facilitar al lector la comprensión de la secuencia de pasos en la extracción de datos.
+
+## Conclusión
+
+En este capítulo se ha abordado en profundidad la fase de **extracción de datos**, justificando su importancia dentro de un proyecto de análisis predictivo inmobiliario y detallando cómo se llevó a cabo la obtención de datos de Idealista para la región de Andalucía. Se discutieron las alternativas consideradas y por qué se descartaron fuentes como el INE o otros portales, llegando a la solución de emplear la API de Idealista vía RapidAPI por su equilibrio entre alcance y facilidad de uso. Asimismo, se describió minuciosamente el script desarrollado para la extracción mensual de viviendas, desde su estructura modular hasta las técnicas implementadas para manejar errores y límites de la API, incluyendo la rotación de múltiples claves. Este script proporcionó un **dataset crudo** consistente en varios archivos CSV con miles de registros de propiedades, que constituyen la materia prima para el análisis.
+
+Con los datos en mano, el siguiente paso del proyecto se enfoca en el **preprocesamiento y construcción del dataset consolidado**. Es decir, limpiar y depurar los datos extraídos, unificar los distintos archivos en un solo conjunto coherente, manejar duplicados (particularmente porque cada provincia se obtuvo en dos ordenaciones), enriquecer o transformar variables según se requiera, y preparar el conjunto resultante para la fase de *modelado predictivo*. En el próximo capítulo se tratará detalladamente ese proceso de preprocesamiento del dataset, donde se aplicarán técnicas de tratamiento de valores atípicos, codificación de variables categóricas, normalización de escalas y otras tareas propias de la etapa de *Data Preparation*. La sólida base de datos lograda gracias a una extracción cuidadosa permitirá que estas siguientes fases se lleven a cabo sobre datos de calidad, incrementando las posibilidades de éxito en la construcción del modelo de predicción de precios inmobiliarios. En el texto final del TFG, se sugiere incluir esquemas o pseudocódigo adicional si fuera necesario para ilustrar tanto la extracción (descrita aquí) como las transformaciones realizadas en el preprocesamiento, reforzando así la claridad y carácter didáctico del documento.

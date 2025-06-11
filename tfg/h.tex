@@ -1,0 +1,47 @@
+
+\subsection{Carga y limpieza de los datos}
+
+\subsubsection{Introducción al propósito del análisis exploratorio}
+La calidad y consistencia de los datos brutos obtenidos en el capítulo anterior son fundamentales para el éxito de las etapas posteriores de análisis avanzado y modelado predictivo. Por ello, antes de acometer un análisis exploratorio detallado, se realiza un preprocesamiento exhaustivo del conjunto de datos con el fin de asegurar su integridad. En esta fase inicial de **carga y limpieza**, llevada a cabo mediante un script Python desarrollado para el proyecto (Carrera Bonilla, 2025), se aplican diversas técnicas para detectar y corregir anomalías, estandarizar formatos y enriquecer la información disponible. El resultado es un conjunto de datos depurado y coherente, listo para ser utilizado con confianza en fases posteriores de la investigación.
+
+\subsubsection{Análisis de valores extremos como motivación para las reglas de limpieza}
+Como primer paso, se examinaron las distribuciones de las variables numéricas clave – en particular, la superficie (m²) de las propiedades y el precio de oferta (€) – con el objetivo de identificar valores extremos o inverosímiles. Mediante el método del rango intercuartílico (IQR) se calcularon los cuartiles \$Q1\$ y \$Q3\$ del precio, y se determinó el rango IQR = \$Q3 - Q1\$. A partir de estos valores, se obtuvieron límites inferiores y superiores (\$Q1 - 1.5\cdot IQR\$ y \$Q3 + 1.5\cdot IQR\$ respectivamente) para detectar outliers en la variable *precio*. Adicionalmente, se fijaron umbrales absolutos intuitivos para apoyar la detección de valores anómalos: por ejemplo, se consideraron *extremadamente bajos* aquellos inmuebles con precio menor a 1.000 €, y *extremadamente altos* los que superaban 1.000.000 €. En cuanto a la superficie, cualquier propiedad con más de 10.000 m² de superficie construida fue marcada como fuera de rango típico, mientras que superficies no positivas (0 m² o negativas) se identificaron como datos inválidos. Este análisis exploratorio de valores extremos sirvió de motivación para establecer reglas de limpieza concretas: se decidiría descartar del dataset aquellos registros cuyas características (precio o tamaño) se apartaran de la realidad de forma evidente, evitando así que datos erróneos o atípicos distorsionen los resultados del estudio.
+
+\subsubsection{Visualización e interpretación básica como apoyo}
+Para complementar el análisis numérico y facilitar la identificación de outliers, se emplearon visualizaciones básicas de las distribuciones de datos. En particular, se construyeron gráficos como histogramas y diagramas de caja (*boxplots*) de la variable \emph{precio}, que permitieron observar la concentración de la mayoría de las propiedades en ciertos rangos de valor y visualizar de forma clara la presencia de valores atípicos (puntos aislados fuera de los bigotes del boxplot). Asimismo, se representó la distribución de frecuencias de la variable categórica \emph{tipo\_propiedad} mediante un gráfico de barras, evidenciando la predominancia de ciertas categorías de inmueble (por ejemplo, pisos) sobre otras. Estas visualizaciones ofrecieron un apoyo importante para la toma de decisiones en la limpieza de datos, al ilustrar de manera intuitiva qué tan dispersos o concentrados estaban los valores y qué casos podían considerarse anómalos. En la Figura\~\ref{fig\:precio\_boxplot}, por ejemplo, se muestra un diagrama de caja de los precios de las propiedades, donde se aprecian algunos valores atípicos extremos; de igual forma, la Figura\~\ref{fig\:tipo\_propiedad} presenta la distribución de tipos de propiedad, resaltando la frecuencia de cada categoría en el conjunto de datos.
+
+% \begin{figure}\[H]
+% \centering
+% \includegraphics\[width=0.7\textwidth]{figures/distribucion\_precios\_boxplot.png}
+% \caption{Diagrama de caja de la distribución de precios de las viviendas en el dataset de Andalucía, donde los puntos fuera de los bigotes representan propiedades con precios atípicos.}
+% \label{fig\:precio\_boxplot}
+% \end{figure}
+
+% \begin{figure}\[H]
+% \centering
+% \includegraphics\[width=0.7\textwidth]{figures/distribucion\_tipo\_propiedad.png}
+% \caption{Distribución de frecuencias por tipo de propiedad. Se observa que la categoría \emph{piso} es la más abundante, seguida de \emph{chalet}, mientras que tipologías como \emph{ático} o \emph{casa\_rural} aparecen con menor frecuencia.}
+% \label{fig\:tipo\_propiedad}
+% \end{figure}
+
+\subsubsection{Acciones realizadas para limpiar}
+A partir de los hallazgos anteriores, se llevaron a cabo las siguientes acciones de limpieza y transformación de datos, encaminadas a mejorar la calidad del conjunto de datos:
+
+\begin{enumerate}
+\item \textbf{Eliminación de duplicados}: Se detectaron y eliminaron registros duplicados para evitar la redundancia de información. Esta depuración garantiza que cada inmueble aparezca una sola vez en el dataset, previniendo sesgos en el análisis por sobre-representación de ciertas entradas.
+
+\item \textbf{Renombrado de columnas}: Se renombraron los campos del dataset a nombres descriptivos en español, homogenizando la nomenclatura. Por ejemplo, columnas originalmente en inglés como \emph{Price}, \emph{Property Type} o \emph{Location} fueron renombradas a \emph{precio}, \emph{tipo\_propiedad} y \emph{ubicacion}, respectivamente. Esto facilita la interpretación semántica de cada campo y la comunicación de resultados.
+
+\item \textbf{Traducción y estandarización de categorías}: Se tradujeron los valores categóricos de \emph{tipo\_propiedad} del inglés al español y se unificó su formato. Así, categorías como \emph{flat}, \emph{duplex} o \emph{countryHouse} pasaron a \emph{piso}, \emph{duplex} (mantenido) y \emph{casa\_rural}, entre otras. Con esta estandarización, todas las propiedades comparten categorías coherentes, evitando duplicidades por diferencias lingüísticas o de ortografía.
+
+\item \textbf{Filtrado de superficies extremas}: Siguiendo las reglas motivadas por el análisis de outliers, se eliminaron las entradas con valores de superficie fuera de los límites razonables. En concreto, se descartaron las propiedades con superficie excesivamente grande (superior a 10.000 m², claramente atípica para inmuebles residenciales) así como aquellas con superficie no válida (0 m² o negativa). De este modo, se suprimieron del conjunto de datos registros evidentemente erróneos o irrelevantes desde el punto de vista práctico.
+
+\item \textbf{Identificación y tratamiento de outliers de precio}: Se llevó a cabo un examen detallado de los precios para detectar valores anómalos. Mediante la técnica IQR descrita, se identificaron propiedades con precio muy por debajo o por encima del rango intercuartílico esperado. Aunque se señalaron casos extremos (por ejemplo, propiedades con precio < 1.000 € o > 1.000.000 €), en esta etapa de limpieza no se optó por eliminarlos directamente, sino por dejarlos marcados para un análisis más profundo en fases posteriores. No obstante, se introdujo una medida relativa más reveladora, el \emph{precio por metro cuadrado}. Tras calcular la nueva columna \texttt{precio\_m2} = precio / superficie para cada registro, se filtraron y eliminaron del dataset aquellos inmuebles con un valor de \texttt{precio\_m2} inverosímil (por debajo de 10 €/m² o por encima de 10.000 €/m²), entendiendo que tales casos representan errores de datos o situaciones fuera del alcance del estudio.
+
+\item \textbf{Creación de nuevas variables}: Además de \texttt{precio\_m2}, se creó la variable \texttt{densidad\_habitaciones}, definida como la relación entre el número de habitaciones y la superficie (\emph{habitaciones/m²}) de cada propiedad. Estas variables derivadas enriquecen el conjunto de datos al aportar información más interpretable: por ejemplo, \texttt{precio\_m2} permite comparar el valor de las viviendas independientemente de su tamaño, mientras que \texttt{densidad\_habitaciones} ofrece una medida del aprovechamiento del espacio (número de habitaciones por unidad de superficie).
+
+\item \textbf{Almacenamiento del dataset limpio}: Finalmente, tras aplicar todas las transformaciones y filtros, se guardó el conjunto de datos resultante en un nuevo archivo CSV (e.g., \emph{andalucia\_clean.csv}). Este fichero constituye la versión depurada del dataset original y será utilizado como base para el análisis exploratorio y el entrenamiento de modelos en capítulos posteriores. Al conservar una copia limpia de los datos, se asegura la reproducibilidad del proceso de limpieza y se facilita su reutilización en futuros experimentos.
+\end{enumerate}
+
+\subsubsection{Conclusión con implicaciones prácticas para la limpieza}
+En resumen, las acciones anteriores permitieron obtener un conjunto de datos limpio y consistente, adecuado para su uso en las siguientes fases del proyecto. Tras la limpieza, el dataset se encuentra libre de duplicados, con valores atípicos flagrantes removidos o controlados, y con una estructura de variables más informativa gracias a las nuevas columnas derivadas. Esto implica que los análisis exploratorios y modelos predictivos que se realizarán a continuación podrán apoyarse en datos de mayor calidad, reduciendo la posibilidad de sesgos o interpretaciones erróneas debidas a datos sucios. En la práctica, haber llevado a cabo esta depuración preliminar fortalece la confiabilidad de los resultados que se obtengan más adelante y sienta una base sólida sobre la cual construir conclusiones válidas.
