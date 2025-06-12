@@ -9,7 +9,7 @@ CORS(app) # Habilitar CORS para todas las rutas
 
 
 # --- Carga del Modelo ---
-MODEL_FILE = 'final_housing_price_model_andalucia_v3.joblib'
+MODEL_FILE = 'final_housing_price_model_andalucia_ v3.joblib'
 MODEL_PATH = None
 model = None
 

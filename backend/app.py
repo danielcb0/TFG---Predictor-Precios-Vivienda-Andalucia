@@ -1,46 +1,35 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import joblib
 import pandas as pd
 import os
-import numpy as np # Importar numpy para manejar tipos de datos
+import numpy as np
 from flask_cors import CORS
-app = Flask(__name__)
+
+# Determinar la ruta base del proyecto para acceder a la carpeta frontend
+# __file__ es la ruta de app.py (backend/app.py)
+# os.path.dirname(__file__) es backend/
+# os.path.dirname(os.path.dirname(__file__)) es la raíz del proyecto TFG---Predictor-Precios-Vivienda-Andalucia/
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FRONTEND_FOLDER = os.path.join(PROJECT_ROOT, 'frontend', 'src')
+MODELS_FOLDER = os.path.join(PROJECT_ROOT, 'models') # Carpeta de modelos en la raíz del proyecto
+
+app = Flask(__name__, static_folder=FRONTEND_FOLDER, static_url_path='')
 CORS(app) # Habilitar CORS para todas las rutas
 
 
 # --- Carga del Modelo ---
 MODEL_FILE = 'final_housing_price_model_andalucia_v3.joblib'
-MODEL_PATH = None
+MODEL_PATH = os.path.join(MODELS_FOLDER, MODEL_FILE)
 model = None
 
-# Intentar construir la ruta al modelo de forma más robusta
 try:
-    script_dir = os.path.dirname(__file__) 
-    MODEL_PATH = os.path.join(script_dir, MODEL_FILE)
-
     if not os.path.exists(MODEL_PATH):
-        project_root_dir = os.path.dirname(script_dir) 
-        MODEL_PATH_ALT = os.path.join(project_root_dir, 'models', MODEL_FILE)
-        if os.path.exists(MODEL_PATH_ALT):
-            MODEL_PATH = MODEL_PATH_ALT
-        else:
-            MODEL_PATH_ROOT_EXEC = os.path.join(os.getcwd(), 'models', MODEL_FILE)
-            if os.path.exists(MODEL_PATH_ROOT_EXEC):
-                 MODEL_PATH = MODEL_PATH_ROOT_EXEC
-            else:
-                # Si estás ejecutando desde la raíz y el modelo está en la misma raíz (menos común para 'models' dir)
-                MODEL_PATH_SCRIPT_ROOT_MODEL_ROOT = os.path.join(os.getcwd(), MODEL_FILE)
-                if os.path.exists(MODEL_PATH_SCRIPT_ROOT_MODEL_ROOT) and script_dir == os.getcwd():
-                     MODEL_PATH = MODEL_PATH_SCRIPT_ROOT_MODEL_ROOT
-                else:
-                    raise FileNotFoundError(f"No se pudo encontrar el modelo en las rutas intentadas: {MODEL_PATH}, {MODEL_PATH_ALT}, {MODEL_PATH_ROOT_EXEC}")
-
+        raise FileNotFoundError(f"No se pudo encontrar el modelo en la ruta: {MODEL_PATH}")
     model = joblib.load(MODEL_PATH)
     app.logger.info(f"Modelo cargado exitosamente desde: {MODEL_PATH}")
-
 except FileNotFoundError as e:
     app.logger.error(f"Error al cargar el modelo: {e}")
-    app.logger.error(f"Asegúrate de que el modelo '{MODEL_FILE}' existe en la carpeta 'models' o en una ruta accesible.")
+    app.logger.error(f"Asegúrate de que el modelo '{MODEL_FILE}' existe en la carpeta '{MODELS_FOLDER}'.")
     model = None
 except Exception as e:
     app.logger.error(f"Ocurrió un error inesperado al cargar el modelo: {e}")
@@ -54,6 +43,16 @@ EXPECTED_CATEGORICAL_FEATURES = ['tipo_propiedad']
 ALL_EXPECTED_FEATURES = EXPECTED_NUMERIC_FEATURES + EXPECTED_CATEGORICAL_FEATURES
 # --- Fin Características ---
 
+# Ruta para servir el index.html principal del frontend
+@app.route('/')
+def serve_index():
+    return send_from_directory(FRONTEND_FOLDER, 'index.html')
+
+# Flask servirá automáticamente otros archivos estáticos (CSS, JS, imágenes, otros HTML)
+# desde FRONTEND_FOLDER gracias a la configuración de static_folder y static_url_path.
+# Por ejemplo, /predictor.html servirá frontend/src/predictor.html
+# /partials/header.html servirá frontend/src/partials/header.html
+# /styles/styles.css servirá frontend/src/styles/styles.css
 
 @app.route('/predict', methods=['POST'])
 def predict():

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Predictor de Precios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles/styles.css"> 
+    <style>
+        body { background-color: #f7fafc; }
+    </style>
+</head>
+<body class="font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Barra superior combinada para logo y navegación -->
+    <div id="top-bar-wrapper" class="bg-white text-gray-800 shadow-lg sticky top-0 z-50 w-full"> 
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <div id="header-container"></div> 
+            <div id="nav-container" class="ml-6"></div>   
+        </div>
+    </div>
+
+    <main class="flex-grow">
+        <!-- Sección Hero con Degradado -->
+        <section class="hero-gradient py-12 md:py-16 bg-gradient-to-r from-green-500 to-blue-600 text-white text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-3xl md:text-4xl font-extrabold">Contacto</h1>
+            </div>
+        </section>
+
+        <!-- Contenido específico de la página -->
+        <div class="container mx-auto px-6 py-8 md:py-12">
+            <div class="bg-white shadow-xl rounded-lg p-8 md:p-12 max-w-2xl mx-auto">
+                <p class="text-lg text-gray-700 mb-6">
+                    Si tienes preguntas, sugerencias o deseas obtener más información sobre nuestro proyecto, no dudes en ponerte en contacto.
+                </p>
+                <form action="#" method="POST"> <!-- Actualiza el action si tienes un backend para el formulario -->
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+                        <input type="text" name="name" id="name" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                        <input type="email" name="email" id="email" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                        <textarea name="message" id="message" rows="4" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md shadow-sm transition duration-150 ease-in-out">
+                            Enviar Mensaje
+                        </button>
+                    </div>
+                </form>
+                <p class="text-sm text-gray-500 mt-8 text-center">
+                    Alternativamente, puedes contactarnos a través de <a href="mailto:info@example.com" class="text-blue-600 hover:underline">info@example.com</a>.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container" class="w-full"></div>
+
+    <script>
+// ... Script de carga de parciales (igual que en la plantilla) ...
+        async function loadPartial(url, containerId) {
+          try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`Error ${res.status} al cargar ${url}`);
+            const html = await res.text();
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = html;
+            } else {
+                console.error(`Contenedor con ID '${containerId}' no encontrado.`);
+            }
+          } catch (err) {
+            console.error(`Error cargando parcial ${url}:`, err);
+          }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+          loadPartial('partials/header.html', 'header-container');
+          loadPartial('partials/nav.html',    'nav-container');
+          loadPartial('partials/footer.html', 'footer-container');
+        });
+      </script>
+</body>
+</html>

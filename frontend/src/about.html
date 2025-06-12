@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre el Proyecto - Predictor de Precios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles/styles.css">
+    <style>
+        body { background-color: #f7fafc; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px; 
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background-color: #34d399; /* Tailwind green-400 */
+            border-radius: 50%;
+            border: 3px solid white; 
+            z-index: 1;
+        }
+        .timeline-line {
+            position: absolute;
+            left: -21px; 
+            top: 20px;
+            bottom: -20px; 
+            width: 2px;
+            background-color: #9ca3af; /* Tailwind gray-400 */
+        }
+         .timeline-item:last-child .timeline-line {
+            display: none; 
+        }
+    </style>
+</head>
+<body class="font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Barra superior combinada para logo y navegación -->
+    <div id="top-bar-wrapper" class="bg-white text-gray-800 shadow-lg sticky top-0 z-50 w-full"> 
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <div id="header-container"></div> 
+            <div id="nav-container" class="ml-6"></div>   
+        </div>
+    </div>
+
+    <main class="flex-grow">
+        <!-- Sección Hero con Degradado -->
+        <section class="hero-gradient py-12 md:py-16 bg-gradient-to-r from-green-500 to-blue-600 text-white text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-3xl md:text-4xl font-extrabold">Sobre Nuestro Proyecto</h1>
+            </div>
+        </section>
+
+        <!-- Contenido específico de la página -->
+        <div class="container mx-auto px-6 py-8 md:py-12">
+            <article class="bg-white shadow-xl rounded-lg p-8 md:p-12">
+                <header class="text-center mb-10">
+                    <!-- <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">Sobre Nuestro Proyecto</h1> --> <!-- Título ya está en el Hero -->
+                    <p class="text-xl text-gray-600">Descubriendo el valor de las viviendas en Andalucía con Machine Learning.</p>
+                </header>
+
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-green-600 mb-6">Nuestra Misión</h2>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Este proyecto nace con el objetivo de proporcionar una herramienta intuitiva y precisa para la estimación de precios de viviendas en la comunidad autónoma de Andalucía. Utilizando técnicas avanzadas de recolección de datos, preprocesamiento y modelado con Machine Learning, buscamos ofrecer transparencia y conocimiento accesible tanto para compradores y vendedores como para profesionales del sector inmobiliario.
+                    </p>
+                </section>
+
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-blue-600 mb-8 text-center">Fases Clave del Proyecto</h2>
+                    <div class="relative pl-8"> 
+                        <div class="timeline-item relative pb-10">
+                            <div class="timeline-line"></div>
+                            <h3 class="text-2xl font-semibold text-gray-700 mb-2">1. Recolección y Adquisición de Datos</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Extracción de miles de anuncios de viviendas de portales inmobiliarios líderes, capturando características esenciales como superficie, número de habitaciones, baños, ubicación geográfica (latitud, longitud) y tipo de propiedad.
+                            </p>
+                        </div>
+                        <div class="timeline-item relative pb-10">
+                            <div class="timeline-line"></div>
+                            <h3 class="text-2xl font-semibold text-gray-700 mb-2">2. Preprocesamiento y Limpieza</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Tratamiento de valores atípicos, imputación de datos faltantes, y transformación de variables categóricas (como 'tipo de propiedad') mediante técnicas como One-Hot Encoding para preparar los datos para el modelo.
+                            </p>
+                        </div>
+                        <div class="timeline-item relative pb-10">
+                            <div class="timeline-line"></div>
+                            <h3 class="text-2xl font-semibold text-gray-700 mb-2">3. Ingeniería de Características</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Creación de nuevas características relevantes a partir de las existentes para mejorar la capacidad predictiva del modelo. Aunque en este proyecto nos centramos en las características directas, esta fase es crucial en muchos problemas de ML.
+                            </p>
+                        </div>
+                        <div class="timeline-item relative pb-10">
+                            <div class="timeline-line"></div>
+                            <h3 class="text-2xl font-semibold text-gray-700 mb-2">4. Selección y Entrenamiento del Modelo</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Evaluación de diversos algoritmos de regresión. Se seleccionó un modelo Gradient Boosting (como XGBoost o LightGBM) por su robustez y alto rendimiento, entrenándolo con el conjunto de datos procesado.
+                            </p>
+                        </div>
+                        <div class="timeline-item relative">
+                            <h3 class="text-2xl font-semibold text-gray-700 mb-2">5. Evaluación y Despliegue</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Validación del modelo utilizando métricas como el Error Absoluto Medio (MAE) y R². Finalmente, despliegue del modelo a través de una API RESTful (Flask) para ser consumida por esta aplicación web.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="text-center mt-16">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Manual de Usuario</h2>
+                    <p class="text-lg text-gray-700 mb-8">
+                        Para una guía detallada sobre cómo utilizar el predictor y entender todas sus funcionalidades, consulta nuestro manual de usuario.
+                    </p>
+                    <a href="assets/docs/manual_usuario.pdf" 
+                       target="_blank"
+                       class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-10 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg">
+                       Descargar Manual (PDF)
+                    </a>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <div id="footer-container" class="w-full"></div>
+
+    <script>
+        async function loadPartial(url, containerId) {
+          try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`Error ${res.status} al cargar ${url}`);
+            const html = await res.text();
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = html;
+            } else {
+                console.error(`Contenedor con ID '${containerId}' no encontrado.`);
+            }
+          } catch (err) {
+            console.error(`Error cargando parcial ${url}:`, err);
+          }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          loadPartial('partials/header.html', 'header-container');
+          loadPartial('partials/nav.html',    'nav-container');
+          loadPartial('partials/footer.html', 'footer-container');
+        });
+      </script>
+</body>
+</html>

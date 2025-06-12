@@ -8,244 +8,95 @@
    Azul cielo claro – #00AEEF
    Gris perla – #F5F5F5
 */
+
+/* Paleta de colores base (puedes usarlos si necesitas clases personalizadas no cubiertas por Tailwind) */
+:root {
+   --verde-andaluz: #007A33;
+   --arena-calida: #D6A77A;
+   --oliva-suave: #708238;
+   --gris-pizarra: #2E3C44;
+   --azul-cielo-claro: #00AEEF;
+   --gris-perla: #F5F5F5; /* Usado como fondo de body en Tailwind con bg-gray-50 o bg-slate-50 */
+}
+
+/* Estilos específicos para la página del predictor que no son fácilmente replicables con Tailwind o son para Leaflet */
+
+/* Map container en predictor.html */
+#map {
+  height: 400px; /* Altura del mapa */
+  width: 100%;
+  border-radius: 0.5rem; /* Tailwind: rounded-lg */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Tailwind: shadow-md o shadow-lg */
+  margin-bottom: 1.5rem; /* Tailwind: mb-6 */
+}
+
+/* Leaflet map adjustments (si es necesario anular algo específico de Leaflet) */
+.leaflet-container {
+  /* Generalmente no necesitas anular mucho aquí si el #map está bien estilizado */
+}
+
+/* Estilos para botones específicos del predictor si no usas clases de Tailwind directamente en ellos */
+/* Ejemplo: si tienes <button class="btn btn-primary"> */
+.btn {
+  transition: transform 0.2s ease;
+  /* Padding, font-size, etc., pueden venir de Tailwind (e.g., py-2 px-4 rounded-md) */
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn.btn-primary { /* Botón de predicción */
+  background-color: var(--verde-andaluz); /* Tailwind: bg-green-600 o similar */
+  border-color: var(--verde-andaluz);
+  color: white;
+}
+.btn.btn-primary:hover, .btn.btn-primary:focus {
+  background-color: #006D2D; /* Un verde más oscuro */
+  border-color: #006D2D;
+}
+
+.btn.btn-secondary { /* Botón de limpiar */
+  background-color: var(--oliva-suave); /* Tailwind: bg-yellow-600 o bg-amber-600 */
+  border-color: var(--oliva-suave);
+  color: white;
+}
+.btn.btn-secondary:hover, .btn.btn-secondary:focus {
+  background-color: #647532; /* Un oliva más oscuro */
+  border-color: #647532;
+}
+
+/* Result card styling and animation en predictor.html */
+#result-card {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  border-top: 4px solid var(--verde-andaluz); /* Tailwind: border-t-4 border-green-600 */
+  /* Otros estilos como padding, background, shadow vendrán de Tailwind */
+}
+#result-card.result-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Form error alert spacing en predictor.html */
+#error-alert {
+  /* Tailwind se encargará del display (hidden/block) y colores (bg-red-100 border-red-400 text-red-700) */
+  /* margin-bottom: 1rem; /* Tailwind: mb-4 */
+}
+
+/* Si tienes inputs y selects en predictor.html que no están completamente estilizados por Tailwind: */
+/* Es mejor aplicar clases de Tailwind directamente a los elementos del formulario en predictor.html */
+/* Ejemplo para un input: class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" */
+
+/* Elimina las redefiniciones generales de body, h1, .container, nav, header, footer que estaban antes,
+   ya que Tailwind y la estructura de los parciales se encargan de esto. */
+
+/* Si necesitas algún estilo global mínimo que Tailwind no cubra por defecto: */
 body {
-    background-color: #F5F5F5;
-    color: #2E3C44;
-  }
-  /* Heading style */
-  h1 {
-    color: #007A33;
-  }
-  /* Map container */
-  #map {
-    height: 400px;
-  }
-  /* Leaflet map adjustments */
-  .leaflet-container {
-    border-radius: 0.5rem;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  /* Buttons styling */
-  .btn {
-    transition: transform 0.2s ease;
-  }
-  .btn:hover {
-    transform: translateY(-1px);
-  }
-  .btn:active {
-    transform: scale(0.98);
-  }
-  /* Primary button (Predicción) en verde andaluz */
-  .btn.btn-primary {
-    background-color: #007A33;
-    border-color: #007A33;
-  }
-  .btn.btn-primary:hover, .btn.btn-primary:focus {
-    background-color: #006D2D;
-    border-color: #006D2D;
-  }
-  /* Secondary button (Limpiar) en oliva suave */
-  .btn.btn-secondary {
-    background-color: #708238;
-    border-color: #708238;
-    color: #FFFFFF;
-  }
-  .btn.btn-secondary:hover, .btn.btn-secondary:focus {
-    background-color: #647532;
-    border-color: #647532;
-    color: #FFFFFF;
-  }
-  /* Result card styling and animation */
-  #result-card {
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    border-top: 4px solid #007A33;
-  }
-  #result-card.result-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  /* Hover effect for card */
-  .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  }
-  /* Form error alert spacing */
-  #error-alert {
-    margin-bottom: 1rem;
-  }
-
-
-
-  body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 20px;
-            background-color: #f4f7f6;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #555;
-        }
-        input[type="number"],
-        select {
-            width: calc(100% - 22px); /* Full width minus padding and border */
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        input[type="number"]:focus,
-        select:focus {
-            border-color: #007bff;
-            outline: none;
-            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #result {
-            margin-top: 25px;
-            padding: 15px;
-            background-color: #e9ecef;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            text-align: center;
-        }
-        #result h2 {
-            margin-top: 0;
-            color: #17a2b8;
-        }
-        #result p {
-            font-size: 1.2em;
-            color: #28a745;
-            font-weight: bold;
-        }
-        #result .error {
-            color: #dc3545;
-            font-weight: bold;
-        }
-
-        #map {
-            height: 300px; /* Ajusta la altura según necesites */
-            width: 100%;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-
-
-/* Estilos para header, nav y footer */
-
-/* HEADER */
-header {
-  background-color: #2c3e50;
-  color: #ffffff;
-  padding: 20px 0;
-  text-align: center;
+    /* background-color: #f7fafc; /* Ya se aplica en cada HTML con <style> o clase de Tailwind */
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tailwind usa su propia pila de fuentes sans-serif por defecto */
 }
 
-header .header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-header h1 {
-  font-size: 1.8rem;
-  margin: 0;
-  font-weight: 600;
-}
-
-/* NAV */
-nav {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-nav .nav-list {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  padding: 10px 0;
-}
-
-nav .nav-list li {
-  margin: 0 15px;
-}
-
-nav .nav-list li a {
-  text-decoration: none;
-  font-size: 1rem;
-  color: #2c3e50;
-  font-weight: 500;
-  padding: 5px 10px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-nav .nav-list li a:hover,
-nav .nav-list li a:focus {
-  background-color: #007bff;
-  color: #ffffff;
-  border-radius: 4px;
-}
-
-/* FOOTER */
-footer {
-  background-color: #f4f7f6;
-  color: #555555;
-  padding: 20px 0;
-  border-top: 1px solid #e0e0e0;
-  margin-top: 40px;
-}
-
-footer .footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  text-align: center;
-}
-
-footer p {
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-  

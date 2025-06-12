@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicción de Precios - Predictor de Precios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="styles/styles.css"> 
+    <style>
+        body { background-color: #f7fafc; }
+    </style>
+</head>
+<body id="page-predictor" class="font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Barra superior combinada para logo y navegación -->
+    <div id="top-bar-wrapper" class="bg-white text-gray-800 shadow-lg sticky top-0 z-50 w-full"> 
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <div id="header-container"></div> 
+            <div id="nav-container" class="ml-6"></div>   
+        </div>
+    </div>
+
+    <main class="flex-grow">
+        <!-- Sección Hero con Degradado -->
+        <section class="hero-gradient py-12 md:py-16 bg-gradient-to-r from-green-500 to-blue-600 text-white text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-3xl md:text-4xl font-extrabold">Realiza tu Predicción</h1>
+            </div>
+        </section>
+
+        <!-- Contenido específico de la página -->
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl">
+                <!-- Título original del contenedor del formulario -->
+                <!-- <h1>Predictor de Precios de Vivienda en Andalucía</h1> --> <!-- Ya está en el Hero -->
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Columna del Formulario -->
+                    <div>
+                        <h2 class="text-2xl font-semibold text-gray-700 mb-6">Introduce los datos de la vivienda</h2>
+                        <!-- Cambiado id a predictionForm y los name/id de los inputs para coincidir con el script original -->
+                        <form id="predictionForm" novalidate>
+                            <!-- Provincia (no estaba en el form original, la mantenemos pero el script original no la usará directamente) -->
+                            
+
+                            <!-- Superficie -->
+                            <div class="mb-4">
+                                <label for="superficie" class="block text-sm font-medium text-gray-700 mb-1">Superficie (m²)</label>
+                                <input type="number" id="superficie" name="superficie" min="10" max="10000" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="120">
+                                <div class="invalid-feedback text-red-500 text-xs mt-1 hidden">Introduce una superficie válida (10-10000 m²).</div>
+                            </div>
+
+                            <!-- Habitaciones y Baños (en una fila) -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="habitaciones" class="block text-sm font-medium text-gray-700 mb-1">Habitaciones</label>
+                                    <input type="number" id="habitaciones" name="habitaciones" min="0" max="50" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="3">
+                                    <div class="invalid-feedback text-red-500 text-xs mt-1 hidden">Nº de habitaciones (0-50).</div>
+                                </div>
+                                <div>
+                                    <label for="baños" class="block text-sm font-medium text-gray-700 mb-1">Baños</label>
+                                    <input type="number" id="baños" name="baños" min="0" max="50" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="2">
+                                    <div class="invalid-feedback text-red-500 text-xs mt-1 hidden">Nº de baños (0-50).</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tipo de Propiedad -->
+                            <div class="mb-4">
+                                <label for="tipo_propiedad" class="block text-sm font-medium text-gray-700 mb-1">Tipo de Propiedad</label>
+                                <select id="tipo_propiedad" name="tipo_propiedad" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <option value="" disabled>Selecciona un tipo</option>
+                                    <option value="piso" selected>Piso</option> <!-- Script original usa 'piso', no 'Piso' -->
+                                    <option value="chalet">Chalet</option>
+                                    <option value="casa_rural">Casa Rural</option>
+                                    <option value="duplex">Dúplex</option>
+                                    <option value="atico">Ático</option>
+                                    <option value="estudio">Estudio</option>
+                                    <!-- <option value="Loft">Loft</option> -->
+                                    <!-- <option value="Adosado">Adosado</option> -->
+                                </select>
+                                <div class="invalid-feedback text-red-500 text-xs mt-1 hidden">Selecciona un tipo de propiedad.</div>
+                            </div>
+
+                            <!-- Latitud y Longitud -->
+                            <p class="text-xs text-gray-500 mb-2">Ubicación: Haz clic en el mapa o introduce las coordenadas.</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="latitud" class="block text-sm font-medium text-gray-700 mb-1">Latitud</label>
+                                    <input type="number" step="any" id="latitud" name="latitud" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="37.196993481556994" required>
+                                </div>
+                                <div>
+                                    <label for="longitud" class="block text-sm font-medium text-gray-700 mb-1">Longitud</label>
+                                    <input type="number" step="any" id="longitud" name="longitud" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="-3.6164274080288976" required>
+                                </div>
+                            </div>
+                             <div id="latlng-error" class="text-red-500 text-xs mt-1 mb-3 hidden">Latitud y longitud deben especificarse juntas.</div>
+
+
+                            <!-- Botones -->
+                            <div class="flex space-x-4 mt-6">
+                                <button type="submit" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md shadow-sm transition duration-150 ease-in-out btn btn-primary">
+                                    Generar Predicción <!-- Texto original del botón -->
+                                </button>
+                                <button type="button" id="clear-btn" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md shadow-sm transition duration-150 ease-in-out btn btn-secondary">
+                                    Limpiar
+                                </button>
+                            </div>
+                        </form>
+                        <!-- Alerta de Error General -->
+                        <div id="error-alert" class="hidden mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-md" role="alert">
+                        </div>
+                    </div>
+
+                    <!-- Columna del Mapa y Resultado -->
+                    <div class="flex flex-col">
+                        <div id="map" class="w-full h-64 md:h-[400px] rounded-lg shadow-md mb-6 md:mb-0"></div> <!-- Ajustada altura del mapa -->
+                         <!-- Resultado de la Predicción (usando el id 'result' del script original) -->
+                        <div id="result" class="mt-6 p-6 bg-green-50 border-t-4 border-green-500 rounded-b-lg shadow-md">
+                            <!-- El resultado de la predicción aparecerá aquí -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container" class="w-full"></div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        async function loadPartial(url, containerId) {
+          try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`Error ${res.status} al cargar ${url}`);
+            const html = await res.text();
+            const targetElement = document.getElementById(containerId);
+            if (targetElement) {
+                targetElement.innerHTML = html;
+            } else {
+                console.error(`Contenedor con ID '${containerId}' no encontrado para cargar ${url}.`);
+            }
+          } catch (err) {
+            console.error(`Error cargando parcial ${url}:`, err);
+          }
+        }
+
+        async function loadPageScripts() {
+            // Cargar app.js solo en la página del predictor y después de que #map exista
+            if (document.getElementById('page-predictor') && document.getElementById('map')) {
+                const script = document.createElement('script');
+                script.src = 'components/app.js'; // Asegúrate que la ruta es correcta
+                document.body.appendChild(script);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+          // Cargar parciales primero
+          await Promise.all([
+            loadPartial('partials/header.html', 'header-container'),
+            loadPartial('partials/nav.html',    'nav-container'),
+            loadPartial('partials/footer.html', 'footer-container')
+          ]);
+          // Luego cargar los scripts específicos de la página
+          await loadPageScripts();
+        });
+      </script>
+</body>
+</html>

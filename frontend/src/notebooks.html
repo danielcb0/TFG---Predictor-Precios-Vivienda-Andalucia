@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización de Notebooks - Predictor de Precios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles/styles.css"> 
+    <style>
+        body { background-color: #f7fafc; }
+    </style>
+</head>
+<body class="font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Barra superior combinada para logo y navegación -->
+    <div id="top-bar-wrapper" class="bg-white text-gray-800 shadow-lg sticky top-0 z-50 w-full"> 
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <div id="header-container"></div> 
+            <div id="nav-container" class="ml-6"></div>   
+        </div>
+    </div>
+
+    <main class="flex-grow">
+        <!-- Sección Hero con Degradado -->
+        <section class="hero-gradient py-12 md:py-16 bg-gradient-to-r from-green-500 to-blue-600 text-white text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-3xl md:text-4xl font-extrabold">Notebooks del Proyecto</h1>
+            </div>
+        </section>
+
+        <!-- Contenido específico de la página -->
+        <div class="container mx-auto px-6 py-8 md:py-12">
+            <div class="bg-white shadow-xl rounded-lg p-8 md:p-12">
+                <p class="text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto">
+                    Visualiza los notebooks Jupyter que detallan el análisis exploratorio de datos y el proceso de entrenamiento de nuestro modelo de predicción.
+                </p>
+                
+                <div class="notebook-links grid md:grid-cols-2 gap-8">
+                    <div class="notebook-item bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="text-2xl font-semibold text-green-600 mb-3">Análisis Exploratorio de Datos (EDA)</h3>
+                        <p class="text-gray-600 mb-6">
+                            Explora cómo se prepararon y analizaron los datos iniciales, descubriendo patrones y características clave.
+                        </p>
+                        <a href="analisis_exploratorio.html" 
+                           target="_blank" 
+                           class="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-md transition duration-300 ease-in-out">
+                           Ver Notebook EDA
+                        </a>
+                    </div>
+                    
+                    <div class="notebook-item bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="text-2xl font-semibold text-blue-600 mb-3">Entrenamiento del Modelo</h3>
+                        <p class="text-gray-600 mb-6">
+                            Descubre el proceso de selección, entrenamiento y evaluación del modelo de machine learning utilizado para las predicciones.
+                        </p>
+                        <a href="entrenamiento_modelo.html" 
+                           target="_blank" 
+                           class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-md transition duration-300 ease-in-out">
+                           Ver Notebook de Modelo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container" class="w-full"></div>
+
+    <script>
+        async function loadPartial(url, containerId) {
+          try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`Error ${res.status} al cargar ${url}`);
+            const html = await res.text();
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = html;
+            } else {
+                console.error(`Contenedor con ID '${containerId}' no encontrado.`);
+            }
+          } catch (err) {
+            console.error(`Error cargando parcial ${url}:`, err);
+          }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          loadPartial('partials/header.html', 'header-container');
+          loadPartial('partials/nav.html',    'nav-container');
+          loadPartial('partials/footer.html', 'footer-container');
+        });
+      </script>
+</body>
+</html>

@@ -3,203 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predictor de Precios de Vivienda</title>
-
-    <!-- Enlaza tu archivo de estilos externo en lugar del bloque <style> -->
-    <link rel="stylesheet" href="styles.css">
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
-     <link rel="stylesheet" href="styles/styles.css">
+    <title>Inicio - Predictor de Precios de Vivienda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles/styles.css"> 
+    <style>
+        body { background-color: #f7fafc; } 
+    </style>
 </head>
-<body>
+<body class="font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- Contenedor donde inyectaremos header.html -->
-  <div id="header-container"></div>
-
-  <!-- Contenedor donde inyectaremos nav.html -->
-  <div id="nav-container"></div>
-
-<script>
-    // Función genérica para cargar un fragmento HTML y “pegarlo” en un contenedor
-    async function loadPartial(url, containerId) {
-      try {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`Error ${res.status} al cargar ${url}`);
-        const html = await res.text();
-        document.getElementById(containerId).innerHTML = html;
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    // Al cargar la página, llamamos a loadPartial para cada sección
-    document.addEventListener('DOMContentLoaded', () => {
-      loadPartial('partials/header.html', 'header-container');
-      loadPartial('partials/nav.html',    'nav-container');
-      loadPartial('partials/footer.html', 'footer-container');
-    });
-  </script>
-
-
-    <div class="container">
-        
-        <h1>Predictor de Precios de Vivienda en Andalucía</h1>
-
-        <div id="map"></div> <!-- Contenedor para el mapa -->
-
-        <form id="predictionForm">
-            <div>
-                <label for="superficie">Superficie (m²):</label>
-                <input type="number" id="superficie" name="superficie" value="120" required>
-            </div>
-
-            <div>
-                <label for="habitaciones">Número de Habitaciones:</label>
-                <input type="number" id="habitaciones" name="habitaciones" value="3" required>
-            </div>
-
-            <div>
-                <label for="baños">Número de Baños:</label>
-                <input type="number" id="baños" name="baños" value="2" required>
-            </div>
-
-            <div>
-                <label for="latitud">Latitud:</label>
-                <input type="number" id="latitud" name="latitud" value="37.196993481556994" step="any" required>
-            </div>
-
-            <div>
-                <label for="longitud">Longitud:</label>
-                <input type="number" id="longitud" name="longitud" value="-3.6164274080288976" step="any" required>
-            </div>
-
-            <div>
-                <label for="tipo_propiedad">Tipo de Propiedad:</label>
-                <select id="tipo_propiedad" name="tipo_propiedad" required>
-                    <option value="piso" selected>Piso</option>
-                    <option value="chalet">Chalet</option>
-                    <option value="casa_rural">Casa Rural</option>
-                    <option value="duplex">Dúplex</option>
-                    <option value="atico">Ático</option>
-                    <option value="estudio">Estudio</option>
-                </select>
-            </div>
-
-            <button type="submit">Generar Predicción</button>
-        </form>
-
-        <div id="result">
-            <!-- El resultado de la predicción aparecerá aquí -->
+    <!-- Barra superior combinada para logo y navegación -->
+    <div id="top-bar-wrapper" class="bg-white text-gray-800 shadow-lg sticky top-0 z-50 w-full"> 
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <div id="header-container"></div> 
+            <div id="nav-container" class="ml-6"></div>   
         </div>
     </div>
 
+    <main class="flex-grow">
+        <!-- Sección Hero con Degradado (modificada para index) -->
+        <section class="hero text-center py-16 md:py-24 bg-gradient-to-r from-green-500 to-blue-600 text-white">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-6">Predictor de Precios de Vivienda en Andalucía</h1>
+                <p class="text-lg md:text-xl mb-12 max-w-3xl mx-auto">
+                    Estima el valor de una vivienda en Andalucía o explora los datos y modelos que impulsan nuestro proyecto.
+                </p>
+                
+                <div class="max-w-5xl mx-auto mb-12 p-6 md:p-8 text-left"> 
+                    <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                        <div class="flex-shrink-0 mb-6 md:mb-0">
+                            <img src="assets/robot_bienvenida.png" alt="Robot Asistente" class="w-48 h-48 md:w-64 md:h-64 object-contain rounded-full shadow-2xl">
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="text-2xl md:text-3xl font-semibold mb-4 text-white">¡Bienvenido a tu Asistente Inmobiliario Inteligente!</h3>
+                            <p class="text-md md:text-lg text-gray-50 leading-relaxed">
+                                Nuestra plataforma utiliza la potencia del Machine Learning para ofrecerte estimaciones de precios de viviendas en toda Andalucía.
+                                Ya sea que estés buscando comprar, vender, o simplemente explorar el mercado, te proporcionamos información valiosa y transparente.
+                                Navega por nuestras herramientas, descubre el análisis detrás de los números y toma decisiones informadas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-buttons flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="predictor.html" 
+                       class="inline-block bg-white hover:bg-gray-100 text-green-600 font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg w-full sm:w-auto">
+                       Ir al Predictor
+                    </a>
+                    <a href="notebooks.html" 
+                       class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg w-full sm:w-auto">
+                       Ver Notebooks
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contenido específico de la página index -->
+        <section class="features py-16 md:py-20 bg-gray-50"> <!-- bg-gray-50 para alternar secciones si se desea -->
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-16">Características Principales</h3>
+                <div class="grid md:grid-cols-2 gap-10 lg:gap-16">
+                    <div class="feature-item bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+                        <h4 class="text-2xl font-semibold text-green-600 mb-4">Predicción de Precios Precisa</h4>
+                        <p class="text-gray-600 leading-relaxed">
+                            Introduce las características de una vivienda y obtén una estimación de su precio basada en nuestro avanzado modelo de machine learning.
+                        </p>
+                    </div>
+                    <div class="feature-item bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+                        <h4 class="text-2xl font-semibold text-blue-600 mb-4">Análisis Detallado y Transparente</h4>
+                        <p class="text-gray-600 leading-relaxed">
+                            Explora los notebooks Jupyter con el análisis exploratorio de datos (EDA) y el proceso completo de entrenamiento del modelo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container" class="w-full"></div>
+
     <script>
-        const form = document.getElementById('predictionForm');
-        const resultDiv = document.getElementById('result');
-        const latitudInput = document.getElementById('latitud');
-        const longitudInput = document.getElementById('longitud');
-
-        // 1) Definimos los límites aproximados de Andalucía
-        const andaluciaBounds = [
-            [36.00, -7.80],   // esquina sudoeste (lat, lng)
-            [38.80, -0.10]    // esquina noreste  (lat, lng)
-        ];
-
-        // 2) Inicializamos el mapa “encerrado” solo en Andalucía
-        const map = L.map('map', {
-            maxBounds: andaluciaBounds,
-            maxBoundsViscosity: 1.0, // no deja desplazar ni un píxel fuera de Andalucía
-            minZoom: 7               // evita alejarse tanto que se vea fuera de Andalucía
-        });
-
-        // 3) Cargamos la capa base de OpenStreetMap
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
-
-        // 4) Ajustamos la vista inicial para encuadrar toda Andalucía
-        map.fitBounds(andaluciaBounds);
-
-        let marker;
-
-        // Función para actualizar los campos del formulario y el marcador
-        function updateCoordinates(lat, lng) {
-            latitudInput.value = lat.toFixed(10);
-            longitudInput.value = lng.toFixed(10);
-
-            if (marker) {
-                map.removeLayer(marker);
+        async function loadPartial(url, containerId) {
+          try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`Error ${res.status} al cargar ${url}`);
+            const html = await res.text();
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = html;
+            } else {
+                console.error(`Contenedor con ID '${containerId}' no encontrado.`);
             }
-            marker = L.marker([lat, lng]).addTo(map);
-            map.setView([lat, lng], map.getZoom());
+          } catch (err) {
+            console.error(`Error cargando parcial ${url}:`, err);
+          }
         }
 
-        // Si los inputs ya traían coordenadas al cargar la página, colocamos el marcador
-        const initialLat = parseFloat(latitudInput.value);
-        const initialLng = parseFloat(longitudInput.value);
-        if (!isNaN(initialLat) && !isNaN(initialLng)) {
-            updateCoordinates(initialLat, initialLng);
-        }
-
-        // Evento de clic en el mapa
-        map.on('click', function(e) {
-            updateCoordinates(e.latlng.lat, e.latlng.lng);
+        document.addEventListener('DOMContentLoaded', () => {
+          loadPartial('partials/header.html', 'header-container');
+          loadPartial('partials/nav.html',    'nav-container');
+          loadPartial('partials/footer.html', 'footer-container');
         });
-
-        form.addEventListener('submit', async function(event) {
-            event.preventDefault(); // Evitar el envío tradicional del formulario
-
-            const formData = new FormData(form);
-            const data = {};
-
-            // Convertir FormData a un objeto JSON y asegurar tipos numéricos
-            formData.forEach((value, key) => {
-                if (['superficie', 'habitaciones', 'baños', 'latitud', 'longitud'].includes(key)) {
-                    data[key] = parseFloat(value);
-                } else {
-                    data[key] = value;
-                }
-            });
-
-            resultDiv.innerHTML = 'Calculando predicción...';
-
-            try {
-                const response = await fetch('http://127.0.0.1:5000/predict', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    if (result.prediction !== undefined) {
-                        resultDiv.innerHTML = `
-                            <h2>Precio Estimado:</h2>
-                            <p>€ ${parseFloat(result.prediction).toLocaleString('es-ES', {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2
-                            })}</p>
-                        `;
-                    } else {
-                        resultDiv.innerHTML = `<p class="error">Respuesta inesperada del servidor.</p>`;
-                    }
-                } else {
-                    resultDiv.innerHTML = `<p class="error">Error: ${result.error || response.statusText}</p>`;
-                }
-
-            } catch (error) {
-                console.error('Error al realizar la petición:', error);
-                resultDiv.innerHTML = `<p class="error">Error de conexión o al procesar la solicitud. Revisa la consola.</p>`;
-            }
-        });
-    </script>
+      </script>
 </body>
 </html>
